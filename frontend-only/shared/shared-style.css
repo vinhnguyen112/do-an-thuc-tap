@@ -1,0 +1,130 @@
+.notifications-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+.notification-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid transparent;
+  transition: all 0.3s;
+}
+.notification-card.unread {
+  border-left-color: var(--primary-color);
+  background: #f8f9ff;
+}
+.notification-card:hover {
+  transform: translateX(4px);
+}
+.notification-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+.notification-icon.info {
+  background: #e7f1ff;
+  color: var(--primary-color);
+}
+.notification-icon.success {
+  background: #e8f5e8;
+  color: #198754;
+}
+.notification-icon.warning {
+  background: #fff3cd;
+  color: #ffc107;
+}
+.notification-icon.danger {
+  background: #f8d7da;
+  color: #dc3545;
+}
+.settings-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+.settings-sidebar {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  position: sticky;
+  top: 100px;
+}
+.settings-sidebar .nav-link {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--dark-color);
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.settings-sidebar .nav-link.active {
+  background: rgba(13, 110, 253, 0.1);
+  border-left-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.settings-sidebar .nav-link:hover {
+  background: rgba(13, 110, 253, 0.05);
+}
+.settings-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+.settings-section {
+  margin-bottom: 2.5rem;
+}
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+.avatar-upload {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.avatar-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.avatar-upload .btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}
+
+/* Footer */
+footer,
+footer * {
+  color: white !important;
+}
+
+footer a {
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--primary-color) !important;
+}
+
+footer .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+

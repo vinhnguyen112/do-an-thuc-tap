@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <!-- Thông tin cơ bản của trang -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Ký - JobHub</title>
+    <meta
+      name="description"
+      content="Đăng ký tài khoản JobHub để bắt đầu tìm kiếm việc làm phù hợp"
+    />
+
+    <!-- CSS Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+
+    <!-- Font chữ Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS tùy chỉnh -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- CSS cho thông báo mật khẩu -->
+    <style>
+      .thong-bao-mat-khau {
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+      }
+      .thong-bao-mat-khau.weak {
+        color: #dc3545;
+        background: #f8d7da;
+      }
+      .thong-bao-mat-khau.medium {
+        color: #ffc107;
+        background: #fff3cd;
+      }
+      .thong-bao-mat-khau.strong {
+        color: #198754;
+        background: #d1e7dd;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- KHUNG ĐĂNG KÝ -->
+    <div class="khung-dang-nhap">
+      <div class="the-dang-nhap">
+        <!-- Phần đầu form -->
+        <div class="dau-form">
+          <!-- Logo và tên website -->
+          <a
+            href="index.html"
+            class="d-inline-flex align-items-center mb-3 text-white text-decoration-none"
+          >
+            <div class="icon-logo me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold fs-5">JobHub</span>
+          </a>
+
+          <!-- Tiêu đề -->
+          <h2 class="mb-0">Tạo tài khoản mới</h2>
+          <p class="mb-0 mt-2 opacity-75">Tham gia cùng hàng ngàn sinh viên</p>
+        </div>
+
+        <!-- Phần thân form -->
+        <div class="than-form">
+          <!-- Form đăng ký -->
+          <form id="registerForm" onsubmit="xuLyDangKy(event)">
+            <!-- Ô nhập họ và tên -->
+            <div class="mb-3">
+              <label for="fullName" class="form-label">
+                <i class="bi bi-person me-1"></i>Họ và tên
+              </label>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="fullName"
+                name="fullName"
+                placeholder="Nhập họ và tên đầy đủ"
+                required
+              />
+            </div>
+
+            <!-- Ô nhập email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope me-1"></i>Email
+              </label>
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                id="email"
+                name="email"
+                placeholder="Nhập địa chỉ email"
+                required
+              />
+            </div>
+
+            <!-- Ô nhập số điện thoại -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">
+                <i class="bi bi-phone me-1"></i>Số điện thoại
+              </label>
+              <input
+                type="tel"
+                class="form-control form-control-lg"
+                id="phone"
+                name="phone"
+                placeholder="Nhập số điện thoại"
+                required
+              />
+            </div>
+
+            <!-- Ô chọn loại người dùng -->
+            <div class="mb-3">
+              <label for="userType" class="form-label">
+                <i class="bi bi-person-badge me-1"></i>Bạn là
+              </label>
+              <select
+                class="form-select form-select-lg"
+                id="userType"
+                name="userType"
+                required
+              >
+                <option value="">Chọn loại tài khoản</option>
+                <option value="student">Sinh viên</option>
+                <option value="employer">Nhà tuyển dụng</option>
+              </select>
+            </div>
+
+            <!-- Ô nhập mật khẩu -->
+            <div class="mb-3">
+              <label for="password" class="form-label">
+                <i class="bi bi-lock me-1"></i>Mật khẩu
+              </label>
+              <div class="position-relative">
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="password"
+                  name="password"
+                  placeholder="Nhập mật khẩu (tối thiểu 8 ký tự)"
+                  required
+                  minlength="8"
+                  onkeyup="kiemTraDoManhMatKhau()"
+                />
+                <!-- Nút hiện/ẩn mật khẩu -->
+                <button
+                  type="button"
+                  class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3"
+                  onclick="chuyenDoiHienMatKhau('password', 'togglePasswordIcon')"
+                  style="text-decoration: none; border: none; background: none"
+                >
+                  <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                </button>
+              </div>
+              <!-- Thông báo độ mạnh mật khẩu -->
+              <div id="passwordStrength" class="thong-bao-mat-khau"></div>
+            </div>
+
+            <!-- Ô xác nhận mật khẩu -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">
+                <i class="bi bi-lock-fill me-1"></i>Xác nhận mật khẩu
+              </label>
+              <div class="position-relative">
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Nhập lại mật khẩu"
+                  required
+                  onkeyup="kiemTraMatKhauKhop()"
+                />
+                <!-- Nút hiện/ẩn mật khẩu -->
+                <button
+                  type="button"
+                  class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3"
+                  onclick="chuyenDoiHienMatKhau('confirmPassword', 'toggleConfirmPasswordIcon')"
+                  style="text-decoration: none; border: none; background: none"
+                >
+                  <i class="bi bi-eye" id="toggleConfirmPasswordIcon"></i>
+                </button>
+              </div>
+              <!-- Thông báo mật khẩu khớp -->
+              <div id="passwordMatch" class="thong-bao-mat-khau"></div>
+            </div>
+
+            <!-- Checkbox đồng ý điều khoản -->
+            <div class="mb-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="terms"
+                  required
+                />
+                <label class="form-check-label" for="terms">
+                  Tôi đồng ý với
+                  <a href="#terms" class="text-primary">Điều khoản sử dụng</a>
+                  và
+                  <a href="#privacy" class="text-primary">Chính sách bảo mật</a>
+                </label>
+              </div>
+            </div>
+
+            <!-- Nút đăng ký -->
+            <button type="submit" class="btn btn-primary w-100 btn-lg mb-3">
+              <i class="bi bi-person-plus me-2"></i>Đăng ký
+            </button>
+          </form>
+
+          <!-- Đăng ký bằng mạng xã hội (tùy chọn) -->
+          <div class="text-center my-3">
+            <span class="text-muted">Hoặc đăng ký bằng</span>
+          </div>
+          <div class="d-flex gap-2 justify-content-center mb-3">
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-google me-2"></i>Google
+            </a>
+            <a href="#" class="btn btn-outline-primary">
+              <i class="bi bi-facebook me-2"></i>Facebook
+            </a>
+          </div>
+
+          <!-- Link đăng nhập -->
+          <div class="text-center">
+            <p class="mb-0 text-muted">
+              Đã có tài khoản?
+              <a href="login.html">Đăng nhập ngay</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript xử lý đăng ký -->
+    <script src="js/auth.js"></script>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2025 JobHub. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+  </body>
+</html>

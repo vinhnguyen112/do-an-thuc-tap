@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - JobHub</title>
+    <meta
+      name="description"
+      content="Blog hướng nghiệp và chia sẻ kinh nghiệm tìm việc cho sinh viên"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS tùy chỉnh -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="sticky-top bg-white shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a
+            class="navbar-brand d-flex align-items-center ten-website"
+            href="index.html"
+          >
+            <div class="icon-logo me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold">JobHub</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto">
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="index.html">Trang chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="index.html#jobs"
+                  >Việc làm</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="index.html#companies"
+                  >Đối tác</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu active" href="blog.html">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="about.html">Giới thiệu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="help.html">Hỗ trợ</a>
+              </li>
+            </ul>
+            <div class="d-flex gap-2">
+              <a href="login.html" class="btn btn-outline-primary">Đăng nhập</a>
+              <a href="register.html" class="btn btn-primary">Đăng ký</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Banner -->
+    <section class="bg-primary text-white py-5">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-8">
+            <h1 class="display-4 fw-bold mb-3">Blog Hướng Nghiệp</h1>
+            <p class="lead">
+              Chia sẻ kinh nghiệm, mẹo hay và xu hướng việc làm dành cho sinh
+              viên
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tìm kiếm -->
+    <section class="py-4 bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input
+                type="text"
+                class="form-control"
+                id="blogSearch"
+                placeholder="Tìm kiếm bài viết..."
+              />
+              <button
+                class="btn btn-primary"
+                type="button"
+                onclick="searchBlog()"
+              >
+                Tìm kiếm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bài viết nổi bật -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="fw-bold mb-4">Bài viết nổi bật</h2>
+        <div class="row mb-5">
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-lg h-100">
+              <img
+                src="assets/Student_job_interview_success_1bbbe4ab-CGEG4isa.png"
+                class="card-img-top blog-featured-image"
+                alt="Featured Post"
+              />
+              <div class="card-body p-4">
+                <div class="d-flex gap-3 mb-3">
+                  <span class="badge bg-primary">Hướng nghiệp</span>
+                  <span class="text-muted"
+                    ><i class="bi bi-calendar me-1"></i>20/12/2024</span
+                  >
+                  <span class="text-muted"
+                    ><i class="bi bi-clock me-1"></i>5 phút đọc</span
+                  >
+                </div>
+                <h3 class="card-title fw-bold mb-3">
+                  10 Kỹ năng cần thiết để thành công trong phỏng vấn xin việc
+                </h3>
+                <p class="card-text text-muted mb-4">
+                  Khám phá những kỹ năng quan trọng giúp bạn gây ấn tượng với
+                  nhà tuyển dụng và tăng cơ hội thành công trong buổi phỏng
+                  vấn...
+                </p>
+                <a href="blog-post-detail.html" class="btn btn-primary"
+                  >Đọc thêm <i class="bi bi-arrow-right ms-2"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card border-0 shadow h-100">
+              <img
+                src="assets/Career_fair_networking_event_a36a70f1-NJ2r_s4t.png"
+                class="card-img-top blog-card-image"
+                alt="Career Fair"
+              />
+              <div class="card-body p-3">
+                <span class="badge bg-success mb-2">Xu hướng</span>
+                <h5 class="card-title fw-bold mb-2">
+                  Top 5 ngành nghề hot nhất cho sinh viên năm 2025
+                </h5>
+                <p class="card-text text-muted small mb-2">
+                  Phân tích xu hướng tuyển dụng và các ngành nghề có triển
+                  vọng...
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted"
+                    ><i class="bi bi-calendar me-1"></i>15/12/2024</small
+                  >
+                  <small class="text-muted"
+                    ><i class="bi bi-clock me-1"></i>6 phút</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Các bài viết -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="fw-bold mb-0">Tất cả bài viết</h2>
+          <div class="btn-group" role="group">
+            <input
+              type="radio"
+              class="btn-check"
+              name="category"
+              id="all"
+              checked
+              onchange="filterPosts('all')"
+            />
+            <label class="btn btn-outline-primary" for="all">Tất cả</label>
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="category"
+              id="career"
+              onchange="filterPosts('career')"
+            />
+            <label class="btn btn-outline-primary" for="career"
+              >Hướng nghiệp</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="category"
+              id="cv"
+              onchange="filterPosts('cv')"
+            />
+            <label class="btn btn-outline-primary" for="cv">CV & Hồ sơ</label>
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="category"
+              id="skills"
+              onchange="filterPosts('skills')"
+            />
+            <label class="btn btn-outline-primary" for="skills">Kỹ năng</label>
+          </div>
+        </div>
+        <div class="row g-4" id="blogPostsContainer"></div>
+      </div>
+    </section>
+
+    <!-- Footer - Simplified -->
+    <footer class="footer-simple bg-dark text-white py-5">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Company Info -->
+          <div class="col-lg-3 col-md-6">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-logo me-2" style="font-size: 1.5rem; color: #667eea;">
+                <i class="bi bi-briefcase"></i>
+              </div>
+              <h5 class="fw-bold mb-0">JobHub</h5>
+            </div>
+            <p class="text-white-50 small mb-3">
+              Nền tảng kết nối sinh viên với cơ hội việc làm từ các doanh nghiệp uy tín.
+            </p>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a href="#" class="btn btn-outline-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-instagram"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-lg-3 col-md-6">
+            <h6 class="fw-bold mb-3">Liên kết nhanh</h6>
+            <ul class="list-unstyled small">
+              <li class="mb-2"><a href="index.html" class="text-white-50 text-decoration-none">Trang chủ</a></li>
+              <li class="mb-2"><a href="index.html#jobs" class="text-white-50 text-decoration-none">Tìm việc làm</a></li>
+              <li class="mb-2"><a href="blog.html" class="text-white-50 text-decoration-none">Blog</a></li>
+              <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none">Giới thiệu</a></li>
+              <li class="mb-2"><a href="help.html" class="text-white-50 text-decoration-none">Hỗ trợ</a></li>
+            </ul>
+          </div>
+
+          <!-- For Employers -->
+          <div class="col-lg-3 col-md-6">
+            <h6 class="fw-bold mb-3">Nhà tuyển dụng</h6>
+            <ul class="list-unstyled small">
+              <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Đăng tin tuyển dụng</a></li>
+              <li class="mb-2"><a href="index.html#companies" class="text-white-50 text-decoration-none">Đối tác</a></li>
+              <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Điều khoản</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="col-lg-3 col-md-6">
+            <h6 class="fw-bold mb-3">Liên hệ</h6>
+            <ul class="list-unstyled text-white-50 small">
+              <li class="mb-2">
+                <i class="bi bi-geo-alt-fill me-2" style="color: #667eea;"></i>123 Đường ABC, Q.1, TP.HCM
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-telephone-fill me-2" style="color: #667eea;"></i>
+                <a href="tel:+84123456789" class="text-white-50 text-decoration-none">+84 123 456 789</a>
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-envelope-fill me-2" style="color: #667eea;"></i>
+                <a href="mailto:support@jobhub.vn" class="text-white-50 text-decoration-none">support@jobhub.vn</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-4" style="opacity: 0.1;" />
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0 small text-white-50">&copy; 2025 <strong class="text-white">JobHub</strong>. Tất cả quyền được bảo lưu.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="d-flex justify-content-center justify-content-md-end gap-3 small">
+              <a href="#" class="text-white-50 text-decoration-none">Điều khoản</a>
+              <span class="text-white-50">|</span>
+              <a href="#" class="text-white-50 text-decoration-none">Bảo mật</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .footer-simple {
+        background: #1a1a2e !important;
+      }
+      .footer-simple a:hover {
+        color: #fff !important;
+      }
+      .footer-simple .btn:hover {
+        background: #667eea;
+        border-color: #667eea;
+        transform: translateY(-2px);
+      }
+    </style>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/blog.js"></script>
+  </body>
+</html>

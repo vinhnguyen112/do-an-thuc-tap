@@ -1,0 +1,189 @@
+/* CSS cho module nhà tuyển dụng */
+
+/* Khung chứa */
+.khung-dashboard,
+.dashboard-container,
+.khung-quan-ly-viec,
+.manage-jobs-container,
+.khung-dang-tin,
+.post-job-container,
+.khung-ho-so-cong-ty,
+.profile-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+
+/* Thẻ thống kê */
+.the-thong-ke,
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--mau-chinh);
+}
+
+/* Thẻ hành động nhanh */
+.the-hanh-dong-nhanh,
+.quick-action-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  height: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.the-hanh-dong-nhanh:hover,
+.quick-action-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Thẻ ứng viên */
+.the-ung-vien,
+.candidate-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.so-luong-ung-vien,
+.candidate-count {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--mau-chinh);
+}
+
+/* Trang hồ sơ */
+.the-ho-so-cong-ty,
+.profile-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dau-ho-so-cong-ty,
+.profile-header {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.khung-upload-logo,
+.logo-upload {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.khung-upload-logo img,
+.logo-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.khung-upload-logo .btn,
+.logo-upload .btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}
+
+/* Trang đăng tin */
+.phần-form-dang-tin,
+.form-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.phần-xem-truoc,
+.preview-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  position: sticky;
+  top: 100px;
+}
+
+/* Các thành phần chung */
+.tieu-de-phan,
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--mau-chu-toi);
+  border-bottom: 2px solid var(--mau-chinh);
+  padding-bottom: 0.5rem;
+}
+
+.luoi-thong-ke,
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.muc-thong-ke,
+.stat-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.nhan-trang-thai,
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.the-viec-lam-ntd,
+.job-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.the-viec-lam-ntd:hover,
+.job-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Footer */
+footer,
+footer * {
+  color: white !important;
+}
+
+footer a {
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--mau-chinh) !important;
+}
+
+footer .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+

@@ -1,0 +1,59 @@
+/* CSS cho module admin */
+
+/* Khung chứa */
+.khung-admin,
+.admin-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+
+/* Thẻ thống kê */
+.the-thong-ke-admin,
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--mau-chinh);
+}
+
+/* Thẻ hành động nhanh */
+.the-hanh-dong-nhanh-admin,
+.quick-action-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+/* Thẻ tin chờ duyệt */
+.the-tin-cho-duyet,
+.pending-job-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  border-left: 4px solid #ffc107;
+}
+
+/* Footer */
+footer,
+footer * {
+  color: white !important;
+}
+
+footer a {
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--mau-chinh) !important;
+}
+
+footer .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+

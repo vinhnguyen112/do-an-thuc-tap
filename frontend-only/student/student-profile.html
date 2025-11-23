@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ Sơ Sinh Viên - JobHub</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="student-style.css" />
+    <style></style>
+  </head>
+  <body>
+    <!-- Đầu trang -->
+    <header class="sticky-top bg-white shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a
+            class="navbar-brand d-flex align-items-center"
+            href="../page/index.html"
+          >
+            <div class="logo-icon me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold">JobHub</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="student-dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="job-search.html">Tìm việc</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-cvs.html">CV của tôi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-applications.html">Ứng tuyển</a>
+              </li>
+
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+              <a
+                href="../shared/notifications.html"
+                class="btn btn-outline-secondary btn-sm position-relative"
+              >
+                <i class="bi bi-bell"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  >3</span
+                >
+              </a>
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="bi bi-person-circle me-1"></i>Nguyễn Văn A
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item active" href="student-profile.html"
+                      >Hồ sơ</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="../shared/settings.html"
+                      >Cài đặt</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item text-danger"
+                      href="../page/index.html"
+                      >Đăng xuất</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Nội dung chính -->
+    <div class="profile-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Phần đầu hồ sơ -->
+            <div class="profile-card">
+              <div class="profile-header">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <div class="avatar-upload">
+                      <img
+                        src="../page/assets/avata.jpg"
+                        alt="Avatar"
+                        id="avatarPreview"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        onclick="uploadAnh()"
+                      >
+                        <i class="bi bi-camera"></i>
+                      </button>
+                      <input
+                        type="file"
+                        id="avatarInput"
+                        accept="image/*"
+                        class="d-none"
+                        onchange="previewAvatar(event)"
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <h2 class="fw-bold mb-1">Nguyễn Văn A</h2>
+                    <p class="text-muted mb-2">
+                      <i class="bi bi-geo-alt me-1"></i>Hồ Chí Minh, Việt Nam
+                    </p>
+                    <div class="d-flex gap-2">
+                      <span class="badge bg-primary">Sinh viên</span>
+                      <span class="badge bg-success">Đang tìm việc</span>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <button
+                      class="btn btn-outline-primary"
+                      onclick="chuyenCheDoChinhSua()"
+                    >
+                      <i class="bi bi-pencil me-1"></i>Chỉnh sửa
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thông tin cá nhân -->
+              <div class="mb-4">
+                <h5 class="section-title">Thông tin cá nhân</h5>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Họ và tên</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="Nguyễn Văn A"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      value="nguyenvana@example.com"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Số điện thoại</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      value="+84 123 456 789"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Ngày sinh</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      value="2002-05-15"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Địa chỉ</label>
+                    <textarea class="form-control" rows="2" readonly>
+123 Đường ABC, Quận 1, TP.HCM</textarea
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Học vấn -->
+              <div class="mb-4">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="section-title mb-0">Học vấn</h5>
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#educationModal"
+                  >
+                    <i class="bi bi-plus me-1"></i>Thêm học vấn
+                  </button>
+                </div>
+                <div class="education-item">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div>
+                      <h6 class="fw-semibold mb-1">Đại học Công nghệ TP.HCM</h6>
+                      <p class="text-muted mb-1">Cử nhân Công nghệ Thông tin</p>
+                      <p class="text-muted mb-0">GPA: 3.5/4.0 • 2020 - 2024</p>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kỹ năng -->
+              <div class="mb-4">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="section-title mb-0">Kỹ năng</h5>
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#skillModal"
+                  >
+                    <i class="bi bi-plus me-1"></i>Thêm kỹ năng
+                  </button>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge bg-primary p-2">JavaScript</span>
+                  <span class="badge bg-primary p-2">ReactJS</span>
+                  <span class="badge bg-primary p-2">HTML/CSS</span>
+                  <span class="badge bg-primary p-2">Node.js</span>
+                  <span class="badge bg-primary p-2">Git</span>
+                  <span class="badge bg-primary p-2">MySQL</span>
+                </div>
+              </div>
+
+              <!-- Kinh nghiệm -->
+              <div class="mb-4">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="section-title mb-0">Kinh nghiệm</h5>
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#experienceModal"
+                  >
+                    <i class="bi bi-plus me-1"></i>Thêm kinh nghiệm
+                  </button>
+                </div>
+                <div class="experience-item">
+                  <div
+                    class="d-flex justify-content-between align-items-start mb-3"
+                  >
+                    <div>
+                      <h6 class="fw-semibold mb-1">
+                        Frontend Developer Intern
+                      </h6>
+                      <p class="text-muted mb-1">Tech Corp Vietnam</p>
+                      <p class="text-muted mb-0">
+                        06/2023 - 08/2023 • Hồ Chí Minh
+                      </p>
+                      <p class="mt-1 mb-0">
+                        Phát triển giao diện người dùng với ReactJS, tối ưu hóa
+                        hiệu suất ứng dụng web.
+                      </p>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Nút lưu -->
+              <div class="d-flex justify-content-end gap-2">
+                <button class="btn btn-secondary">Hủy</button>
+                <button class="btn btn-primary">Lưu thay đổi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Học vấn -->
+    <div class="modal fade" id="educationModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Thêm học vấn</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Trường</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Tên trường đại học/cao đẳng"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Chuyên ngành</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ngành học"
+                />
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">Từ năm</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="2020"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Đến năm</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="2024"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">GPA</label>
+                <input type="text" class="form-control" placeholder="3.5/4.0" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button type="button" class="btn btn-primary">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chân trang -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="d-flex align-items-center mb-3">
+              <div class="logo-icon me-2">
+                <i class="bi bi-briefcase"></i>
+              </div>
+              <span class="fw-bold">JobHub</span>
+            </div>
+            <p class="text-muted small mb-3">
+              Nền tảng kết nối sinh viên với cơ hội việc làm từ các doanh nghiệp
+              uy tín.
+            </p>
+            <div class="d-flex gap-2">
+              <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="social-icon"
+                ><i class="bi bi-instagram"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h5 class="mb-3">Dành cho sinh viên</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="job-search.html"
+                  class="text-muted text-decoration-none"
+                  >Tìm việc làm</a
+                >
+              </li>
+              <li>
+                <a
+                  href="saved-jobs.html"
+                  class="text-muted text-decoration-none"
+                  >Việc làm đã lưu</a
+                >
+              </li>
+              <li>
+                <a
+                  href="student-profile.html"
+                  class="text-muted text-decoration-none"
+                  >Hồ sơ của tôi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../page/blog.html"
+                  class="text-muted text-decoration-none"
+                  >Hướng nghiệp</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h5 class="mb-3">Dành cho nhà tuyển dụng</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="../employer/post-job.html"
+                  class="text-muted text-decoration-none"
+                  >Đăng tuyển dụng</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../index.html#companies"
+                  class="text-muted text-decoration-none"
+                  >Đối tác</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-muted text-decoration-none">Liên hệ</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h5 class="mb-3">Liên hệ</h5>
+            <ul class="list-unstyled text-muted">
+              <li class="mb-2">
+                <i class="bi bi-geo-alt me-2"></i>123 Đường ABC, Quận 1, TP.HCM
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-telephone me-2"></i>+84 123 456 789
+              </li>
+              <li><i class="bi bi-envelope me-2"></i>support@jobhub.vn</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-4 bg-secondary" />
+        <div class="text-center text-muted">
+          <p class="mb-0">&copy; 2025 JobHub. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="student-js/student-profile.js"></script>
+  </body>
+</html>

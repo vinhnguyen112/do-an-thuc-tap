@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <!-- Thông tin cơ bản của trang -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập - JobHub</title>
+    <meta
+      name="description"
+      content="Đăng nhập vào JobHub để truy cập các tính năng tìm việc làm cho sinh viên"
+    />
+
+    <!-- CSS Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+    <!-- Icon Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    
+    <!-- Font chữ Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- CSS tùy chỉnh -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ============================================
+         KHUNG ĐĂNG NHẬP
+         ============================================ -->
+    <div class="khung-dang-nhap">
+      <div class="the-dang-nhap">
+        <!-- Phần đầu form -->
+        <div class="dau-form">
+          <!-- Logo và tên website -->
+          <a
+            href="index.html"
+            class="d-inline-flex align-items-center mb-3 text-white text-decoration-none"
+          >
+            <div class="icon-logo me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold fs-5">JobHub</span>
+          </a>
+          
+          <!-- Tiêu đề -->
+          <h2 class="mb-0">Chào mừng trở lại!</h2>
+          <p class="mb-0 mt-2 opacity-75">Đăng nhập để tiếp tục</p>
+        </div>
+
+        <!-- Phần thân form -->
+        <div class="than-form">
+          <!-- Form đăng nhập -->
+          <form id="loginForm" onsubmit="xuLyDangNhap(event)">
+            <!-- Ô nhập email hoặc tên đăng nhập -->
+            <div class="mb-3">
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope me-1"></i>Email hoặc tên đăng nhập
+              </label>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="email"
+                name="email"
+                placeholder="Nhập email hoặc tên đăng nhập"
+                required
+              />
+            </div>
+
+            <!-- Ô nhập mật khẩu -->
+            <div class="mb-3">
+              <label for="password" class="form-label">
+                <i class="bi bi-lock me-1"></i>Mật khẩu
+              </label>
+              <div class="position-relative">
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="password"
+                  name="password"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+                <!-- Nút hiện/ẩn mật khẩu -->
+                <button
+                  type="button"
+                  class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3"
+                  onclick="chuyenDoiHienMatKhau()"
+                  style="text-decoration: none; border: none; background: none;"
+                >
+                  <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Ghi nhớ đăng nhập và quên mật khẩu -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remember" />
+                <label class="form-check-label" for="remember">
+                  Ghi nhớ đăng nhập
+                </label>
+              </div>
+              <div>
+                <a href="#forgot">Quên mật khẩu?</a>
+              </div>
+            </div>
+
+            <!-- Nút đăng nhập -->
+            <button type="submit" class="btn btn-primary w-100 btn-lg mb-3">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
+            </button>
+          </form>
+
+          <!-- Đăng nhập bằng mạng xã hội (tùy chọn) -->
+          <div class="text-center my-3">
+            <span class="text-muted">Hoặc đăng nhập bằng</span>
+          </div>
+          <div class="d-flex gap-2 justify-content-center mb-3">
+            <a href="#" class="btn btn-outline-danger">
+              <i class="bi bi-google me-2"></i>Google
+            </a>
+            <a href="#" class="btn btn-outline-primary">
+              <i class="bi bi-facebook me-2"></i>Facebook
+            </a>
+          </div>
+
+          <!-- Link đăng ký -->
+          <div class="text-center">
+            <p class="mb-0 text-muted">
+              Chưa có tài khoản?
+              <a href="register.html">Đăng ký ngay</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript xử lý đăng nhập -->
+    <script src="js/auth.js"></script>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2025 JobHub. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+  </body>
+</html>

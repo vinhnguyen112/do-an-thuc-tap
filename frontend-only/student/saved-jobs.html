@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Công Việc Đã Lưu - JobHub</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="student-style.css" />
+    <style></style>
+  </head>
+  <body>
+    <!-- Đầu trang -->
+    <header class="sticky-top bg-white shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a
+            class="navbar-brand d-flex align-items-center"
+            href="../page/index.html"
+          >
+            <div class="logo-icon me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold">JobHub</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="student-dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="job-search.html">Tìm việc</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-cvs.html">CV của tôi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-applications.html">Ứng tuyển</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="saved-jobs.html">Đã lưu</a>
+              </li>
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+              <a
+                href="../shared/notifications.html"
+                class="btn btn-outline-secondary btn-sm position-relative"
+              >
+                <i class="bi bi-bell"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  >3</span
+                >
+              </a>
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="bi bi-person-circle me-1"></i>Nguyễn Văn A
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="student-profile.html"
+                      >Hồ sơ</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="../shared/settings.html"
+                      >Cài đặt</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item text-danger"
+                      href="../page/index.html"
+                      >Đăng xuất</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Nội dung chính -->
+    <div class="saved-jobs-container">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h1 class="fw-bold mb-1">Công việc đã lưu</h1>
+                <p class="text-muted mb-0">
+                  Quản lý các công việc bạn quan tâm
+                </p>
+              </div>
+              <a href="job-search.html" class="btn btn-primary">
+                <i class="bi bi-search me-2"></i>Tìm thêm việc
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thống kê -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <div class="stats-card">
+              <h3 class="fw-bold text-primary">15</h3>
+              <p class="text-muted mb-0">Tổng số đã lưu</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stats-card">
+              <h3 class="fw-bold text-success">5</h3>
+              <p class="text-muted mb-0">Đã ứng tuyển</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stats-card">
+              <h3 class="fw-bold text-warning">3</h3>
+              <p class="text-muted mb-0">Sắp hết hạn</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Danh sách việc đã lưu -->
+          <div class="col-lg-8">
+            <!-- Tùy chọn lọc -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="text-muted">Lọc theo:</span>
+                <select
+                  class="form-select"
+                  style="width: auto"
+                  onchange="filterSavedJobs(this.value)"
+                >
+                  <option value="all">Tất cả</option>
+                  <option value="recent">Mới lưu</option>
+                  <option value="expiring">Sắp hết hạn</option>
+                  <option value="applied">Đã ứng tuyển</option>
+                  <option value="not-applied">Chưa ứng tuyển</option>
+                </select>
+              </div>
+              <div class="text-muted">
+                Hiển thị <span class="fw-semibold">1-6</span> của
+                <span class="fw-semibold">15</span> công việc
+              </div>
+            </div>
+
+            <!-- Việc đã lưu -->
+            <div id="savedJobsList">
+              <!-- Công việc 1 -->
+              <div class="saved-job-card">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <img
+                      src="../page/assets/images.jpg"
+                      alt="Tech Corp"
+                      class="company-logo"
+                    />
+                  </div>
+                  <div class="col">
+                    <div
+                      class="d-flex justify-content-between align-items-start"
+                    >
+                      <div>
+                        <h5 class="fw-bold mb-1">Frontend Developer Intern</h5>
+                        <p class="text-muted mb-2">
+                          Tech Corp Vietnam • Hồ Chí Minh
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                          <span class="badge bg-light text-dark"
+                            >Toàn thời gian</span
+                          >
+                          <span class="badge bg-light text-dark"
+                            >8-12 triệu</span
+                          >
+                          <span class="badge bg-warning">Sắp hết hạn</span>
+                        </div>
+                        <div class="d-flex gap-3 text-muted small">
+                          <span
+                            ><i class="bi bi-calendar me-1"></i>Lưu:
+                            18/12/2024</span
+                          >
+                          <span
+                            ><i class="bi bi-clock me-1"></i>Hạn nộp:
+                            25/12/2024</span
+                          >
+                        </div>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-success">Đã ứng tuyển</span>
+                        <div class="mt-2">
+                          <small class="text-muted"
+                            >Ứng tuyển: 15/12/2024</small
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="xemChiTiet(1)"
+                  >
+                    <i class="bi bi-eye me-1"></i>Xem chi tiết
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-success me-2"
+                    onclick="ungTuyenNhanh(1)"
+                  >
+                    <i class="bi bi-send me-1"></i>Ứng tuyển lại
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="boLuu(1)"
+                  >
+                    <i class="bi bi-bookmark-x me-1"></i>Bỏ lưu
+                  </button>
+                </div>
+              </div>
+
+              <!-- Job 2 -->
+              <div class="saved-job-card">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <img
+                      src="../page/assets/images.jpg"
+                      alt="Startup Innovation"
+                      class="company-logo"
+                    />
+                  </div>
+                  <div class="col">
+                    <div
+                      class="d-flex justify-content-between align-items-start"
+                    >
+                      <div>
+                        <h5 class="fw-bold mb-1">ReactJS Developer (Remote)</h5>
+                        <p class="text-muted mb-2">
+                          Startup Innovation • Remote
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                          <span class="badge bg-light text-dark"
+                            >Part-time</span
+                          >
+                          <span class="badge bg-light text-dark"
+                            >10-15 triệu</span
+                          >
+                          <span class="badge bg-success">Còn thời gian</span>
+                        </div>
+                        <div class="d-flex gap-3 text-muted small">
+                          <span
+                            ><i class="bi bi-calendar me-1"></i>Lưu:
+                            17/12/2024</span
+                          >
+                          <span
+                            ><i class="bi bi-clock me-1"></i>Hạn nộp:
+                            30/12/2024</span
+                          >
+                        </div>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-info">Chưa ứng tuyển</span>
+                        <div class="mt-2">
+                          <small class="text-muted">Ưu tiên cao</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="xemChiTiet(2)"
+                  >
+                    <i class="bi bi-eye me-1"></i>Xem chi tiết
+                  </button>
+                  <button
+                    class="btn btn-sm btn-success me-2"
+                    onclick="ungTuyenNhanh(2)"
+                  >
+                    <i class="bi bi-send me-1"></i>Ứng tuyển ngay
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="boLuu(2)"
+                  >
+                    <i class="bi bi-bookmark-x me-1"></i>Bỏ lưu
+                  </button>
+                </div>
+              </div>
+
+              <!-- Job 3 -->
+              <div class="saved-job-card">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <img
+                      src="../page/assets/images.jpg"
+                      alt="Design Studio"
+                      class="company-logo"
+                    />
+                  </div>
+                  <div class="col">
+                    <div
+                      class="d-flex justify-content-between align-items-start"
+                    >
+                      <div>
+                        <h5 class="fw-bold mb-1">UI/UX Designer Intern</h5>
+                        <p class="text-muted mb-2">
+                          Creative Design Studio • Hà Nội
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                          <span class="badge bg-light text-dark">Thực tập</span>
+                          <span class="badge bg-light text-dark"
+                            >4-6 triệu</span
+                          >
+                          <span class="badge bg-danger">Hết hạn sớm</span>
+                        </div>
+                        <div class="d-flex gap-3 text-muted small">
+                          <span
+                            ><i class="bi bi-calendar me-1"></i>Lưu:
+                            16/12/2024</span
+                          >
+                          <span
+                            ><i class="bi bi-clock me-1"></i>Hạn nộp:
+                            20/12/2024</span
+                          >
+                        </div>
+                      </div>
+                      <div class="text-end">
+                        <span class="badge bg-info">Chưa ứng tuyển</span>
+                        <div class="mt-2">
+                          <small class="text-muted">Ưu tiên trung bình</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    onclick="xemChiTiet(3)"
+                  >
+                    <i class="bi bi-eye me-1"></i>Xem chi tiết
+                  </button>
+                  <button
+                    class="btn btn-sm btn-success me-2"
+                    onclick="ungTuyenNhanh(3)"
+                  >
+                    <i class="bi bi-send me-1"></i>Ứng tuyển ngay
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger"
+                    onclick="boLuu(3)"
+                  >
+                    <i class="bi bi-bookmark-x me-1"></i>Bỏ lưu
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="emptyState" class="empty-state d-none">
+              <div class="empty-state-icon">
+                <i class="bi bi-bookmark"></i>
+              </div>
+              <h4 class="fw-bold mb-3">Chưa có công việc nào được lưu</h4>
+              <p class="text-muted mb-4">
+                Bắt đầu lưu các công việc bạn quan tâm để dễ dàng theo dõi và
+                ứng tuyển sau này.
+              </p>
+              <a href="job-search.html" class="btn btn-primary">
+                <i class="bi bi-search me-2"></i>Khám phá việc làm
+              </a>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-4">
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">Trước</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Tiếp</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-4">
+            <!-- Quick Actions -->
+            <div class="stats-card">
+              <h5 class="fw-bold mb-3">Hành động nhanh</h5>
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-outline-primary"
+                  onclick="alert('Tính năng đang phát triển')"
+                >
+                  <i class="bi bi-send me-2"></i>Ứng tuyển tất cả ưu tiên
+                </button>
+                <button
+                  class="btn btn-outline-danger"
+                  onclick="xoaTatCa()"
+                >
+                  <i class="bi bi-trash me-2"></i>Xóa tất cả đã lưu
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  onclick="alert('Tính năng đang phát triển')"
+                >
+                  <i class="bi bi-download me-2"></i>Xuất danh sách
+                </button>
+              </div>
+            </div>
+
+            <!-- Saved Jobs Insights -->
+            <div class="stats-card">
+              <h5 class="fw-bold mb-3">Thống kê đã lưu</h5>
+              <div class="mb-3">
+                <h6 class="fw-semibold mb-2">Phân loại theo vị trí:</h6>
+                <div class="d-flex justify-content-between small mb-1">
+                  <span>Frontend Developer</span>
+                  <span class="fw-semibold">5</span>
+                </div>
+                <div class="d-flex justify-content-between small mb-1">
+                  <span>UI/UX Designer</span>
+                  <span class="fw-semibold">3</span>
+                </div>
+                <div class="d-flex justify-content-between small">
+                  <span>Fullstack Developer</span>
+                  <span class="fw-semibold">2</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <h6 class="fw-semibold mb-2">Phân loại theo địa điểm:</h6>
+                <div class="d-flex justify-content-between small mb-1">
+                  <span>Hồ Chí Minh</span>
+                  <span class="fw-semibold">8</span>
+                </div>
+                <div class="d-flex justify-content-between small mb-1">
+                  <span>Remote</span>
+                  <span class="fw-semibold">4</span>
+                </div>
+                <div class="d-flex justify-content-between small">
+                  <span>Hà Nội</span>
+                  <span class="fw-semibold">3</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reminders -->
+            <div class="stats-card">
+              <h5 class="fw-bold mb-3">Nhắc nhở</h5>
+              <div class="alert alert-warning">
+                <h6 class="fw-semibold mb-2">
+                  <i class="bi bi-exclamation-triangle me-2"></i>Công việc sắp
+                  hết hạn
+                </h6>
+                <ul class="small mb-0 ps-3">
+                  <li>UI/UX Designer Intern - Hết hạn 20/12</li>
+                  <li>Frontend Developer Intern - Hết hạn 25/12</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <!-- Footer content same as previous pages -->
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="student-js/saved-jobs.js"></script>
+  </body>
+</html>

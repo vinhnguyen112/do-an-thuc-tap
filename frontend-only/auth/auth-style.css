@@ -1,0 +1,64 @@
+.settings-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+.settings-sidebar {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0;
+}
+.settings-sidebar .nav-link {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--dark-color);
+  font-weight: 500;
+}
+.settings-sidebar .nav-link.active {
+  background: rgba(13, 110, 253, 0.1);
+  border-left-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.settings-sidebar .nav-link:hover {
+  background: rgba(13, 110, 253, 0.05);
+}
+.settings-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+.password-strength {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+.password-strength.weak {
+  color: #dc3545;
+}
+.password-strength.medium {
+  color: #ffc107;
+}
+.password-strength.strong {
+  color: #198754;
+}
+
+/* Footer */
+footer,
+footer * {
+  color: white !important;
+}
+
+footer a {
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #0d6efd !important;
+}
+
+footer .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+

@@ -1,0 +1,379 @@
+/* CSS cho module sinh viên */
+
+/* Khung chứa chung */
+.khung-sinh-vien,
+.khung-ung-tuyen,
+.application-container,
+.khung-tim-viec,
+.job-search-container,
+.khung-chi-tiet-viec,
+.job-detail-container,
+.khung-danh-sach-ung-tuyen,
+.applications-container,
+.khung-cv,
+.cv-container,
+.khung-viec-da-luu,
+.saved-jobs-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+
+/* Thẻ */
+.the-ung-tuyen,
+.application-card,
+.the-viec-lam-sinh-vien,
+.job-card,
+.the-viec-da-luu,
+.saved-job-card,
+.the-cv,
+.cv-card,
+.the-thong-ke,
+.stats-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.the-ung-tuyen:hover,
+.application-card:hover,
+.the-viec-lam-sinh-vien:hover,
+.job-card:hover,
+.the-viec-da-luu:hover,
+.saved-job-card:hover,
+.the-cv:hover,
+.cv-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Trang hồ sơ */
+.khung-ho-so,
+.profile-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+
+.the-ho-so,
+.profile-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dau-ho-so,
+.profile-header {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.khung-upload-anh,
+.avatar-upload {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.khung-upload-anh img,
+.avatar-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.khung-upload-anh .btn,
+.avatar-upload .btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}
+
+/* Trang chi tiết việc làm */
+.dau-chi-tiet-viec,
+.job-header {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.logo-cong-ty-lon,
+.company-logo-large {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.noi-dung-viec,
+.job-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.the-ben-canh,
+.sidebar-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: sticky;
+  top: 100px;
+}
+
+/* Trang tìm việc */
+.dau-tim-viec,
+.search-header {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.thanh-loc,
+.filter-sidebar {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  position: sticky;
+  top: 100px;
+}
+
+.logo-cong-ty,
+.company-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.nhan-luong,
+.salary-badge {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+/* Trang tạo CV */
+.khung-tao-cv,
+.cv-builder-container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.lua-chon-cv,
+.cv-option {
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.lua-chon-cv:hover,
+.cv-option:hover {
+  border-color: var(--mau-chinh);
+  background: #f8f9ff;
+}
+
+.lua-chon-cv.da-chon,
+.cv-option.selected {
+  border-color: var(--mau-chinh);
+  background: #e7f1ff;
+}
+
+.the-mau-cv,
+.template-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+  margin-bottom: 1.5rem;
+  height: 100%;
+}
+
+.the-mau-cv:hover,
+.template-card:hover {
+  transform: translateY(-4px);
+}
+
+.the-mau-cv.da-chon,
+.template-card.selected {
+  border-color: var(--mau-chinh);
+}
+
+.xem-truoc-mau,
+.template-preview {
+  background: #f8f9fa;
+  border-radius: 8px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.xem-truoc-cv,
+.cv-template-preview {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  height: auto;
+  min-height: 297mm;
+}
+
+.xem-truoc-cv-nho,
+.cv-preview {
+  background: #f8f9fa;
+  border-radius: 8px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Các thành phần chung */
+.phần-form,
+.form-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tieu-de-phan,
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--mau-chu-toi);
+  border-bottom: 2px solid var(--mau-chinh);
+  padding-bottom: 0.5rem;
+}
+
+.nhan-trang-thai,
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.nhan-tinh-nang,
+.feature-badge {
+  background: #e7f1ff;
+  color: var(--mau-chinh);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.xem-truoc-viec,
+.job-preview {
+  background: #f8f9ff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Timeline */
+.dong-thoi-gian,
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.dong-thoi-gian::before,
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #dee2e6;
+}
+
+.muc-thoi-gian,
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.muc-thoi-gian::before,
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  top: 0.25rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--mau-chinh);
+}
+
+/* Trạng thái rỗng */
+.trang-thai-rong,
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.icon-trang-thai-rong,
+.empty-state-icon {
+  font-size: 4rem;
+  color: #dee2e6;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (min-width: 992px) {
+  .xem-truoc-cv,
+  .cv-template-preview {
+    position: sticky;
+    top: 100px;
+  }
+}
+
+/* Footer */
+footer,
+footer * {
+  color: white !important;
+}
+
+footer a {
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--mau-chinh) !important;
+}
+
+footer .text-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+

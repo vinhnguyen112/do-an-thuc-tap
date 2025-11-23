@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Ứng viên - JobHub</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../page/css/style.css" />
+    <link rel="stylesheet" href="employer-style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="sticky-top bg-white shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a
+            class="navbar-brand d-flex align-items-center"
+            href="../page/index.html"
+          >
+            <div class="logo-icon me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold">JobHub</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="employer-dashboard.html">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="post-job.html">Đăng tin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manage-jobs.html">Quản lý tin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="job-candidates.html">Ứng viên</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="employer-profile.html">Hồ sơ</a>
+              </li>
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+              <a
+                href="../shared/notifications.html"
+                class="btn btn-outline-secondary btn-sm position-relative"
+              >
+                <i class="bi bi-bell"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  >5</span
+                >
+              </a>
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="bi bi-building me-1"></i>Tech Corp
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="employer-profile.html"
+                      >Hồ sơ công ty</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="../shared/settings.html"
+                      >Cài đặt</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item text-danger" href="../page/index.html"
+                      >Đăng xuất</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12">
+          <!-- Page Header -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h2 class="fw-bold mb-1">Quản lý Ứng viên</h2>
+              <p class="text-muted mb-0">
+                Xem và quản lý các ứng viên đã ứng tuyển vào công việc của bạn
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-primary" onclick="exportCandidates()">
+                <i class="bi bi-download me-1"></i>Xuất Excel
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted mb-1 small">Tổng ứng viên</p>
+                      <h3 class="fw-bold mb-0 text-primary">156</h3>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 p-3 rounded">
+                      <i class="bi bi-people fs-4 text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted mb-1 small">Ứng viên mới</p>
+                      <h3 class="fw-bold mb-0 text-info">89</h3>
+                    </div>
+                    <div class="bg-info bg-opacity-10 p-3 rounded">
+                      <i class="bi bi-person-plus fs-4 text-info"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted mb-1 small">Đang phỏng vấn</p>
+                      <h3 class="fw-bold mb-0 text-warning">23</h3>
+                    </div>
+                    <div class="bg-warning bg-opacity-10 p-3 rounded">
+                      <i class="bi bi-chat-dots fs-4 text-warning"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted mb-1 small">Đã tuyển</p>
+                      <h3 class="fw-bold mb-0 text-success">12</h3>
+                    </div>
+                    <div class="bg-success bg-opacity-10 p-3 rounded">
+                      <i class="bi bi-check-circle fs-4 text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Tìm kiếm</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Tên ứng viên..."
+                    id="searchInput"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Vị trí</label>
+                  <select class="form-select" id="jobFilter">
+                    <option value="">Tất cả vị trí</option>
+                    <option value="1">Frontend Developer</option>
+                    <option value="2">Backend Developer</option>
+                    <option value="3">UI/UX Designer</option>
+                    <option value="4">Marketing Manager</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Trạng thái</label>
+                  <select class="form-select" id="statusFilter">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="new">Mới ứng tuyển</option>
+                    <option value="reviewing">Đang xem xét</option>
+                    <option value="interview">Phỏng vấn</option>
+                    <option value="accepted">Đã tuyển</option>
+                    <option value="rejected">Từ chối</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small fw-semibold">Sắp xếp</label>
+                  <select class="form-select" id="sortFilter">
+                    <option value="newest">Mới nhất</option>
+                    <option value="oldest">Cũ nhất</option>
+                    <option value="name">Tên A-Z</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Candidates List -->
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="bg-light">
+                    <tr>
+                      <th class="px-4 py-3">
+                        <input type="checkbox" class="form-check-input" />
+                      </th>
+                      <th class="py-3">Ứng viên</th>
+                      <th class="py-3">Vị trí ứng tuyển</th>
+                      <th class="py-3">Ngày ứng tuyển</th>
+                      <th class="py-3">Trạng thái</th>
+                      <th class="py-3">Đánh giá</th>
+                      <th class="py-3 text-center">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody id="candidatesTableBody">
+                    <!-- Candidate 1 -->
+                    <tr>
+                      <td class="px-4">
+                        <input type="checkbox" class="form-check-input" />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="https://via.placeholder.com/40"
+                            alt="Avatar"
+                            class="rounded-circle me-3"
+                            style="width: 40px; height: 40px"
+                          />
+                          <div>
+                            <div class="fw-semibold">Nguyễn Văn A</div>
+                            <small class="text-muted">nguyenvana@email.com</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="fw-medium">Frontend Developer</div>
+                        <small class="text-muted">Full-time</small>
+                      </td>
+                      <td>
+                        <div>20/12/2024</div>
+                        <small class="text-muted">2 ngày trước</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-info">Mới ứng tuyển</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star text-muted"></i>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewCandidate(1)"
+                            title="Xem hồ sơ"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="scheduleInterview(1)"
+                            title="Lịch phỏng vấn"
+                          >
+                            <i class="bi bi-calendar-check"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-secondary"
+                            onclick="sendMessage(1)"
+                            title="Gửi tin nhắn"
+                          >
+                            <i class="bi bi-chat"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- Candidate 2 -->
+                    <tr>
+                      <td class="px-4">
+                        <input type="checkbox" class="form-check-input" />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="https://via.placeholder.com/40"
+                            alt="Avatar"
+                            class="rounded-circle me-3"
+                            style="width: 40px; height: 40px"
+                          />
+                          <div>
+                            <div class="fw-semibold">Trần Thị B</div>
+                            <small class="text-muted">tranthib@email.com</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="fw-medium">UI/UX Designer</div>
+                        <small class="text-muted">Full-time</small>
+                      </td>
+                      <td>
+                        <div>18/12/2024</div>
+                        <small class="text-muted">4 ngày trước</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-warning">Phỏng vấn</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewCandidate(2)"
+                            title="Xem hồ sơ"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="scheduleInterview(2)"
+                            title="Lịch phỏng vấn"
+                          >
+                            <i class="bi bi-calendar-check"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-secondary"
+                            onclick="sendMessage(2)"
+                            title="Gửi tin nhắn"
+                          >
+                            <i class="bi bi-chat"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- Candidate 3 -->
+                    <tr>
+                      <td class="px-4">
+                        <input type="checkbox" class="form-check-input" />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="https://via.placeholder.com/40"
+                            alt="Avatar"
+                            class="rounded-circle me-3"
+                            style="width: 40px; height: 40px"
+                          />
+                          <div>
+                            <div class="fw-semibold">Lê Văn C</div>
+                            <small class="text-muted">levanc@email.com</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="fw-medium">Backend Developer</div>
+                        <small class="text-muted">Full-time</small>
+                      </td>
+                      <td>
+                        <div>15/12/2024</div>
+                        <small class="text-muted">1 tuần trước</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-success">Đã tuyển</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-half text-warning"></i>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewCandidate(3)"
+                            title="Xem hồ sơ"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="scheduleInterview(3)"
+                            title="Lịch phỏng vấn"
+                          >
+                            <i class="bi bi-calendar-check"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-secondary"
+                            onclick="sendMessage(3)"
+                            title="Gửi tin nhắn"
+                          >
+                            <i class="bi bi-chat"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- Candidate 4 -->
+                    <tr>
+                      <td class="px-4">
+                        <input type="checkbox" class="form-check-input" />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="https://via.placeholder.com/40"
+                            alt="Avatar"
+                            class="rounded-circle me-3"
+                            style="width: 40px; height: 40px"
+                          />
+                          <div>
+                            <div class="fw-semibold">Phạm Thị D</div>
+                            <small class="text-muted">phamthid@email.com</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="fw-medium">Marketing Manager</div>
+                        <small class="text-muted">Full-time</small>
+                      </td>
+                      <td>
+                        <div>10/12/2024</div>
+                        <small class="text-muted">12 ngày trước</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-secondary">Đang xem xét</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star text-muted me-1"></i>
+                          <i class="bi bi-star text-muted"></i>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewCandidate(4)"
+                            title="Xem hồ sơ"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="scheduleInterview(4)"
+                            title="Lịch phỏng vấn"
+                          >
+                            <i class="bi bi-calendar-check"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-secondary"
+                            onclick="sendMessage(4)"
+                            title="Gửi tin nhắn"
+                          >
+                            <i class="bi bi-chat"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- Candidate 5 -->
+                    <tr>
+                      <td class="px-4">
+                        <input type="checkbox" class="form-check-input" />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="https://via.placeholder.com/40"
+                            alt="Avatar"
+                            class="rounded-circle me-3"
+                            style="width: 40px; height: 40px"
+                          />
+                          <div>
+                            <div class="fw-semibold">Hoàng Văn E</div>
+                            <small class="text-muted">hoangvane@email.com</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="fw-medium">Frontend Developer</div>
+                        <small class="text-muted">Part-time</small>
+                      </td>
+                      <td>
+                        <div>05/12/2024</div>
+                        <small class="text-muted">17 ngày trước</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-danger">Từ chối</span>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star-fill text-warning me-1"></i>
+                          <i class="bi bi-star text-muted me-1"></i>
+                          <i class="bi bi-star text-muted me-1"></i>
+                          <i class="bi bi-star text-muted"></i>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewCandidate(5)"
+                            title="Xem hồ sơ"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="scheduleInterview(5)"
+                            title="Lịch phỏng vấn"
+                          >
+                            <i class="bi bi-calendar-check"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-secondary"
+                            onclick="sendMessage(5)"
+                            title="Gửi tin nhắn"
+                          >
+                            <i class="bi bi-chat"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Pagination -->
+            <div class="card-footer bg-white border-top">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="text-muted small">
+                  Hiển thị 1-5 trong tổng số 156 ứng viên
+                </div>
+                <nav>
+                  <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#">Trước</a>
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">32</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Sau</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // View candidate details
+      function viewCandidate(id) {
+        alert('Xem hồ sơ ứng viên ID: ' + id);
+        // Redirect to candidate detail page
+        // window.location.href = 'candidate-detail.html?id=' + id;
+      }
+
+      // Schedule interview
+      function scheduleInterview(id) {
+        alert('Lên lịch phỏng vấn cho ứng viên ID: ' + id);
+        // Open interview scheduling modal
+      }
+
+      // Send message to candidate
+      function sendMessage(id) {
+        alert('Gửi tin nhắn cho ứng viên ID: ' + id);
+        // Open messaging interface
+      }
+
+      // Export candidates to Excel
+      function exportCandidates() {
+        alert('Xuất danh sách ứng viên ra file Excel');
+        // Implement export functionality
+      }
+
+      // Search functionality
+      document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        console.log('Searching for:', searchTerm);
+        // Implement search logic
+      });
+
+      // Filter by job
+      document.getElementById('jobFilter').addEventListener('change', function(e) {
+        console.log('Filter by job:', e.target.value);
+        // Implement filter logic
+      });
+
+      // Filter by status
+      document.getElementById('statusFilter').addEventListener('change', function(e) {
+        console.log('Filter by status:', e.target.value);
+        // Implement filter logic
+      });
+
+      // Sort candidates
+      document.getElementById('sortFilter').addEventListener('change', function(e) {
+        console.log('Sort by:', e.target.value);
+        // Implement sort logic
+      });
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Job Candidates page loaded');
+      });
+    </script>
+  </body>
+</html>
