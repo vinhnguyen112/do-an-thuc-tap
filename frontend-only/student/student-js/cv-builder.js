@@ -167,6 +167,7 @@ function themKyNang() {
     } else {
         console.log("Chưa nhập kỹ năng!");
     }
+}
 
 // Hàm xóa kỹ năng (tên cũ: removeSkill)
 function xoaKyNang(element) {
