@@ -1,121 +1,108 @@
 // Import thư viện puppeteer để tạo PDF
 const puppeteer = require('puppeteer');
 
-// Hàm tạo HTML từ dữ liệu CV
-function generateCVHTML(cv) {
-    // Lấy danh sách kỹ năng
-    const skills = Array.isArray(cv.Skills) ? cv.Skills : [];
-    // Lấy dữ liệu CV
-    const cvData = cv.CVData || {};
-    
-    // Tạo HTML cho CV
-    return `
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${cv.Title || 'CV'}</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+// CSS cho CV (tách riêng để dễ đọc)
+const cssChoCV = `
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        padding: 20px;
+        background: #fff;
+    }
+    .cv-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+    }
+    .cv-header {
+        text-align: center;
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+    .cv-header h1 {
+        font-size: 28px;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+    .cv-header p {
+        font-size: 16px;
+        color: #666;
+        margin: 5px 0;
+    }
+    .cv-section {
+        margin-bottom: 25px;
+    }
+    .cv-section h2 {
+        font-size: 20px;
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+    .cv-section p {
+        margin-bottom: 10px;
+        text-align: justify;
+    }
+    .skill-tag {
+        display: inline-block;
+        background: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 3px;
+        margin: 3px;
+        font-size: 12px;
+    }
+    .education-item, .experience-item, .project-item {
+        margin-bottom: 15px;
+    }
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+    .item-title {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .item-company {
+        color: #666;
+        font-size: 14px;
+    }
+    .item-date {
+        color: #999;
+        font-size: 14px;
+    }
+    .item-description {
+        margin-top: 5px;
+        padding-left: 20px;
+    }
+    .item-description ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+    .item-description li {
+        margin-bottom: 5px;
+    }
+    @media print {
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            padding: 20px;
-            background: #fff;
+            padding: 0;
         }
         .cv-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
+            max-width: 100%;
         }
-        .cv-header {
-            text-align: center;
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        .cv-header h1 {
-            font-size: 28px;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-        .cv-header p {
-            font-size: 16px;
-            color: #666;
-            margin: 5px 0;
-        }
-        .cv-section {
-            margin-bottom: 25px;
-        }
-        .cv-section h2 {
-            font-size: 20px;
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-        .cv-section p {
-            margin-bottom: 10px;
-            text-align: justify;
-        }
-        .skill-tag {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-            margin: 3px;
-            font-size: 12px;
-        }
-        .education-item, .experience-item, .project-item {
-            margin-bottom: 15px;
-        }
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        .item-title {
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .item-company {
-            color: #666;
-            font-size: 14px;
-        }
-        .item-date {
-            color: #999;
-            font-size: 14px;
-        }
-        .item-description {
-            margin-top: 5px;
-            padding-left: 20px;
-        }
-        .item-description ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        .item-description li {
-            margin-bottom: 5px;
-        }
-        @media print {
-            body {
-                padding: 0;
-            }
-            .cv-container {
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="cv-container">
+    }
+`;
+
+// Hàm tạo phần header của CV
+function taoHeaderCV(cvData) {
+    return `
         <div class="cv-header">
             <h1>${cvData.fullName || 'Họ và Tên'}</h1>
             <p>${cvData.position || 'Vị trí ứng tuyển'}</p>
@@ -125,84 +112,153 @@ function generateCVHTML(cv) {
                 ${cvData.address ? `<span>📍 ${cvData.address}</span>` : ''}
             </p>
         </div>
+    `;
+}
 
-        ${cv.Objective ? `
+// Hàm tạo phần mục tiêu nghề nghiệp
+function taoPhanMucTieu(cv) {
+    if (!cv.Objective) return '';
+    
+    return `
         <div class="cv-section">
             <h2>MỤC TIÊU NGHỀ NGHIỆP</h2>
             <p>${cv.Objective}</p>
         </div>
-        ` : ''}
+    `;
+}
 
-        ${cvData.education && cvData.education.length > 0 ? `
+// Hàm tạo phần học vấn
+function taoPhanHocVan(cvData) {
+    if (!cvData.education || cvData.education.length === 0) return '';
+    
+    const danhSachHocVan = cvData.education.map(edu => `
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">${edu.school || ''}</div>
+                    <div class="item-company">${edu.degree || ''}</div>
+                </div>
+                <div class="item-date">${edu.startDate || ''} - ${edu.endDate || ''}</div>
+            </div>
+            ${edu.gpa ? `<p>GPA: ${edu.gpa}</p>` : ''}
+        </div>
+    `).join('');
+    
+    return `
         <div class="cv-section">
             <h2>HỌC VẤN</h2>
-            ${cvData.education.map(edu => `
-                <div class="education-item">
-                    <div class="item-header">
-                        <div>
-                            <div class="item-title">${edu.school || ''}</div>
-                            <div class="item-company">${edu.degree || ''}</div>
-                        </div>
-                        <div class="item-date">${edu.startDate || ''} - ${edu.endDate || ''}</div>
-                    </div>
-                    ${edu.gpa ? `<p>GPA: ${edu.gpa}</p>` : ''}
-                </div>
-            `).join('')}
+            ${danhSachHocVan}
         </div>
-        ` : ''}
+    `;
+}
 
-        ${cvData.experience && cvData.experience.length > 0 ? `
+// Hàm tạo phần kinh nghiệm
+function taoPhanKinhNghiem(cvData) {
+    if (!cvData.experience || cvData.experience.length === 0) return '';
+    
+    const danhSachKinhNghiem = cvData.experience.map(exp => `
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">${exp.position || ''}</div>
+                    <div class="item-company">${exp.company || ''}</div>
+                </div>
+                <div class="item-date">${exp.startDate || ''} - ${exp.endDate || ''}</div>
+            </div>
+            ${exp.description ? `
+                <div class="item-description">
+                    <ul>
+                        ${Array.isArray(exp.responsibilities) ? 
+                            exp.responsibilities.map(resp => `<li>${resp}</li>`).join('') :
+                            `<li>${exp.description}</li>`
+                        }
+                    </ul>
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
+    
+    return `
         <div class="cv-section">
             <h2>KINH NGHIỆM</h2>
-            ${cvData.experience.map(exp => `
-                <div class="experience-item">
-                    <div class="item-header">
-                        <div>
-                            <div class="item-title">${exp.position || ''}</div>
-                            <div class="item-company">${exp.company || ''}</div>
-                        </div>
-                        <div class="item-date">${exp.startDate || ''} - ${exp.endDate || ''}</div>
-                    </div>
-                    ${exp.description ? `
-                        <div class="item-description">
-                            <ul>
-                                ${Array.isArray(exp.responsibilities) ? 
-                                    exp.responsibilities.map(resp => `<li>${resp}</li>`).join('') :
-                                    `<li>${exp.description}</li>`
-                                }
-                            </ul>
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('')}
+            ${danhSachKinhNghiem}
         </div>
-        ` : ''}
+    `;
+}
 
-        ${skills.length > 0 ? `
+// Hàm tạo phần kỹ năng
+function taoPhanKyNang(skills) {
+    if (!skills || skills.length === 0) return '';
+    
+    const danhSachKyNang = skills.map(skill => 
+        `<span class="skill-tag">${skill}</span>`
+    ).join('');
+    
+    return `
         <div class="cv-section">
             <h2>KỸ NĂNG</h2>
-            <div>
-                ${skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
-            </div>
+            <div>${danhSachKyNang}</div>
         </div>
-        ` : ''}
+    `;
+}
 
-        ${cvData.projects && cvData.projects.length > 0 ? `
+// Hàm tạo phần dự án
+function taoPhanDuAn(cvData) {
+    if (!cvData.projects || cvData.projects.length === 0) return '';
+    
+    const danhSachDuAn = cvData.projects.map(project => `
+        <div class="project-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">${project.name || ''}</div>
+                    <div class="item-company">${project.tech || ''}</div>
+                </div>
+            </div>
+            ${project.description ? `<p>${project.description}</p>` : ''}
+        </div>
+    `).join('');
+    
+    return `
         <div class="cv-section">
             <h2>DỰ ÁN</h2>
-            ${cvData.projects.map(project => `
-                <div class="project-item">
-                    <div class="item-header">
-                        <div>
-                            <div class="item-title">${project.name || ''}</div>
-                            <div class="item-company">${project.tech || ''}</div>
-                        </div>
-                    </div>
-                    ${project.description ? `<p>${project.description}</p>` : ''}
-                </div>
-            `).join('')}
+            ${danhSachDuAn}
         </div>
-        ` : ''}
+    `;
+}
+
+// Hàm tạo HTML từ dữ liệu CV
+function generateCVHTML(cv) {
+    // Lấy danh sách kỹ năng
+    const skills = Array.isArray(cv.Skills) ? cv.Skills : [];
+    // Lấy dữ liệu CV
+    const cvData = cv.CVData || {};
+    
+    // Tạo các phần của CV
+    const header = taoHeaderCV(cvData);
+    const mucTieu = taoPhanMucTieu(cv);
+    const hocVan = taoPhanHocVan(cvData);
+    const kinhNghiem = taoPhanKinhNghiem(cvData);
+    const kyNang = taoPhanKyNang(skills);
+    const duAn = taoPhanDuAn(cvData);
+    
+    // Ghép tất cả lại thành HTML hoàn chỉnh
+    return `
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${cv.Title || 'CV'}</title>
+    <style>${cssChoCV}</style>
+</head>
+<body>
+    <div class="cv-container">
+        ${header}
+        ${mucTieu}
+        ${hocVan}
+        ${kinhNghiem}
+        ${kyNang}
+        ${duAn}
     </div>
 </body>
 </html>
