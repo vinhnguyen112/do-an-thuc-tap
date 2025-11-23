@@ -1,20 +1,20 @@
-# Dependencies
-node_modules/
-package-lock.json
+# # Dependencies
+# node_modules/
+# package-lock.json
 
-# Environment variables
-.env
+# # Environment variables
+# .env
 
-# Logs
-*.log
-npm-debug.log*
+# # Logs
+# *.log
+# npm-debug.log*
 
-# OS files
-.DS_Store
-Thumbs.db
+# # OS files
+# .DS_Store
+# Thumbs.db
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
+# # IDE
+# .vscode/
+# .idea/
+# *.swp
+# *.swo
