@@ -480,3 +480,85 @@ footer .text-muted {
   color: #666;
   line-height: 1.8;
 }
+
+/* ========================================
+   CSS CHO LAYOUT 2 CỘT VÀ CÁC STYLE MỚI
+   ======================================== */
+
+/* Professional Template - 2 cột với sidebar */
+.cv-template-preview.template-professional .cv-sidebar {
+  background-color: #f8f9fa;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid #dee2e6;
+}
+
+.cv-template-preview.template-professional .avatar-circle {
+  width: 100px;
+  height: 100px;
+  background-color: #28a745;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+}
+
+.cv-template-preview.template-professional .section-title {
+  border-bottom: 2px solid #28a745;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Creative Template - Header lớn */
+.cv-template-preview.template-creative .creative-header {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe0b2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(255, 152, 0, 0.1);
+}
+
+.cv-template-preview.template-creative .creative-section-title {
+  border-left: 5px solid #ff9800;
+  padding-left: 15px;
+  margin-bottom: 1rem;
+}
+
+.cv-template-preview.template-creative .progress-bar {
+  background-color: #ff9800 !important;
+}
+
+/* Minimal Template - Đơn giản tuyệt đối */
+.cv-template-preview.template-minimal .minimal-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cv-template-preview.template-minimal h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+
+/* Responsive cho layout 2 cột */
+@media (max-width: 768px) {
+  .cv-template-preview.template-professional .cv-sidebar,
+  .cv-template-preview.template-creative .col-md-5,
+  .cv-template-preview.template-creative .col-md-7 {
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cv-template-preview.template-creative .creative-header {
+    padding: 2rem 1rem !important;
+  }
+  
+  .cv-template-preview.template-creative .creative-header h1 {
+    font-size: 2rem !important;
+  }
+}

@@ -2,6 +2,328 @@
 // Tác giả: Sinh viên thực tập
 // Mô tả: Code để tạo CV với preview trực tiếp
 
+// Biến lưu template hiện tại
+var templateHienTai = 'modern';
+
+// ========================================
+// CÁC HÀM TẠO TEMPLATE CV
+// ========================================
+
+// Hàm tạo template Modern - 1 cột đơn giản
+function taoTemplateModern(duLieu) {
+    return `
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary" id="previewName">${duLieu.hoTen || 'NGUYỄN VĂN A'}</h2>
+            <p class="text-muted mb-2" id="previewJobTitle">${duLieu.viTri || 'Frontend Developer'}</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <small><i class="bi bi-telephone me-1"></i><span id="previewPhone">${duLieu.sdt || '+84 123 456 789'}</span></small>
+                <small><i class="bi bi-envelope me-1"></i><span id="previewEmail">${duLieu.email || 'nguyenvana@example.com'}</span></small>
+                <small><i class="bi bi-geo-alt me-1"></i><span id="previewAddress">${duLieu.diaChi || 'Hồ Chí Minh'}</span></small>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="fw-bold border-bottom pb-2">MỤC TIÊU NGHỀ NGHIỆP</h5>
+            <p class="mb-0" id="previewObjective">${duLieu.mucTieu || 'Sinh viên năm cuối ngành Công nghệ Thông tin...'}</p>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="fw-bold border-bottom pb-2">HỌC VẤN</h5>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6 class="fw-semibold mb-0">Đại học Công nghệ TP.HCM</h6>
+                    <p class="text-muted mb-0">Cử nhân Công nghệ Thông tin</p>
+                </div>
+                <div class="text-end">
+                    <p class="text-muted mb-0">2020 - 2024</p>
+                    <p class="text-muted mb-0">GPA: 3.5/4.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="fw-bold border-bottom pb-2">KINH NGHIỆM</h5>
+            <div class="mb-3">
+                <h6 class="fw-semibold mb-0">Frontend Developer Intern</h6>
+                <p class="text-muted mb-1">Tech Corp Vietnam | 06/2023 - 08/2023</p>
+                <ul class="mb-0">
+                    <li>Phát triển giao diện người dùng với ReactJS và TypeScript</li>
+                    <li>Tối ưu hóa hiệu suất ứng dụng web</li>
+                    <li>Phối hợp với team backend để tích hợp API</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="fw-bold border-bottom pb-2">KỸ NĂNG</h5>
+            <div class="d-flex flex-wrap gap-2" id="previewSkills">
+                ${(duLieu.kyNang || ['JavaScript', 'ReactJS', 'HTML/CSS']).map(kn => `<span class="badge bg-primary">${kn}</span>`).join('')}
+            </div>
+        </div>
+
+        <div>
+            <h5 class="fw-bold border-bottom pb-2">DỰ ÁN</h5>
+            <div class="mb-3">
+                <h6 class="fw-semibold mb-0">Website E-commerce</h6>
+                <p class="text-muted mb-1">ReactJS, Node.js, MongoDB</p>
+                <p class="mb-0">Phát triển website thương mại điện tử với đầy đủ tính năng mua sắm, thanh toán.</p>
+            </div>
+        </div>
+    `;
+}
+
+// Hàm tạo template Professional - 2 cột với sidebar
+function taoTemplateProfessional(duLieu) {
+    return `
+        <div class="row">
+            <!-- Sidebar trái -->
+            <div class="col-md-4 cv-sidebar">
+                <div class="text-center mb-4">
+                    <div class="avatar-circle mx-auto mb-3">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1" id="previewName">${duLieu.hoTen || 'NGUYỄN VĂN A'}</h4>
+                    <p class="text-muted mb-0 small" id="previewJobTitle">${duLieu.viTri || 'Frontend Developer'}</p>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3 text-uppercase">Liên hệ</h6>
+                    <div class="mb-2"><i class="bi bi-telephone me-2"></i><small id="previewPhone">${duLieu.sdt || '+84 123 456 789'}</small></div>
+                    <div class="mb-2"><i class="bi bi-envelope me-2"></i><small id="previewEmail">${duLieu.email || 'nguyenvana@example.com'}</small></div>
+                    <div class="mb-2"><i class="bi bi-geo-alt me-2"></i><small id="previewAddress">${duLieu.diaChi || 'Hồ Chí Minh'}</small></div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3 text-uppercase">Kỹ năng</h6>
+                    <div id="previewSkills">
+                        ${(duLieu.kyNang || ['JavaScript', 'ReactJS', 'HTML/CSS']).map(kn => `
+                            <div class="mb-2">
+                                <small class="d-block mb-1">${kn}</small>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nội dung chính bên phải -->
+            <div class="col-md-8 cv-main-content">
+                <div class="mb-4">
+                    <h5 class="fw-bold section-title">MỤC TIÊU NGHỀ NGHIỆP</h5>
+                    <p class="mb-0" id="previewObjective">${duLieu.mucTieu || 'Sinh viên năm cuối ngành Công nghệ Thông tin...'}</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold section-title">KINH NGHIỆM</h5>
+                    <div class="mb-3">
+                        <h6 class="fw-semibold mb-0">Frontend Developer Intern</h6>
+                        <p class="text-muted mb-1 small">Tech Corp Vietnam | 06/2023 - 08/2023</p>
+                        <ul class="mb-0 small">
+                            <li>Phát triển giao diện người dùng với ReactJS và TypeScript</li>
+                            <li>Tối ưu hóa hiệu suất ứng dụng web</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold section-title">HỌC VẤN</h5>
+                    <div>
+                        <h6 class="fw-semibold mb-0">Đại học Công nghệ TP.HCM</h6>
+                        <p class="text-muted mb-0 small">Cử nhân Công nghệ Thông tin | 2020 - 2024 | GPA: 3.5/4.0</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="fw-bold section-title">DỰ ÁN</h5>
+                    <div class="mb-3">
+                        <h6 class="fw-semibold mb-0">Website E-commerce</h6>
+                        <p class="text-muted mb-1 small">ReactJS, Node.js, MongoDB</p>
+                        <p class="mb-0 small">Phát triển website thương mại điện tử với đầy đủ tính năng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Hàm tạo template Creative - Header lớn + 2 cột
+function taoTemplateCreative(duLieu) {
+    return `
+        <!-- Header lớn với background -->
+        <div class="creative-header text-center mb-4 p-4">
+            <h1 class="display-4 fw-bold mb-2" id="previewName">${duLieu.hoTen || 'NGUYỄN VĂN A'}</h1>
+            <h4 class="mb-3" id="previewJobTitle">${duLieu.viTri || 'Frontend Developer'}</h4>
+            <div class="d-flex justify-content-center gap-4">
+                <span><i class="bi bi-telephone-fill me-2"></i><span id="previewPhone">${duLieu.sdt || '+84 123 456 789'}</span></span>
+                <span><i class="bi bi-envelope-fill me-2"></i><span id="previewEmail">${duLieu.email || 'nguyenvana@example.com'}</span></span>
+                <span><i class="bi bi-geo-alt-fill me-2"></i><span id="previewAddress">${duLieu.diaChi || 'Hồ Chí Minh'}</span></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Cột trái 40% -->
+            <div class="col-md-5">
+                <div class="mb-4">
+                    <h5 class="fw-bold creative-section-title">KỸ NĂNG</h5>
+                    <div id="previewSkills">
+                        ${(duLieu.kyNang || ['JavaScript', 'ReactJS', 'HTML/CSS', 'Node.js']).map(kn => `
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="fw-semibold">${kn}</span>
+                                    <span class="text-muted">85%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-warning" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold creative-section-title">SỞ THÍCH</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-warning text-dark">Đọc sách</span>
+                        <span class="badge bg-warning text-dark">Du lịch</span>
+                        <span class="badge bg-warning text-dark">Coding</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải 60% -->
+            <div class="col-md-7">
+                <div class="mb-4">
+                    <h5 class="fw-bold creative-section-title">MỤC TIÊU</h5>
+                    <p class="mb-0" id="previewObjective">${duLieu.mucTieu || 'Sinh viên năm cuối ngành Công nghệ Thông tin...'}</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold creative-section-title">KINH NGHIỆM</h5>
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-1">Frontend Developer Intern</h6>
+                        <p class="text-muted mb-2 small">Tech Corp Vietnam | 06/2023 - 08/2023</p>
+                        <ul class="mb-0">
+                            <li>Phát triển giao diện người dùng với ReactJS</li>
+                            <li>Tối ưu hóa hiệu suất ứng dụng web</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold creative-section-title">HỌC VẤN</h5>
+                    <h6 class="fw-bold mb-1">Đại học Công nghệ TP.HCM</h6>
+                    <p class="text-muted mb-0">Cử nhân Công nghệ Thông tin | 2020 - 2024 | GPA: 3.5/4.0</p>
+                </div>
+
+                <div>
+                    <h5 class="fw-bold creative-section-title">DỰ ÁN</h5>
+                    <div>
+                        <h6 class="fw-bold mb-1">Website E-commerce</h6>
+                        <p class="text-muted mb-1 small">ReactJS, Node.js, MongoDB</p>
+                        <p class="mb-0">Phát triển website thương mại điện tử.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Hàm tạo template Minimal - Siêu đơn giản
+function taoTemplateMinimal(duLieu) {
+    return `
+        <!-- Header đơn giản trên 1 dòng -->
+        <div class="minimal-header mb-4 pb-3 border-bottom">
+            <h2 class="mb-1" id="previewName">${duLieu.hoTen || 'NGUYỄN VĂN A'}</h2>
+            <div class="d-flex gap-3 flex-wrap">
+                <span id="previewEmail">${duLieu.email || 'nguyenvana@example.com'}</span>
+                <span id="previewPhone">${duLieu.sdt || '+84 123 456 789'}</span>
+                <span id="previewAddress">${duLieu.diaChi || 'Hồ Chí Minh'}</span>
+            </div>
+        </div>
+
+        <!-- Mục tiêu -->
+        <div class="mb-3">
+            <h5 class="mb-2">MỤC TIÊU NGHỀ NGHIỆP</h5>
+            <p id="previewObjective">${duLieu.mucTieu || 'Sinh viên năm cuối ngành Công nghệ Thông tin...'}</p>
+        </div>
+
+        <!-- Kinh nghiệm -->
+        <div class="mb-3">
+            <h5 class="mb-2">KINH NGHIỆM</h5>
+            <div class="mb-2">
+                <strong>Frontend Developer Intern</strong> - Tech Corp Vietnam<br>
+                <span class="text-muted">06/2023 - 08/2023</span>
+                <ul class="mt-1 mb-0">
+                    <li>Phát triển giao diện người dùng với ReactJS và TypeScript</li>
+                    <li>Tối ưu hóa hiệu suất ứng dụng web</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Học vấn -->
+        <div class="mb-3">
+            <h5 class="mb-2">HỌC VẤN</h5>
+            <strong>Đại học Công nghệ TP.HCM</strong><br>
+            Cử nhân Công nghệ Thông tin | 2020 - 2024 | GPA: 3.5/4.0
+        </div>
+
+        <!-- Kỹ năng -->
+        <div class="mb-3">
+            <h5 class="mb-2">KỸ NĂNG</h5>
+            <div id="previewSkills">
+                ${(duLieu.kyNang || ['JavaScript', 'ReactJS', 'HTML/CSS', 'Node.js']).join(', ')}
+            </div>
+        </div>
+
+        <!-- Dự án -->
+        <div>
+            <h5 class="mb-2">DỰ ÁN</h5>
+            <strong>Website E-commerce</strong><br>
+            <span class="text-muted">ReactJS, Node.js, MongoDB</span><br>
+            Phát triển website thương mại điện tử với đầy đủ tính năng mua sắm, thanh toán.
+        </div>
+    `;
+}
+
+// Hàm cập nhật preview theo template
+function capNhatPreview() {
+    // Lấy dữ liệu từ form
+    var duLieu = {
+        hoTen: document.getElementById('fullName') ? document.getElementById('fullName').value : '',
+        viTri: document.getElementById('jobTitle') ? document.getElementById('jobTitle').value : '',
+        sdt: document.getElementById('phone') ? document.getElementById('phone').value : '',
+        email: document.getElementById('email') ? document.getElementById('email').value : '',
+        diaChi: document.getElementById('address') ? document.getElementById('address').value : '',
+        mucTieu: document.getElementById('cvObjective') ? document.getElementById('cvObjective').value : '',
+        kyNang: layDanhSachKyNang()
+    };
+
+    // Lấy container preview
+    var cvPreview = document.getElementById('cvPreview');
+    if (!cvPreview) return;
+
+    // Tạo HTML theo template
+    var htmlMoi = '';
+    if (templateHienTai === 'modern') {
+        htmlMoi = taoTemplateModern(duLieu);
+    } else if (templateHienTai === 'professional') {
+        htmlMoi = taoTemplateProfessional(duLieu);
+    } else if (templateHienTai === 'creative') {
+        htmlMoi = taoTemplateCreative(duLieu);
+    } else if (templateHienTai === 'minimal') {
+        htmlMoi = taoTemplateMinimal(duLieu);
+    }
+
+    // Cập nhật HTML
+    cvPreview.innerHTML = htmlMoi;
+}
+
+// ========================================
+// KHỞI TẠO TRANG
+// ========================================
+
 // Chờ trang web load xong rồi mới chạy
 window.onload = function() {
     console.log("Trang đã load xong!");
@@ -11,6 +333,9 @@ window.onload = function() {
     
     // Thử load dữ liệu đã lưu (nếu có)
     taiDuLieuDaLuu();
+    
+    // Render preview lần đầu
+    capNhatPreview();
 };
 
 // Hàm để setup các sự kiện khi người dùng nhập liệu
@@ -125,6 +450,9 @@ function selectTemplate(element, loaiTemplate) {
         radioButton.checked = true;
     }
     
+    // Lưu template hiện tại
+    templateHienTai = loaiTemplate;
+    
     // Đổi style của preview theo template được chọn
     var cvPreview = document.querySelector('.cv-template-preview');
     if (cvPreview) {
@@ -136,6 +464,9 @@ function selectTemplate(element, loaiTemplate) {
         
         console.log("Đã đổi style preview sang: template-" + loaiTemplate);
     }
+    
+    // Cập nhật lại HTML của preview theo template mới
+    capNhatPreview();
     
     console.log("Đã chọn template: " + loaiTemplate);
 }
