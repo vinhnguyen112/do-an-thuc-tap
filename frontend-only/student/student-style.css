@@ -377,3 +377,106 @@ footer .text-muted {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
+/* CSS cho các template CV khác nhau */
+
+/* Template Modern - Màu xanh dương hiện đại */
+.cv-template-preview.template-modern h2 {
+  color: #007bff;
+  border-bottom: 3px solid #007bff;
+  padding-bottom: 10px;
+}
+.cv-template-preview.template-modern h5 {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+}
+.cv-template-preview.template-modern .badge {
+  background-color: #007bff !important;
+}
+
+/* Template Professional - Màu xanh lá chuyên nghiệp */
+.cv-template-preview.template-professional {
+  font-family: 'Georgia', serif;
+}
+.cv-template-preview.template-professional h2 {
+  color: #28a745;
+  border-bottom: 3px solid #28a745;
+  padding-bottom: 10px;
+  font-family: 'Georgia', serif;
+}
+.cv-template-preview.template-professional h5 {
+  color: #28a745;
+  border-bottom: 2px solid #28a745;
+  background-color: #f8f9fa;
+  padding: 8px 12px;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+.cv-template-preview.template-professional .badge {
+  background-color: #28a745 !important;
+}
+.cv-template-preview.template-professional h6 {
+  color: #28a745;
+}
+
+/* Template Creative - Màu cam sáng tạo */
+.cv-template-preview.template-creative {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+}
+.cv-template-preview.template-creative h2 {
+  color: #ff9800;
+  border-bottom: 4px double #ff9800;
+  padding-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.cv-template-preview.template-creative h5 {
+  color: #ff9800;
+  border-left: 5px solid #ff9800;
+  padding-left: 15px;
+  border-bottom: none;
+}
+.cv-template-preview.template-creative .badge {
+  background-color: #ff9800 !important;
+  border-radius: 20px;
+  padding: 8px 15px;
+}
+.cv-template-preview.template-creative h6 {
+  color: #ff9800;
+  font-weight: 700;
+}
+
+/* Template Minimal - Màu xám tối giản */
+.cv-template-preview.template-minimal {
+  font-family: 'Courier New', monospace;
+  background-color: #fafafa;
+}
+.cv-template-preview.template-minimal h2 {
+  color: #333;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.5rem;
+}
+.cv-template-preview.template-minimal h5 {
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+.cv-template-preview.template-minimal .badge {
+  background-color: #333 !important;
+  border-radius: 0;
+  padding: 6px 12px;
+  font-family: 'Inter', sans-serif;
+}
+.cv-template-preview.template-minimal h6 {
+  color: #333;
+  font-weight: 600;
+}
+.cv-template-preview.template-minimal p {
+  color: #666;
+  line-height: 1.8;
+}
