@@ -1,193 +1,107 @@
 /* JavaScript cho trang chủ - Hiển thị việc làm, công ty, tìm kiếm */
 
 // Dữ liệu mẫu việc làm
-const danhSachViecLam = [
-  {
-    id: "1",
-    tieuDe: "Frontend Developer Intern",
-    tenCongTy: "Tech Corp Vietnam",
-    diaDiem: "Hà Nội",
-    loaiViec: "Thực tập",
-    luong: "5-8 triệu",
-    thoiGianDang: "2 ngày trước",
-    kyNang: ["React", "TypeScript", "Tailwind"],
-  },
-  {
-    id: "2",
-    tieuDe: "Marketing Assistant",
-    tenCongTy: "Digital Agency VN",
-    diaDiem: "TP.HCM",
-    loaiViec: "Part-time",
-    luong: "6-10 triệu",
-    thoiGianDang: "1 ngày trước",
-    kyNang: ["Social Media", "Content", "SEO"],
-  },
-  {
-    id: "3",
-    tieuDe: "Data Analyst Intern",
-    tenCongTy: "FinTech Solutions",
-    diaDiem: "Đà Nẵng",
-    loaiViec: "Thực tập",
-    luong: "7-9 triệu",
-    thoiGianDang: "3 ngày trước",
-    kyNang: ["Python", "Excel", "SQL"],
-  },
-  {
-    id: "4",
-    tieuDe: "UX/UI Designer Intern",
-    tenCongTy: "Creative Studio",
-    diaDiem: "TP.HCM",
-    loaiViec: "Thực tập",
-    luong: "6-9 triệu",
-    thoiGianDang: "4 ngày trước",
-    kyNang: ["Figma", "Adobe XD", "Design"],
-  },
-  {
-    id: "5",
-    tieuDe: "Content Writer",
-    tenCongTy: "Media Group",
-    diaDiem: "Hà Nội",
-    loaiViec: "Part-time",
-    luong: "5-7 triệu",
-    thoiGianDang: "5 ngày trước",
-    kyNang: ["Writing", "SEO", "Content"],
-  },
-  {
-    id: "6",
-    tieuDe: "Backend Developer Intern",
-    tenCongTy: "Tech Startup",
-    diaDiem: "Đà Nẵng",
-    loaiViec: "Thực tập",
-    luong: "7-10 triệu",
-    thoiGianDang: "1 ngày trước",
-    kyNang: ["Node.js", "Python", "API"],
-  },
-];
-
-// Dữ liệu mẫu công ty
-const danhSachCongTy = [
-  {
-    id: "1",
-    ten: "TechViet Solutions",
-    nganhNghe: "Công nghệ thông tin",
-    diaDiem: "TP.HCM",
-    soNhanVien: "100-500",
-    soViTriTuyen: 12,
-  },
-  {
-    id: "2",
-    ten: "VN Digital Group",
-    nganhNghe: "Marketing & Media",
-    diaDiem: "Hà Nội",
-    soNhanVien: "50-100",
-    soViTriTuyen: 8,
-  },
-  {
-    id: "3",
-    ten: "StartupHub Vietnam",
-    nganhNghe: "Đa ngành",
-    diaDiem: "Đà Nẵng",
-    soNhanVien: "20-50",
-    soViTriTuyen: 15,
-  },
-  {
-    id: "4",
-    ten: "Innovation Lab",
-    nganhNghe: "Công nghệ thông tin",
-    diaDiem: "TP.HCM",
-    soNhanVien: "50-100",
-    soViTriTuyen: 10,
-  },
-  {
-    id: "5",
-    ten: "Creative Agency",
-    nganhNghe: "Marketing & Media",
-    diaDiem: "Hà Nội",
-    soNhanVien: "20-50",
-    soViTriTuyen: 6,
-  },
-  {
-    id: "6",
-    ten: "FinTech Vietnam",
-    nganhNghe: "Tài chính",
-    diaDiem: "TP.HCM",
-    soNhanVien: "100-500",
-    soViTriTuyen: 20,
-  },
-];
-
-// Hiển thị danh sách việc làm
-function hienThiViecLam() {
+// Hiển thị danh sách việc làm từ API
+async function hienThiViecLam() {
   const khungChua = document.getElementById("jobsContainer");
   if (!khungChua) return;
 
-  let html = "";
-  for (let i = 0; i < danhSachViecLam.length; i++) {
-    const viecLam = danhSachViecLam[i];
-    let htmlKyNang = "";
-    for (let j = 0; j < viecLam.kyNang.length; j++) {
-      htmlKyNang += `<span class="tag-ky-nang">${viecLam.kyNang[j]}</span>`;
+  try {
+    const response = await fetch('http://localhost:5000/api/public/jobs');
+    const danhSachViecLam = await response.json();
+
+    if (danhSachViecLam.length === 0) {
+      khungChua.innerHTML = '<div class="col-12 text-center"><p>Chưa có tin tuyển dụng nào.</p></div>';
+      return;
     }
-    html += `
-      <div class="col-md-6 col-lg-4">
-        <div class="the-viec-lam">
-          <div class="dau-the-viec-lam">
-            <div>
-              <h4 class="tieu-de-viec-lam">${viecLam.tieuDe}</h4>
-              <div class="ten-cong-ty">${viecLam.tenCongTy}</div>
+
+    let html = "";
+    for (let i = 0; i < danhSachViecLam.length; i++) {
+      const viecLam = danhSachViecLam[i];
+      let htmlKyNang = "";
+      if (viecLam.kyNang && Array.isArray(viecLam.kyNang)) {
+        for (let j = 0; j < viecLam.kyNang.length; j++) {
+          htmlKyNang += `<span class="tag-ky-nang">${viecLam.kyNang[j]}</span>`;
+        }
+      }
+      
+      html += `
+        <div class="col-md-6 col-lg-4">
+          <div class="the-viec-lam">
+            <div class="dau-the-viec-lam">
+              <div>
+                <h4 class="tieu-de-viec-lam" title="${viecLam.tieuDe}">${viecLam.tieuDe}</h4>
+                <div class="ten-cong-ty">${viecLam.tenCongTy}</div>
+              </div>
+              <span class="nhan-loai-viec">${viecLam.loaiViec}</span>
             </div>
-            <span class="nhan-loai-viec">${viecLam.loaiViec}</span>
-          </div>
-          <div class="thong-tin-viec-lam">
-            <span><i class="bi bi-geo-alt me-1"></i>${viecLam.diaDiem}</span>
-            <span><i class="bi bi-cash me-1"></i>${viecLam.luong}</span>
-          </div>
-          <div class="the-kỹ-nang">
-            ${htmlKyNang}
-          </div>
-          <div class="cuoi-the-viec-lam">
-            <span class="ngay-dang"><i class="bi bi-clock me-1"></i>${viecLam.thoiGianDang}</span>
-            <a href="dang-nhap.html" class="btn btn-sm btn-primary" onclick="alert('Vui lòng đăng nhập để xem chi tiết công việc!')">Xem chi tiết</a>
+            <div class="thong-tin-viec-lam">
+              <span><i class="bi bi-geo-alt me-1"></i>${viecLam.diaDiem || 'Toàn quốc'}</span>
+              <span><i class="bi bi-cash me-1"></i>${viecLam.luong || 'Thỏa thuận'}</span>
+            </div>
+            <div class="the-kỹ-nang">
+              ${htmlKyNang}
+            </div>
+            <div class="cuoi-the-viec-lam">
+              <span class="ngay-dang"><i class="bi bi-clock me-1"></i>${viecLam.thoiGianDang}</span>
+              <a href="dang-nhap.html" class="btn btn-sm btn-primary" onclick="alert('Vui lòng đăng nhập để xem chi tiết công việc!')">Xem chi tiết</a>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
+    }
+    khungChua.innerHTML = html;
+  } catch (error) {
+    console.error('Lỗi tải việc làm:', error);
+    khungChua.innerHTML = '<div class="col-12 text-center text-danger"><p>Không thể tải danh sách việc làm. Vui lòng kiểm tra kết nối server.</p></div>';
   }
-  khungChua.innerHTML = html;
 }
 
-// Hiển thị danh sách công ty
-function hienThiCongTy() {
+// Hiển thị danh sách công ty từ API
+async function hienThiCongTy() {
   const khungChua = document.getElementById("companiesContainer");
   if (!khungChua) return;
 
-  let html = "";
-  for (let i = 0; i < danhSachCongTy.length; i++) {
-    const congTy = danhSachCongTy[i];
-    html += `
-      <div class="col-md-6 col-lg-4">
-        <div class="the-cong-ty">
-          <h4 class="ten-cong-ty">${congTy.ten}</h4>
-          <div class="nganh-nghe">${congTy.nganhNghe}</div>
-          <div class="thong-tin-cong-ty">
-            <div class="muc-thong-tin-cong-ty">
-              <i class="bi bi-geo-alt"></i>
-              <span>${congTy.diaDiem}</span>
+  try {
+    const response = await fetch('http://localhost:5000/api/public/companies');
+    const danhSachCongTy = await response.json();
+
+    if (danhSachCongTy.length === 0) {
+      khungChua.innerHTML = '<div class="col-12 text-center"><p>Chưa có công ty nào.</p></div>';
+      return;
+    }
+
+    let html = "";
+    for (let i = 0; i < danhSachCongTy.length; i++) {
+      const congTy = danhSachCongTy[i];
+      html += `
+        <div class="col-md-6 col-lg-4">
+          <div class="the-cong-ty">
+            <h4 class="ten-cong-ty">${congTy.ten}</h4>
+            <div class="nganh-nghe">${congTy.nganhNghe}</div>
+            <div class="thong-tin-cong-ty">
+              <div class="muc-thong-tin-cong-ty">
+                <i class="bi bi-geo-alt"></i>
+                <span>${congTy.diaDiem}</span>
+              </div>
+              <div class="muc-thong-tin-cong-ty">
+                <i class="bi bi-people"></i>
+                <span>${congTy.soNhanVien} nhân viên</span>
+              </div>
             </div>
-            <div class="muc-thong-tin-cong-ty">
-              <i class="bi bi-people"></i>
-              <span>${congTy.soNhanVien} nhân viên</span>
+            <div class="vi-tri-tuyen">
+              <span><strong>${congTy.soViTriTuyen}</strong> vị trí đang tuyển</span>
+              <a href="dang-nhap.html" class="btn btn-sm btn-outline-primary" onclick="alert('Vui lòng đăng nhập để xem chi tiết công ty!')">Xem chi tiết</a>
             </div>
-          </div>
-          <div class="vi-tri-tuyen">
-            <span><strong>${congTy.soViTriTuyen}</strong> vị trí đang tuyển</span>
-            <a href="dang-nhap.html" class="btn btn-sm btn-outline-primary" onclick="alert('Vui lòng đăng nhập để xem chi tiết công ty!')">Xem chi tiết</a>
           </div>
         </div>
-      </div>
-    `;
+      `;
+    }
+    khungChua.innerHTML = html;
+  } catch (error) {
+    console.error('Lỗi tải công ty:', error);
+    khungChua.innerHTML = '<div class="col-12 text-center text-danger"><p>Không thể tải danh sách công ty.</p></div>';
   }
-  khungChua.innerHTML = html;
 }
 
 // Xử lý tìm kiếm
