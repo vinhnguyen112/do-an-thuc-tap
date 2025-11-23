@@ -1,6 +1,7 @@
+// Import hàm getPool từ db.js
 const { getPool } = require("../db");
 
-// Helper: Lấy SinhVien_id từ userId
+// Hàm helper: Lấy SinhVien_id từ userId
 async function getSinhVienId(userId) {
   const id = parseInt(userId);
   return id;
@@ -9,63 +10,73 @@ async function getSinhVienId(userId) {
 /* ============================================
    LƯU CV CHÍNH THỨC (ĐÚNG VỚI BẢNG CỦA BẠN)
    ============================================ */
-async function saveCV(data) {
-  const pool = await getPool();
-  const request = pool.request();
+async function saveCV(duLieu) {
+  // Lấy kết nối database
+  const ketNoi = await getPool();
+  const yeuCau = ketNoi.request();
 
-  const sinhVienId = await getSinhVienId(data.userId);
+  // Lấy SinhVien_id từ userId
+  const sinhVienId = await getSinhVienId(duLieu.userId);
 
-  request.input("SinhVien_id", sinhVienId);
-  request.input("TenCV", data.title || "");
+  // Thêm các tham số vào yêu cầu
+  yeuCau.input("SinhVien_id", sinhVienId);
+  yeuCau.input("TenCV", duLieu.title || "");
 
   // Skills: chuyển array → string
-  let skillsValue = "";
-  if (Array.isArray(data.skills)) {
-    skillsValue = data.skills.join(", ");
+  let kyNangString = "";
+  if (Array.isArray(duLieu.skills)) {
+    kyNangString = duLieu.skills.join(", ");
   } else {
-    skillsValue = data.skills || "";
+    kyNangString = duLieu.skills || "";
   }
-  request.input("Skills", skillsValue);
+  yeuCau.input("Skills", kyNangString);
 
   // Không có TepCV lúc lưu → để null
-  request.input("TepCV", null);
+  yeuCau.input("TepCV", null);
 
-  const result = await request.query(`
+  // Thực hiện query INSERT
+  const ketQua = await yeuCau.query(`
         INSERT INTO CV (SinhVien_id, TenCV, Skills, TepCV)
         OUTPUT INSERTED.CV_id, INSERTED.NgayTaiLen
         VALUES (@SinhVien_id, @TenCV, @Skills, @TepCV)
     `);
 
+  // Trả về kết quả
   return {
-    CVId: result.recordset[0].CV_id,
-    CreatedAt: result.recordset[0].NgayTaiLen,
+    CVId: ketQua.recordset[0].CV_id,
+    CreatedAt: ketQua.recordset[0].NgayTaiLen,
   };
 }
 
 /* ============================================
    LƯU BẢN NHÁP (CHỈ LƯU CỘT CƠ BẢN)
    ============================================ */
-async function saveDraft(data) {
-  return await saveCV(data);
+async function saveDraft(duLieu) {
+  // Lưu bản nháp giống như lưu CV chính thức
+  return await saveCV(duLieu);
 }
 
 /* ============================================
    LẤY DANH SÁCH CV
    ============================================ */
 async function getCVs(userId) {
-  const pool = await getPool();
-  const request = pool.request();
+  // Lấy kết nối database
+  const ketNoi = await getPool();
+  const yeuCau = ketNoi.request();
 
+  // Lấy SinhVien_id
   const sinhVienId = await getSinhVienId(userId);
-  request.input("SinhVien_id", sinhVienId);
+  yeuCau.input("SinhVien_id", sinhVienId);
 
-  const result = await request.query(`
+  // Thực hiện query SELECT
+  const ketQua = await yeuCau.query(`
         SELECT * FROM CV 
         WHERE SinhVien_id = @SinhVien_id
         ORDER BY NgayTaiLen DESC
     `);
 
-  return result.recordset.map((cv) => ({
+  // Chuyển dữ liệu sang dạng dễ đọc hơn
+  return ketQua.recordset.map((cv) => ({
     CVId: cv.CV_id,
     UserId: cv.SinhVien_id,
     Title: cv.TenCV,
@@ -79,21 +90,27 @@ async function getCVs(userId) {
    LẤY 1 CV
    ============================================ */
 async function getCVById(cvId, userId) {
-  const pool = await getPool();
-  const request = pool.request();
+  // Lấy kết nối
+  const ketNoi = await getPool();
+  const yeuCau = ketNoi.request();
 
-  request.input("CV_id", parseInt(cvId));
-  request.input("SinhVien_id", parseInt(userId));
+  // Thêm tham số
+  yeuCau.input("CV_id", parseInt(cvId));
+  yeuCau.input("SinhVien_id", parseInt(userId));
 
-  const result = await request.query(`
+  // Thực hiện query
+  const ketQua = await yeuCau.query(`
         SELECT * FROM CV 
         WHERE CV_id = @CV_id AND SinhVien_id = @SinhVien_id
     `);
 
-  if (result.recordset.length === 0) return null;
+  // Nếu không tìm thấy thì trả về null
+  if (ketQua.recordset.length === 0) return null;
 
-  const cv = result.recordset[0];
+  // Lấy CV đầu tiên
+  const cv = ketQua.recordset[0];
 
+  // Trả về dữ liệu CV
   return {
     CVId: cv.CV_id,
     UserId: cv.SinhVien_id,
@@ -107,33 +124,40 @@ async function getCVById(cvId, userId) {
 /* ============================================
    CẬP NHẬT CV
    ============================================ */
-async function updateCV(cvId, userId, data) {
-  const pool = await getPool();
-  const request = pool.request();
+async function updateCV(cvId, userId, duLieu) {
+  // Lấy kết nối
+  const ketNoi = await getPool();
+  const yeuCau = ketNoi.request();
 
-  request.input("CV_id", parseInt(cvId));
-  request.input("SinhVien_id", parseInt(userId));
-  request.input("TenCV", data.title);
+  // Thêm tham số
+  yeuCau.input("CV_id", parseInt(cvId));
+  yeuCau.input("SinhVien_id", parseInt(userId));
+  yeuCau.input("TenCV", duLieu.title);
 
-  let skillsValue = "";
-  if (Array.isArray(data.skills)) {
-    skillsValue = data.skills.join(", ");
+  // Chuyển skills thành string
+  let kyNangString = "";
+  if (Array.isArray(duLieu.skills)) {
+    kyNangString = duLieu.skills.join(", ");
   } else {
-    skillsValue = data.skills || "";
+    kyNangString = duLieu.skills || "";
   }
-  request.input("Skills", skillsValue);
+  yeuCau.input("Skills", kyNangString);
 
-  const result = await request.query(`
+  // Thực hiện query UPDATE
+  const ketQua = await yeuCau.query(`
         UPDATE CV 
         SET TenCV = @TenCV, Skills = @Skills
         WHERE CV_id = @CV_id AND SinhVien_id = @SinhVien_id
         OUTPUT INSERTED.*
     `);
 
-  if (!result.recordset.length) return null;
+  // Nếu không có bản ghi nào được cập nhật
+  if (!ketQua.recordset.length) return null;
 
-  const cv = result.recordset[0];
+  // Lấy CV vừa cập nhật
+  const cv = ketQua.recordset[0];
 
+  // Trả về dữ liệu
   return {
     CVId: cv.CV_id,
     UserId: cv.SinhVien_id,
@@ -148,20 +172,25 @@ async function updateCV(cvId, userId, data) {
    XOÁ CV
    ============================================ */
 async function deleteCV(cvId, userId) {
-  const pool = await getPool();
-  const request = pool.request();
+  // Lấy kết nối
+  const ketNoi = await getPool();
+  const yeuCau = ketNoi.request();
 
-  request.input("CV_id", parseInt(cvId));
-  request.input("SinhVien_id", parseInt(userId));
+  // Thêm tham số
+  yeuCau.input("CV_id", parseInt(cvId));
+  yeuCau.input("SinhVien_id", parseInt(userId));
 
-  const result = await request.query(`
+  // Thực hiện query DELETE
+  const ketQua = await yeuCau.query(`
         DELETE FROM CV 
         WHERE CV_id = @CV_id AND SinhVien_id = @SinhVien_id
     `);
 
-  return result.rowsAffected[0] > 0;
+  // Trả về true nếu xóa thành công (có ít nhất 1 bản ghi bị xóa)
+  return ketQua.rowsAffected[0] > 0;
 }
 
+// Export các hàm để dùng ở file khác
 module.exports = {
   saveCV,
   saveDraft,
