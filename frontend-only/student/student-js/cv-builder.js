@@ -125,7 +125,18 @@ function selectTemplate(element, loaiTemplate) {
         radioButton.checked = true;
     }
     
-    // Đổi style của preview (chưa làm, để sau)
+    // Đổi style của preview theo template được chọn
+    var cvPreview = document.querySelector('.cv-template-preview');
+    if (cvPreview) {
+        // Xóa tất cả các class template cũ
+        cvPreview.classList.remove('template-modern', 'template-professional', 'template-creative', 'template-minimal');
+        
+        // Thêm class template mới
+        cvPreview.classList.add('template-' + loaiTemplate);
+        
+        console.log("Đã đổi style preview sang: template-" + loaiTemplate);
+    }
+    
     console.log("Đã chọn template: " + loaiTemplate);
 }
 
@@ -156,7 +167,6 @@ function themKyNang() {
     } else {
         console.log("Chưa nhập kỹ năng!");
     }
-}
 
 // Hàm xóa kỹ năng (tên cũ: removeSkill)
 function xoaKyNang(element) {
