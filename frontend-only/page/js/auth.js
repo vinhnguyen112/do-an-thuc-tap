@@ -80,7 +80,7 @@ function kiemTraMatKhauKhop() {
 }
 
 // Xử lý đăng nhập
-function xuLyDangNhap(event) {
+async function xuLyDangNhap(event) {
   event.preventDefault();
   const form = event.target;
   const formData = new FormData(form);
@@ -93,46 +93,62 @@ function xuLyDangNhap(event) {
     return;
   }
 
-  console.log("Đang đăng nhập...", { email, matKhau, ghiNho });
+  console.log("Đang đăng nhập...", { email });
 
   const nutSubmit = form.querySelector('button[type="submit"]');
   const noiDungGoc = nutSubmit.innerHTML;
   nutSubmit.disabled = true;
   nutSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang đăng nhập...';
 
-  setTimeout(() => {
-    // Demo: Determine user type based on email
-    // In production, this will come from backend API response
-    let userType = 'student'; // default
-    
-    // Check if email contains employer-related keywords
-    if (email.toLowerCase().includes('employer') || 
-        email.toLowerCase().includes('company') ||
-        email.toLowerCase().includes('recruiter') ||
-        email.toLowerCase().includes('hr')) {
-      userType = 'employer';
+  try {
+    const response = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: matKhau
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Lưu thông tin user vào localStorage
+      localStorage.setItem('userType', data.user.role);
+      localStorage.setItem('userEmail', data.user.email);
+      localStorage.setItem('userName', data.user.name);
+      localStorage.setItem('userId', data.user.id);
+      localStorage.setItem('roleId', data.user.roleId); // SinhVien_id hoặc NhaTuyenDung_id
+      localStorage.setItem('isLoggedIn', 'true');
+      
+      if (ghiNho) {
+        localStorage.setItem('rememberedEmail', email);
+      }
+
+      alert(`Đăng nhập thành công! Chào mừng ${data.user.name}!`);
+      
+      // Chuyển hướng dựa trên role
+      if (data.user.role === 'student') {
+        window.location.href = "../student/student-home.html";
+      } else {
+        window.location.href = "../employer/employer-home.html";
+      }
+    } else {
+      alert(data.message || 'Đăng nhập thất bại');
     }
-    
-    // Store user info in localStorage (for demo)
-    localStorage.setItem('userType', userType);
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('isLoggedIn', 'true');
-    
-    alert(`Đăng nhập thành công! Chào mừng ${userType === 'student' ? 'sinh viên' : 'nhà tuyển dụng'}! (Demo)`);
+  } catch (error) {
+    console.error('Login error:', error);
+    alert('Không thể kết nối đến server. Vui lòng kiểm tra lại backend.');
+  } finally {
     nutSubmit.disabled = false;
     nutSubmit.innerHTML = noiDungGoc;
-    
-    // Redirect based on user type
-    if (userType === 'student') {
-      window.location.href = "../student/student-home.html";
-    } else {
-      window.location.href = "../employer/employer-home.html";
-    }
-  }, 1500);
+  }
 }
 
 // Xử lý đăng ký
-function xuLyDangKy(event) {
+async function xuLyDangKy(event) {
   event.preventDefault();
   const form = event.target;
   const formData = new FormData(form);
@@ -164,31 +180,43 @@ function xuLyDangKy(event) {
     return;
   }
 
-  console.log("Đang đăng ký...", { hoTen, email, soDienThoai, loaiNguoiDung });
+  console.log("Đang đăng ký...", { hoTen, email, loaiNguoiDung });
 
   const nutSubmit = form.querySelector('button[type="submit"]');
   const noiDungGoc = nutSubmit.innerHTML;
   nutSubmit.disabled = true;
   nutSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang đăng ký...';
 
-  setTimeout(() => {
-    // Store user info in localStorage (for demo)
-    localStorage.setItem('userType', loaiNguoiDung);
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('userName', hoTen);
-    localStorage.setItem('isLoggedIn', 'true');
-    
-    alert(`Đăng ký thành công! Chào mừng ${loaiNguoiDung === 'student' ? 'sinh viên' : 'nhà tuyển dụng'} ${hoTen}! (Demo)`);
+  try {
+    const response = await fetch('http://localhost:5000/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        full_name: hoTen,
+        email: email,
+        password: matKhau,
+        role: loaiNguoiDung,
+        phone: soDienThoai
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Đăng ký thành công! Vui lòng đăng nhập để tiếp tục.');
+      window.location.href = "dang-nhap.html";
+    } else {
+      alert(data.message || 'Đăng ký thất bại');
+    }
+  } catch (error) {
+    console.error('Register error:', error);
+    alert('Không thể kết nối đến server. Vui lòng kiểm tra lại backend.');
+  } finally {
     nutSubmit.disabled = false;
     nutSubmit.innerHTML = noiDungGoc;
-    
-    // Redirect based on user type
-    if (loaiNguoiDung === 'student') {
-      window.location.href = "../student/student-home.html";
-    } else {
-      window.location.href = "../employer/employer-home.html";
-    }
-  }, 1500);
+  }
 }
 
 // Tự động định dạng số điện thoại
