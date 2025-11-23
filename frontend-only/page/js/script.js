@@ -147,7 +147,7 @@ function hienThiViecLam() {
           </div>
           <div class="cuoi-the-viec-lam">
             <span class="ngay-dang"><i class="bi bi-clock me-1"></i>${viecLam.thoiGianDang}</span>
-            <a href="../student/job-detail.html?id=${viecLam.id}" class="btn btn-sm btn-primary" target="_blank">Xem chi tiết</a>
+            <a href="dang-nhap.html" class="btn btn-sm btn-primary" onclick="alert('Vui lòng đăng nhập để xem chi tiết công việc!')">Xem chi tiết</a>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ function hienThiCongTy() {
           </div>
           <div class="vi-tri-tuyen">
             <span><strong>${congTy.soViTriTuyen}</strong> vị trí đang tuyển</span>
-            <a href="../employer/employer-profile.html?id=${congTy.id}" class="btn btn-sm btn-outline-primary" target="_blank">Xem chi tiết</a>
+            <a href="dang-nhap.html" class="btn btn-sm btn-outline-primary" onclick="alert('Vui lòng đăng nhập để xem chi tiết công ty!')">Xem chi tiết</a>
           </div>
         </div>
       </div>
