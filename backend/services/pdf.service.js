@@ -1,10 +1,14 @@
+// Import thư viện puppeteer để tạo PDF
 const puppeteer = require('puppeteer');
 
-// Tạo HTML từ CV data
+// Hàm tạo HTML từ dữ liệu CV
 function generateCVHTML(cv) {
+    // Lấy danh sách kỹ năng
     const skills = Array.isArray(cv.Skills) ? cv.Skills : [];
+    // Lấy dữ liệu CV
     const cvData = cv.CVData || {};
     
+    // Tạo HTML cho CV
     return `
 <!DOCTYPE html>
 <html lang="vi">
@@ -205,24 +209,36 @@ function generateCVHTML(cv) {
     `;
 }
 
-// Generate PDF từ CV data
+// Hàm tạo file PDF từ dữ liệu CV
 async function generatePDF(cv) {
-    let browser;
+    let trinhDuyet; // Biến để lưu browser
     try {
-        const html = generateCVHTML(cv);
+        // Tạo HTML từ CV
+        const noiDungHTML = generateCVHTML(cv);
         
-        browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        console.log("Đang khởi động trình duyệt...");
+        
+        // Khởi động trình duyệt (headless mode)
+        trinhDuyet = await puppeteer.launch({
+            headless: true, // Chạy ẩn, không hiện cửa sổ
+            args: ['--no-sandbox', '--disable-setuid-sandbox'] // Các tham số bảo mật
         });
         
-        const page = await browser.newPage();
-        await page.setContent(html, { waitUntil: 'networkidle0' });
+        console.log("Đang tạo trang mới...");
         
-        const pdf = await page.pdf({
-            format: 'A4',
-            printBackground: true,
-            margin: {
+        // Tạo trang mới trong trình duyệt
+        const trang = await trinhDuyet.newPage();
+        
+        // Set nội dung HTML vào trang
+        await trang.setContent(noiDungHTML, { waitUntil: 'networkidle0' });
+        
+        console.log("Đang tạo file PDF...");
+        
+        // Tạo file PDF từ trang HTML
+        const filePDF = await trang.pdf({
+            format: 'A4', // Khổ giấy A4
+            printBackground: true, // In cả background
+            margin: { // Lề trang
                 top: '20mm',
                 right: '15mm',
                 bottom: '20mm',
@@ -230,16 +246,28 @@ async function generatePDF(cv) {
             }
         });
         
-        await browser.close();
-        return pdf;
-    } catch (error) {
-        if (browser) {
-            await browser.close();
+        console.log("Đã tạo PDF xong!");
+        
+        // Đóng trình duyệt
+        await trinhDuyet.close();
+        
+        // Trả về file PDF
+        return filePDF;
+    } catch (loi) {
+        // Nếu có lỗi
+        console.error("Lỗi khi tạo PDF:", loi);
+        
+        // Đóng trình duyệt nếu đang mở
+        if (trinhDuyet) {
+            await trinhDuyet.close();
         }
-        throw error;
+        
+        // Throw lỗi để hàm gọi biết
+        throw loi;
     }
 }
 
+// Export các hàm để dùng ở file khác
 module.exports = {
     generatePDF,
     generateCVHTML
