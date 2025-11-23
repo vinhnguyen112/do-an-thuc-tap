@@ -101,10 +101,33 @@ function xuLyDangNhap(event) {
   nutSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang đăng nhập...';
 
   setTimeout(() => {
-    alert("Đăng nhập thành công! (Demo)");
+    // Demo: Determine user type based on email
+    // In production, this will come from backend API response
+    let userType = 'student'; // default
+    
+    // Check if email contains employer-related keywords
+    if (email.toLowerCase().includes('employer') || 
+        email.toLowerCase().includes('company') ||
+        email.toLowerCase().includes('recruiter') ||
+        email.toLowerCase().includes('hr')) {
+      userType = 'employer';
+    }
+    
+    // Store user info in localStorage (for demo)
+    localStorage.setItem('userType', userType);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    alert(`Đăng nhập thành công! Chào mừng ${userType === 'student' ? 'sinh viên' : 'nhà tuyển dụng'}! (Demo)`);
     nutSubmit.disabled = false;
     nutSubmit.innerHTML = noiDungGoc;
-    window.location.href = "index.html";
+    
+    // Redirect based on user type
+    if (userType === 'student') {
+      window.location.href = "../student/student-home.html";
+    } else {
+      window.location.href = "../employer/employer-home.html";
+    }
   }, 1500);
 }
 
@@ -149,10 +172,22 @@ function xuLyDangKy(event) {
   nutSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang đăng ký...';
 
   setTimeout(() => {
-    alert("Đăng ký thành công! Chào mừng bạn đến với JobHub! (Demo)");
+    // Store user info in localStorage (for demo)
+    localStorage.setItem('userType', loaiNguoiDung);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userName', hoTen);
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    alert(`Đăng ký thành công! Chào mừng ${loaiNguoiDung === 'student' ? 'sinh viên' : 'nhà tuyển dụng'} ${hoTen}! (Demo)`);
     nutSubmit.disabled = false;
     nutSubmit.innerHTML = noiDungGoc;
-    window.location.href = "login.html";
+    
+    // Redirect based on user type
+    if (loaiNguoiDung === 'student') {
+      window.location.href = "../student/student-home.html";
+    } else {
+      window.location.href = "../employer/employer-home.html";
+    }
   }, 1500);
 }
 

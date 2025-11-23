@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hỗ Trợ - JobHub</title>
-    <meta name="description" content="Hỗ trợ và hướng dẫn sử dụng JobHub" />
+    <title>Câu Hỏi Thường Gặp - JobHub</title>
+    <meta
+      name="description"
+      content="Câu hỏi thường gặp về JobHub - Tìm câu trả lời nhanh chóng"
+    />
 
     <!-- Bootstrap CSS -->
     <link
@@ -23,7 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <!-- CSS tùy chỉnh -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -31,12 +34,16 @@
     <header class="sticky-top bg-white shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand d-flex align-items-center ten-website" href="index.html">
+          <a
+            class="navbar-brand d-flex align-items-center ten-website"
+            href="index.html"
+          >
             <div class="icon-logo me-2">
               <i class="bi bi-briefcase"></i>
             </div>
             <span class="fw-bold">JobHub</span>
           </a>
+
           <button
             class="navbar-toggler"
             type="button"
@@ -45,27 +52,23 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
+
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto me-auto">
               <li class="nav-item">
                 <a class="nav-link link-menu" href="index.html">Trang chủ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link link-menu" href="index.html#jobs">Việc làm</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link link-menu" href="index.html#companies">Đối tác</a>
+                <a class="nav-link link-menu" href="about.html">Giới thiệu</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link link-menu" href="blog.html">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link link-menu" href="about.html">Giới thiệu</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link link-menu active" href="help.html">Hỗ trợ</a>
               </li>
             </ul>
+
             <div class="d-flex gap-2">
               <a href="login.html" class="btn btn-outline-primary">Đăng nhập</a>
               <a href="register.html" class="btn btn-primary">Đăng ký</a>
@@ -75,224 +78,609 @@
       </nav>
     </header>
 
-    <!-- Banner -->
-    <section class="bg-primary text-white py-5">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-8">
-            <h1 class="display-4 fw-bold mb-3">Trung tâm hỗ trợ</h1>
-            <p class="lead">Chúng tôi luôn sẵn sàng giúp đỡ bạn</p>
+    <!-- Main Content -->
+    <div class="container my-5">
+      <!-- Page Header -->
+      <div class="text-center mb-5">
+        <h1 class="fw-bold mb-3">Câu Hỏi Thường Gặp</h1>
+        <p class="text-muted col-lg-6 mx-auto">
+          Tìm câu trả lời nhanh chóng cho các câu hỏi phổ biến về JobHub
+        </p>
+      </div>
+
+      <!-- Search Box -->
+      <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+          <div class="input-group input-group-lg">
+            <span class="input-group-text bg-white">
+              <i class="bi bi-search"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tìm kiếm câu hỏi..."
+              id="faqSearch"
+            />
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Tìm kiếm FAQ -->
-    <section class="py-4 bg-light">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="input-group input-group-lg">
-              <span class="input-group-text"><i class="bi bi-search"></i></span>
-              <input
-                type="text"
-                class="form-control"
-                id="faqSearch"
-                placeholder="Tìm kiếm câu hỏi thường gặp..."
-                onkeyup="searchFAQ()"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Danh mục hỗ trợ -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-md-6 col-lg-3">
-            <div class="card border-0 shadow h-100 text-center p-4">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-question-circle"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Tài khoản & Hồ sơ</h5>
-              <p class="text-muted mb-0 small">Quản lý thông tin cá nhân</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="card border-0 shadow h-100 text-center p-4">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-search"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Tìm kiếm việc làm</h5>
-              <p class="text-muted mb-0 small">Hướng dẫn tìm kiếm hiệu quả</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="card border-0 shadow h-100 text-center p-4">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-chat-dots"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Ứng tuyển</h5>
-              <p class="text-muted mb-0 small">Quy trình và mẹo ứng tuyển</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="card border-0 shadow h-100 text-center p-4">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-envelope"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Liên hệ hỗ trợ</h5>
-              <p class="text-muted mb-0 small">Nhận trợ giúp trực tiếp</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="fw-bold mb-3">Câu hỏi thường gặp (FAQ)</h2>
-          <p class="text-muted col-lg-8 mx-auto">
-            Tìm câu trả lời cho những thắc mắc phổ biến
-          </p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="accordion" id="faqAccordion"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Liên hệ -->
-    <section class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="fw-bold mb-3">Liên hệ với chúng tôi</h2>
-          <p class="text-muted col-lg-8 mx-auto">
-            Không tìm thấy câu trả lời? Hãy liên hệ trực tiếp với đội ngũ hỗ trợ
-            của chúng tôi
-          </p>
-        </div>
-        <div class="row g-4 justify-content-center">
-          <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow text-center p-4 h-100">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-envelope"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Email</h5>
-              <p class="text-muted mb-2">Gửi email cho chúng tôi</p>
-              <a
-                href="mailto:support@jobhub.vn"
-                class="text-primary text-decoration-none"
-                >support@jobhub.vn</a
+      <!-- Category Tabs -->
+      <div class="row">
+        <div class="col-12">
+          <ul class="nav nav-pills justify-content-center mb-5" id="faqTabs">
+            <li class="nav-item">
+              <button
+                class="nav-link active"
+                data-bs-toggle="pill"
+                data-bs-target="#general"
               >
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow text-center p-4 h-100">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-telephone"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Điện thoại</h5>
-              <p class="text-muted mb-2">Gọi cho chúng tôi</p>
-              <a
-                href="tel:+84123456789"
-                class="text-primary text-decoration-none"
-                >+84 123 456 789</a
+                <i class="bi bi-info-circle me-2"></i>Chung
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="pill"
+                data-bs-target="#student"
               >
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow text-center p-4 h-100">
-              <div class="step-icon mx-auto mb-3">
-                <i class="bi bi-clock"></i>
-              </div>
-              <h5 class="fw-semibold mb-2">Giờ làm việc</h5>
-              <p class="text-muted mb-2">Thứ 2 - Thứ 6</p>
-              <p class="text-muted mb-0">8:00 - 18:00</p>
-            </div>
-          </div>
+                <i class="bi bi-person me-2"></i>Sinh viên
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="pill"
+                data-bs-target="#employer"
+              >
+                <i class="bi bi-building me-2"></i>Nhà tuyển dụng
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="pill"
+                data-bs-target="#account"
+              >
+                <i class="bi bi-person-gear me-2"></i>Tài khoản
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-    </section>
 
-    <!-- Form liên hệ -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="card border-0 shadow">
-              <div class="card-body p-4">
-                <h3 class="fw-bold mb-4">Gửi tin nhắn cho chúng tôi</h3>
-                <form id="contactForm" onsubmit="handleContact(event)">
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label for="contactName" class="form-label"
-                        >Họ và tên *</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="contactName"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <label for="contactEmail" class="form-label"
-                        >Email *</label
-                      >
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="contactEmail"
-                        required
-                      />
-                    </div>
-                    <div class="col-12">
-                      <label for="contactSubject" class="form-label"
-                        >Chủ đề *</label
-                      >
-                      <select class="form-select" id="contactSubject" required>
-                        <option value="">Chọn chủ đề</option>
-                        <option value="account">Tài khoản & Hồ sơ</option>
-                        <option value="job">Tìm kiếm việc làm</option>
-                        <option value="application">Ứng tuyển</option>
-                        <option value="technical">Vấn đề kỹ thuật</option>
-                        <option value="other">Khác</option>
-                      </select>
-                    </div>
-                    <div class="col-12">
-                      <label for="contactMessage" class="form-label"
-                        >Tin nhắn *</label
-                      >
-                      <textarea
-                        class="form-control"
-                        id="contactMessage"
-                        rows="5"
-                        required
-                      ></textarea>
-                    </div>
-                    <div class="col-12">
-                      <button
-                        type="submit"
-                        class="btn btn-primary btn-lg w-100"
-                      >
-                        <i class="bi bi-send me-2"></i>Gửi tin nhắn
-                      </button>
+      <!-- FAQ Content -->
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <div class="tab-content" id="faqTabsContent">
+            <!-- General Questions -->
+            <div class="tab-pane fade show active" id="general">
+              <div class="accordion" id="generalAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#general1"
+                    >
+                      JobHub là gì?
+                    </button>
+                  </h2>
+                  <div
+                    id="general1"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#generalAccordion"
+                  >
+                    <div class="accordion-body">
+                      JobHub là nền tảng kết nối sinh viên với các cơ hội việc
+                      làm part-time, thực tập và toàn thời gian từ các doanh
+                      nghiệp uy tín. Chúng tôi cung cấp công cụ tạo CV, tìm kiếm
+                      việc làm và quản lý ứng tuyển dễ dàng.
                     </div>
                   </div>
-                </form>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#general2"
+                    >
+                      JobHub có miễn phí không?
+                    </button>
+                  </h2>
+                  <div
+                    id="general2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#generalAccordion"
+                  >
+                    <div class="accordion-body">
+                      Đối với sinh viên/ứng viên: Hoàn toàn miễn phí! Bạn có thể
+                      tạo CV, tìm việc và ứng tuyển không giới hạn.
+                      <br /><br />
+                      Đối với nhà tuyển dụng: Có cả gói miễn phí và các gói trả
+                      phí với nhiều tính năng nâng cao. Xem chi tiết tại
+                      <a href="pricing.html">bảng giá</a>.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#general3"
+                    >
+                      Làm sao để liên hệ với JobHub?
+                    </button>
+                  </h2>
+                  <div
+                    id="general3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#generalAccordion"
+                  >
+                    <div class="accordion-body">
+                      Bạn có thể liên hệ với chúng tôi qua:
+                      <ul class="mt-2">
+                        <li>Email: support@jobhub.vn</li>
+                        <li>Hotline: +84 123 456 789</li>
+                        <li>
+                          Form liên hệ: <a href="contact.html">tại đây</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#general4"
+                    >
+                      Thông tin của tôi có được bảo mật không?
+                    </button>
+                  </h2>
+                  <div
+                    id="general4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#generalAccordion"
+                  >
+                    <div class="accordion-body">
+                      Có! JobHub cam kết bảo vệ thông tin cá nhân của bạn theo
+                      <a href="privacy-policy.html">Chính sách bảo mật</a>. Chúng
+                      tôi sử dụng công nghệ mã hóa và các biện pháp bảo mật tiên
+                      tiến để đảm bảo an toàn dữ liệu.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Questions -->
+            <div class="tab-pane fade" id="student">
+              <div class="accordion" id="studentAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#student1"
+                    >
+                      Làm sao để tạo CV trên JobHub?
+                    </button>
+                  </h2>
+                  <div
+                    id="student1"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#studentAccordion"
+                  >
+                    <div class="accordion-body">
+                      <ol>
+                        <li>Đăng nhập vào tài khoản của bạn</li>
+                        <li>Vào mục "CV của tôi" hoặc "Tạo CV"</li>
+                        <li>Chọn template CV phù hợp</li>
+                        <li>Điền đầy đủ thông tin cá nhân, học vấn, kinh nghiệm</li>
+                        <li>Xem trước và tải xuống CV</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#student2"
+                    >
+                      Tôi có thể ứng tuyển bao nhiêu việc làm?
+                    </button>
+                  </h2>
+                  <div
+                    id="student2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#studentAccordion"
+                  >
+                    <div class="accordion-body">
+                      Bạn có thể ứng tuyển không giới hạn số lượng việc làm.
+                      Tuy nhiên, chúng tôi khuyên bạn nên chọn lọc và ứng tuyển
+                      vào những vị trí thực sự phù hợp để tăng tỷ lệ thành công.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#student3"
+                    >
+                      Làm sao để theo dõi trạng thái đơn ứng tuyển?
+                    </button>
+                  </h2>
+                  <div
+                    id="student3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#studentAccordion"
+                  >
+                    <div class="accordion-body">
+                      Vào mục "Ứng tuyển" hoặc "Đơn ứng tuyển của tôi" trên
+                      dashboard. Bạn sẽ thấy danh sách tất cả đơn đã gửi và
+                      trạng thái hiện tại (đã xem, đang xét duyệt, đã phỏng vấn,
+                      v.v.).
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#student4"
+                    >
+                      Tôi chưa có kinh nghiệm, có thể tìm việc được không?
+                    </button>
+                  </h2>
+                  <div
+                    id="student4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#studentAccordion"
+                  >
+                    <div class="accordion-body">
+                      Hoàn toàn có thể! JobHub có rất nhiều vị trí dành cho sinh
+                      viên chưa có kinh nghiệm như: thực tập sinh, part-time,
+                      entry-level. Hãy tập trung vào học vấn, kỹ năng và dự án
+                      trong CV của bạn.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#student5"
+                    >
+                      Làm sao để nhận được nhiều lời mời phỏng vấn hơn?
+                    </button>
+                  </h2>
+                  <div
+                    id="student5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#studentAccordion"
+                  >
+                    <div class="accordion-body">
+                      <ul>
+                        <li>Hoàn thiện hồ sơ 100%</li>
+                        <li>Cập nhật CV chuyên nghiệp và rõ ràng</li>
+                        <li>Thêm kỹ năng liên quan đến công việc</li>
+                        <li>Viết thư xin việc (cover letter) cá nhân hóa</li>
+                        <li>Ứng tuyển sớm khi tin mới đăng</li>
+                        <li>Theo dõi và tương tác với các công ty quan tâm</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Employer Questions -->
+            <div class="tab-pane fade" id="employer">
+              <div class="accordion" id="employerAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#employer1"
+                    >
+                      Làm sao để đăng tin tuyển dụng?
+                    </button>
+                  </h2>
+                  <div
+                    id="employer1"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#employerAccordion"
+                  >
+                    <div class="accordion-body">
+                      <ol>
+                        <li>Đăng nhập tài khoản nhà tuyển dụng</li>
+                        <li>Click "Đăng tin tuyển dụng"</li>
+                        <li>Điền thông tin vị trí tuyển dụng</li>
+                        <li>Chọn gói dịch vụ phù hợp</li>
+                        <li>Xem trước và đăng tin</li>
+                      </ol>
+                      Tin của bạn sẽ được duyệt trong vòng 24 giờ.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#employer2"
+                    >
+                      Mất bao lâu để tin tuyển dụng được duyệt?
+                    </button>
+                  </h2>
+                  <div
+                    id="employer2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#employerAccordion"
+                  >
+                    <div class="accordion-body">
+                      Thông thường tin tuyển dụng sẽ được duyệt trong vòng 12-24
+                      giờ. Trong giờ hành chính (8h-18h, T2-T6), thời gian duyệt
+                      có thể nhanh hơn.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#employer3"
+                    >
+                      Làm sao để tìm ứng viên phù hợp?
+                    </button>
+                  </h2>
+                  <div
+                    id="employer3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#employerAccordion"
+                  >
+                    <div class="accordion-body">
+                      <ul>
+                        <li>Sử dụng bộ lọc theo kỹ năng, kinh nghiệm, địa điểm</li>
+                        <li>Xem CV của ứng viên đã ứng tuyển</li>
+                        <li>Sử dụng tính năng tìm kiếm ứng viên (gói Premium)</li>
+                        <li>Đăng tin tuyển dụng mô tả rõ ràng yêu cầu</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#employer4"
+                    >
+                      Có thể chỉnh sửa tin đã đăng không?
+                    </button>
+                  </h2>
+                  <div
+                    id="employer4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#employerAccordion"
+                  >
+                    <div class="accordion-body">
+                      Có! Bạn có thể chỉnh sửa tin tuyển dụng bất cứ lúc nào
+                      trong mục "Quản lý tin". Sau khi chỉnh sửa, tin sẽ được
+                      duyệt lại trước khi hiển thị.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#employer5"
+                    >
+                      Làm sao để nâng cấp gói Premium?
+                    </button>
+                  </h2>
+                  <div
+                    id="employer5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#employerAccordion"
+                  >
+                    <div class="accordion-body">
+                      Vào mục "Cài đặt" → "Gói dịch vụ" → Chọn "Nâng cấp". Xem
+                      chi tiết các gói tại <a href="pricing.html">đây</a>. Hoặc
+                      liên hệ với đội ngũ sales qua hotline: +84 123 456 789.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Account Questions -->
+            <div class="tab-pane fade" id="account">
+              <div class="accordion" id="accountAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#account1"
+                    >
+                      Làm sao để đăng ký tài khoản?
+                    </button>
+                  </h2>
+                  <div
+                    id="account1"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#accountAccordion"
+                  >
+                    <div class="accordion-body">
+                      Click nút "Đăng ký" trên góc phải màn hình, chọn loại tài
+                      khoản (Sinh viên hoặc Nhà tuyển dụng), điền thông tin và
+                      xác nhận email. Quá trình đăng ký hoàn toàn miễn phí!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#account2"
+                    >
+                      Quên mật khẩu, phải làm sao?
+                    </button>
+                  </h2>
+                  <div
+                    id="account2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accountAccordion"
+                  >
+                    <div class="accordion-body">
+                      Click "Quên mật khẩu?" ở trang đăng nhập, nhập email đã
+                      đăng ký. Chúng tôi sẽ gửi link đặt lại mật khẩu đến email
+                      của bạn trong vòng vài phút.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#account3"
+                    >
+                      Làm sao để thay đổi thông tin cá nhân?
+                    </button>
+                  </h2>
+                  <div
+                    id="account3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accountAccordion"
+                  >
+                    <div class="accordion-body">
+                      Đăng nhập → Click vào tên của bạn ở góc phải → Chọn "Hồ
+                      sơ" → Chỉnh sửa thông tin → Lưu thay đổi.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#account4"
+                    >
+                      Có thể xóa tài khoản không?
+                    </button>
+                  </h2>
+                  <div
+                    id="account4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accountAccordion"
+                  >
+                    <div class="accordion-body">
+                      Có, bạn có thể xóa tài khoản bất cứ lúc nào. Vào "Cài đặt"
+                      → "Tài khoản" → "Xóa tài khoản". Lưu ý: Hành động này không
+                      thể hoàn tác và tất cả dữ liệu sẽ bị xóa vĩnh viễn.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#account5"
+                    >
+                      Tôi có thể có nhiều tài khoản không?
+                    </button>
+                  </h2>
+                  <div
+                    id="account5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accountAccordion"
+                  >
+                    <div class="accordion-body">
+                      Mỗi email chỉ có thể đăng ký một tài khoản cho mỗi loại
+                      (Sinh viên hoặc Nhà tuyển dụng). Tuy nhiên, bạn có thể có
+                      cả hai loại tài khoản với các email khác nhau.
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- Still Have Questions -->
+      <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+          <div class="card border-0 shadow-sm text-center p-5">
+            <i class="bi bi-question-circle text-primary display-4 mb-3"></i>
+            <h4 class="fw-bold mb-3">Vẫn chưa tìm được câu trả lời?</h4>
+            <p class="text-muted mb-4">
+              Đừng lo! Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ bạn.
+            </p>
+            <div class="d-flex gap-3 justify-content-center">
+              <a href="contact.html" class="btn btn-primary">
+                <i class="bi bi-envelope me-2"></i>Liên hệ hỗ trợ
+              </a>
+              <a href="help.html" class="btn btn-outline-secondary">
+                <i class="bi bi-book me-2"></i>Xem hướng dẫn
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-5 mt-5">
@@ -309,62 +697,44 @@
               Nền tảng kết nối sinh viên với cơ hội việc làm từ các doanh nghiệp
               uy tín.
             </p>
-            <div class="d-flex gap-2">
-              <a href="#" class="icon-mang-xa-hoi"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="icon-mang-xa-hoi"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="icon-mang-xa-hoi"><i class="bi bi-linkedin"></i></a>
-              <a href="#" class="icon-mang-xa-hoi"
-                ><i class="bi bi-instagram"></i
-              ></a>
-            </div>
           </div>
+
           <div class="col-md-3">
-            <h5 class="mb-3">Dành cho sinh viên</h5>
+            <h5 class="mb-3">Pháp lý</h5>
             <ul class="list-unstyled">
               <li>
                 <a
-                  href="index.html#jobs"
+                  href="terms-of-service.html"
                   class="text-muted text-decoration-none"
-                  >Tìm việc làm</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-muted text-decoration-none"
-                  >Việc làm đã lưu</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-muted text-decoration-none"
-                  >Hồ sơ của tôi</a
-                >
-              </li>
-              <li>
-                <a href="blog.html" class="text-muted text-decoration-none"
-                  >Hướng nghiệp</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-            <h5 class="mb-3">Dành cho nhà tuyển dụng</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="#" class="text-muted text-decoration-none"
-                  >Đăng tuyển dụng</a
+                  >Điều khoản dịch vụ</a
                 >
               </li>
               <li>
                 <a
-                  href="index.html#companies"
+                  href="privacy-policy.html"
                   class="text-muted text-decoration-none"
-                  >Đối tác</a
+                  >Chính sách bảo mật</a
                 >
-              </li>
-              <li>
-                <a href="#" class="text-muted text-decoration-none">Liên hệ</a>
               </li>
             </ul>
           </div>
+
+          <div class="col-md-3">
+            <h5 class="mb-3">Hỗ trợ</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="help.html" class="text-muted text-decoration-none"
+                  >Trợ giúp</a
+                >
+              </li>
+              <li>
+                <a href="contact.html" class="text-muted text-decoration-none"
+                  >Liên hệ</a
+                >
+              </li>
+            </ul>
+          </div>
+
           <div class="col-md-3">
             <h5 class="mb-3">Liên hệ</h5>
             <ul class="list-unstyled text-muted">
@@ -378,6 +748,7 @@
             </ul>
           </div>
         </div>
+
         <hr class="my-4 bg-secondary" />
         <div class="text-center text-muted">
           <p class="mb-0">&copy; 2025 JobHub. Tất cả quyền được bảo lưu.</p>
@@ -385,8 +756,27 @@
       </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/help.js"></script>
+
+    <!-- FAQ Search Script -->
+    <script>
+      // Simple FAQ search
+      document.getElementById("faqSearch").addEventListener("input", function (e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const accordionButtons = document.querySelectorAll(".accordion-button");
+
+        accordionButtons.forEach((button) => {
+          const text = button.textContent.toLowerCase();
+          const accordionItem = button.closest(".accordion-item");
+
+          if (text.includes(searchTerm) || searchTerm === "") {
+            accordionItem.style.display = "";
+          } else {
+            accordionItem.style.display = "none";
+          }
+        });
+      });
+    </script>
   </body>
 </html>

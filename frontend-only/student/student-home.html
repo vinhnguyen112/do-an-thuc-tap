@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Chủ Sinh Viên - JobHub</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../page/css/style.css" />
+    <link rel="stylesheet" href="student-style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="sticky-top bg-white shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a
+            class="navbar-brand d-flex align-items-center"
+            href="student-home.html"
+          >
+            <div class="logo-icon me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold">JobHub</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="student-home.html">Trang chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="job-search.html">Tìm việc</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-cvs.html">CV của tôi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-applications.html">Ứng tuyển</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="saved-jobs.html">Đã lưu</a>
+              </li>
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+              <a
+                href="../shared/notifications.html"
+                class="btn btn-outline-secondary btn-sm position-relative"
+              >
+                <i class="bi bi-bell"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  >3</span
+                >
+              </a>
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-primary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="bi bi-person-circle me-1"></i>Nguyễn Văn A
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="student-profile.html"
+                      >Hồ sơ</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="student-dashboard.html"
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="../shared/settings.html"
+                      >Cài đặt</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item text-danger"
+                      href="../page/index.html"
+                      >Đăng xuất</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      <!-- Welcome Banner -->
+      <div class="row mb-5">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
+            <div class="card-body p-5">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h1 class="fw-bold mb-3">Xin chào, Nguyễn Văn A! 👋</h1>
+                  <p class="lead mb-4">
+                    Chào mừng bạn trở lại với JobHub. Hãy khám phá các cơ hội việc làm mới nhất dành cho bạn!
+                  </p>
+                  <div class="d-flex gap-3">
+                    <a href="job-search.html" class="btn btn-light btn-lg">
+                      <i class="bi bi-search me-2"></i>Tìm việc ngay
+                    </a>
+                    <a href="cv-builder.html" class="btn btn-outline-light btn-lg">
+                      <i class="bi bi-file-earmark-plus me-2"></i>Tạo CV mới
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-4 text-center d-none d-md-block">
+                  <i class="bi bi-person-workspace" style="font-size: 120px; opacity: 0.3;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="row g-4 mb-5">
+        <div class="col-md-3">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="bi bi-send-check text-primary" style="font-size: 48px;"></i>
+              </div>
+              <h3 class="fw-bold text-primary mb-2">12</h3>
+              <p class="text-muted mb-0">Đơn ứng tuyển</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="bi bi-calendar-check text-success" style="font-size: 48px;"></i>
+              </div>
+              <h3 class="fw-bold text-success mb-2">3</h3>
+              <p class="text-muted mb-0">Lịch phỏng vấn</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="bi bi-bookmark-heart text-warning" style="font-size: 48px;"></i>
+              </div>
+              <h3 class="fw-bold text-warning mb-2">8</h3>
+              <p class="text-muted mb-0">Việc làm đã lưu</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <i class="bi bi-file-earmark-text text-info" style="font-size: 48px;"></i>
+              </div>
+              <h3 class="fw-bold text-info mb-2">5</h3>
+              <p class="text-muted mb-0">CV đã tạo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Row -->
+      <div class="row g-4">
+        <!-- Left Column -->
+        <div class="col-lg-8">
+          <!-- Recommended Jobs -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold mb-0">
+                  <i class="bi bi-star text-warning me-2"></i>Việc làm phù hợp với bạn
+                </h5>
+                <a href="job-search.html" class="btn btn-sm btn-outline-primary">Xem tất cả</a>
+              </div>
+
+              <!-- Job Card 1 -->
+              <div class="card mb-3 border">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex">
+                      <img
+                        src="../page/assets/avata.jpg"
+                        alt="Company Logo"
+                        width="60"
+                        height="60"
+                        class="rounded me-3"
+                      />
+                      <div>
+                        <h6 class="fw-bold mb-1">Frontend Developer (ReactJS)</h6>
+                        <p class="text-muted mb-2">
+                          <i class="bi bi-building me-1"></i>Tech Innovation Co.
+                        </p>
+                        <div class="d-flex gap-3 text-muted small">
+                          <span><i class="bi bi-geo-alt me-1"></i>Hồ Chí Minh</span>
+                          <span><i class="bi bi-cash me-1"></i>15-20 triệu</span>
+                          <span><i class="bi bi-clock me-1"></i>Full-time</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-bookmark"></i>
+                    </button>
+                  </div>
+                  <div class="mt-3">
+                    <span class="badge bg-light text-dark me-2">ReactJS</span>
+                    <span class="badge bg-light text-dark me-2">JavaScript</span>
+                    <span class="badge bg-light text-dark">CSS</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Job Card 2 -->
+              <div class="card mb-3 border">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex">
+                      <img
+                        src="../page/assets/avata.jpg"
+                        alt="Company Logo"
+                        width="60"
+                        height="60"
+                        class="rounded me-3"
+                      />
+                      <div>
+                        <h6 class="fw-bold mb-1">UI/UX Designer Intern</h6>
+                        <p class="text-muted mb-2">
+                          <i class="bi bi-building me-1"></i>Creative Studio
+                        </p>
+                        <div class="d-flex gap-3 text-muted small">
+                          <span><i class="bi bi-geo-alt me-1"></i>Hà Nội</span>
+                          <span><i class="bi bi-cash me-1"></i>8-12 triệu</span>
+                          <span><i class="bi bi-clock me-1"></i>Part-time</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-bookmark"></i>
+                    </button>
+                  </div>
+                  <div class="mt-3">
+                    <span class="badge bg-light text-dark me-2">Figma</span>
+                    <span class="badge bg-light text-dark me-2">Adobe XD</span>
+                    <span class="badge bg-light text-dark">Photoshop</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Job Card 3 -->
+              <div class="card border">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex">
+                      <img
+                        src="../page/assets/avata.jpg"
+                        alt="Company Logo"
+                        width="60"
+                        height="60"
+                        class="rounded me-3"
+                      />
+                      <div>
+                        <h6 class="fw-bold mb-1">Marketing Intern</h6>
+                        <p class="text-muted mb-2">
+                          <i class="bi bi-building me-1"></i>Digital Marketing Agency
+                        </p>
+                        <div class="d-flex gap-3 text-muted small">
+                          <span><i class="bi bi-geo-alt me-1"></i>Remote</span>
+                          <span><i class="bi bi-cash me-1"></i>5-8 triệu</span>
+                          <span><i class="bi bi-clock me-1"></i>Internship</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-bookmark"></i>
+                    </button>
+                  </div>
+                  <div class="mt-3">
+                    <span class="badge bg-light text-dark me-2">Social Media</span>
+                    <span class="badge bg-light text-dark me-2">Content Writing</span>
+                    <span class="badge bg-light text-dark">SEO</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h5 class="fw-bold mb-4">
+                <i class="bi bi-clock-history text-primary me-2"></i>Hoạt động gần đây
+              </h5>
+              <div class="list-group list-group-flush">
+                <div class="list-group-item px-0">
+                  <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                      <div class="rounded-circle bg-success bg-opacity-10 p-3">
+                        <i class="bi bi-send-check text-success"></i>
+                      </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="mb-1">Bạn đã ứng tuyển vào vị trí <strong>Frontend Developer</strong></p>
+                      <small class="text-muted">2 giờ trước</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="list-group-item px-0">
+                  <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                      <div class="rounded-circle bg-info bg-opacity-10 p-3">
+                        <i class="bi bi-bookmark-check text-info"></i>
+                      </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="mb-1">Bạn đã lưu công việc <strong>UI/UX Designer</strong></p>
+                      <small class="text-muted">5 giờ trước</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="list-group-item px-0">
+                  <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                      <div class="rounded-circle bg-warning bg-opacity-10 p-3">
+                        <i class="bi bi-file-earmark-plus text-warning"></i>
+                      </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <p class="mb-1">Bạn đã tạo CV mới <strong>CV_Modern_2024</strong></p>
+                      <small class="text-muted">1 ngày trước</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-4">
+          <!-- Profile Completion -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Hoàn thiện hồ sơ</h6>
+              <div class="progress mb-3" style="height: 10px;">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 75%"
+                  aria-valuenow="75"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+              <p class="text-muted small mb-3">Hồ sơ của bạn đã hoàn thành 75%</p>
+              <a href="student-profile.html" class="btn btn-sm btn-outline-primary w-100">
+                Cập nhật hồ sơ
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Hành động nhanh</h6>
+              <div class="d-grid gap-2">
+                <a href="cv-builder.html" class="btn btn-primary">
+                  <i class="bi bi-file-earmark-plus me-2"></i>Tạo CV mới
+                </a>
+                <a href="job-search.html" class="btn btn-outline-primary">
+                  <i class="bi bi-search me-2"></i>Tìm việc làm
+                </a>
+                <a href="my-applications.html" class="btn btn-outline-secondary">
+                  <i class="bi bi-list-check me-2"></i>Xem đơn ứng tuyển
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">
+                <i class="bi bi-lightbulb me-2"></i>Mẹo tìm việc
+              </h6>
+              <p class="small mb-3">
+                Cập nhật CV thường xuyên và tùy chỉnh CV cho từng vị trí ứng tuyển để tăng cơ hội được nhận!
+              </p>
+              <a href="../page/blog.html" class="btn btn-light btn-sm">
+                Xem thêm mẹo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2025 JobHub. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng Giá Dịch Vụ - JobHub</title>
+    <meta
+      name="description"
+      content="Bảng giá các gói dịch vụ tuyển dụng tại JobHub - Tìm gói phù hợp với doanh nghiệp"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="sticky-top bg-white shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center ten-website" href="index.html">
+            <div class="icon-logo me-2">
+              <i class="bi bi-briefcase"></i>
+            </div>
+            <span class="fw-bold">JobHub</span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto">
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="index.html">Trang chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="about.html">Giới thiệu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu" href="blog.html">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-menu active" href="pricing.html">Bảng giá</a>
+              </li>
+            </ul>
+
+            <div class="d-flex gap-2">
+              <a href="login.html" class="btn btn-outline-primary">Đăng nhập</a>
+              <a href="register.html" class="btn btn-primary">Đăng ký</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      <!-- Page Header -->
+      <div class="text-center mb-5">
+        <h1 class="fw-bold mb-3">Bảng Giá Dịch Vụ</h1>
+        <p class="text-muted col-lg-6 mx-auto">
+          Chọn gói dịch vụ phù hợp với nhu cầu tuyển dụng của doanh nghiệp bạn
+        </p>
+      </div>
+
+      <!-- Toggle for Annual/Monthly -->
+      <div class="text-center mb-5">
+        <div class="btn-group" role="group">
+          <input type="radio" class="btn-check" name="billingCycle" id="monthly" checked />
+          <label class="btn btn-outline-primary" for="monthly">Theo tháng</label>
+
+          <input type="radio" class="btn-check" name="billingCycle" id="annual" />
+          <label class="btn btn-outline-primary" for="annual">
+            Theo năm <span class="badge bg-success">-20%</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="row g-4 mb-5">
+        <!-- Free Plan -->
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+              <h3 class="fw-bold mb-3">Miễn Phí</h3>
+              <div class="mb-4">
+                <span class="h2 fw-bold">0đ</span>
+                <span class="text-muted">/tháng</span>
+              </div>
+              <p class="text-muted mb-4">
+                Dành cho doanh nghiệp mới bắt đầu tuyển dụng
+              </p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-success me-2"></i>
+                  <strong>1</strong> tin tuyển dụng/tháng
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-success me-2"></i>
+                  Hiển thị <strong>30 ngày</strong>
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-success me-2"></i>
+                  Xem CV của ứng viên ứng tuyển
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-success me-2"></i>
+                  Hỗ trợ qua email
+                </li>
+                <li class="mb-3 text-muted">
+                  <i class="bi bi-x-circle-fill me-2"></i>
+                  Tin ưu tiên hiển thị
+                </li>
+                <li class="mb-3 text-muted">
+                  <i class="bi bi-x-circle-fill me-2"></i>
+                  Tìm kiếm ứng viên chủ động
+                </li>
+                <li class="mb-3 text-muted">
+                  <i class="bi bi-x-circle-fill me-2"></i>
+                  Thống kê chi tiết
+                </li>
+              </ul>
+              <a href="register.html" class="btn btn-outline-primary w-100">
+                Bắt đầu miễn phí
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Plan -->
+        <div class="col-lg-4">
+          <div class="card border-primary border-2 shadow h-100">
+            <div class="position-absolute top-0 start-50 translate-middle">
+              <span class="badge bg-primary">Phổ biến</span>
+            </div>
+            <div class="card-body p-4">
+              <h3 class="fw-bold mb-3 text-primary">Standard</h3>
+              <div class="mb-4">
+                <span class="h2 fw-bold monthly-price">3.000.000đ</span>
+                <span class="h2 fw-bold annual-price" style="display: none">2.400.000đ</span>
+                <span class="text-muted">/tháng</span>
+              </div>
+              <p class="text-muted mb-4">
+                Dành cho doanh nghiệp vừa và nhỏ
+              </p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  <strong>10</strong> tin tuyển dụng/tháng
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  Hiển thị <strong>60 ngày</strong>
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  Xem CV không giới hạn
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  <strong>Ưu tiên</strong> hiển thị tin
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  Tìm kiếm <strong>100 CV</strong>/tháng
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  Thống kê cơ bản
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                  Hỗ trợ ưu tiên via chat
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-primary w-100">
+                Đăng ký ngay
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body p-4 text-white">
+              <h3 class="fw-bold mb-3">Premium</h3>
+              <div class="mb-4">
+                <span class="h2 fw-bold monthly-price">8.000.000đ</span>
+                <span class="h2 fw-bold annual-price" style="display: none">6.400.000đ</span>
+                <span>/tháng</span>
+              </div>
+              <p class="mb-4 opacity-75">
+                Dành cho doanh nghiệp lớn và tuyển dụng thường xuyên
+              </p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  Đăng tin <strong>không giới hạn</strong>
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  Hiển thị <strong>90 ngày</strong>
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  Xem CV <strong>không giới hạn</strong>
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  <strong>Top hiển thị</strong> trên trang chủ
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  Tìm kiếm CV <strong>không giới hạn</strong>
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  <strong>Thống kê chi tiết</strong> & insights
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  <strong>Hỗ trợ 24/7</strong> qua hotline
+                </li>
+                <li class="mb-3">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  Trợ lý tuyển dụng riêng
+                </li>
+              </ul>
+              <a href="contact.html" class="btn btn-light w-100">
+                Liên hệ tư vấn
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <h2 class="fw-bold text-center mb-4">So sánh chi tiết các gói</h2>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 40%">Tính năng</th>
+                  <th class="text-center">Miễn Phí</th>
+                  <th class="text-center">Standard</th>
+                  <th class="text-center">Premium</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Số tin tuyển dụng/tháng</strong></td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">10</td>
+                  <td class="text-center"><span class="badge bg-success">Không giới hạn</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Thời gian hiển thị</strong></td>
+                  <td class="text-center">30 ngày</td>
+                  <td class="text-center">60 ngày</td>
+                  <td class="text-center">90 ngày</td>
+                </tr>
+                <tr>
+                  <td><strong>Xem CV ứng viên</strong></td>
+                  <td class="text-center">Ứng tuyển vào tin</td>
+                  <td class="text-center">Không giới hạn</td>
+                  <td class="text-center">Không giới hạn</td>
+                </tr>
+                <tr>
+                  <td><strong>Tìm kiếm CV chủ động</strong></td>
+                  <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                  <td class="text-center">100 CV/tháng</td>
+                  <td class="text-center"><span class="badge bg-success">Không giới hạn</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Ưu tiên hiển thị</strong></td>
+                  <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                  <td class="text-center"><i class="bi bi-check text-success"></i></td>
+                  <td class="text-center"><i class="bi bi-star-fill text-warning"></i> Top</td>
+                </tr>
+                <tr>
+                  <td><strong>Thống kê & Báo cáo</strong></td>
+                  <td class="text-center">Cơ bản</td>
+                  <td class="text-center">Cơ bản</td>
+                  <td class="text-center">Chi tiết + Insights</td>
+                </tr>
+                <tr>
+                  <td><strong>Hỗ trợ khách hàng</strong></td>
+                  <td class="text-center">Email</td>
+                  <td class="text-center">Email + Chat</td>
+                  <td class="text-center">24/7 Hotline</td>
+                </tr>
+                <tr>
+                  <td><strong>Trợ lý tuyển dụng</strong></td>
+                  <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                  <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                  <td class="text-center"><i class="bi bi-check text-success"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="fw-bold text-center mb-4">Câu hỏi thường gặp</h2>
+          <div class="accordion" id="pricingFAQ">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  Tôi có thể thay đổi gói dịch vụ không?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Có! Bạn có thể nâng cấp hoặc hạ cấp gói dịch vụ bất cứ lúc nào. Số tiền chênh lệch sẽ được hoàn trả hoặc bù trừ vào tháng tiếp theo.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  Có chính sách hoàn tiền không?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Chúng tôi có chính sách hoàn tiền 100% trong 7 ngày đầu nếu bạn chưa sử dụng dịch vụ. Sau đó, phí dịch vụ sẽ không được hoàn lại.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  Tôi cần thanh toán như thế nào?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Chúng tôi chấp nhận thanh toán qua: Chuyển khoản ngân hàng, Thẻ tín dụng/ghi nợ, Ví điện tử (Momo, ZaloPay, VNPay), Hóa đơn VAT (cho doanh nghiệp).
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  Có gói dùng thử không?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                <div class="accordion-body">
+                  Chúng tôi có gói Miễn phí để bạn trải nghiệm. Ngoài ra, gói Standard và Premium có thể dùng thử 14 ngày với đầy đủ tính năng. Liên hệ với chúng tôi để được hỗ trợ.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+          <div class="card border-0 shadow-sm text-center p-5" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <div class="text-white">
+              <i class="bi bi-headset" style="font-size: 64px"></i>
+              <h3 class="fw-bold mt-3 mb-3">Cần tư vấn thêm?</h3>
+              <p class="mb-4">
+                Liên hệ với đội ngũ chuyên gia của chúng tôi để được tư vấn gói dịch vụ phù hợp nhất
+              </p>
+              <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="contact.html" class="btn btn-light btn-lg">
+                  <i class="bi bi-envelope me-2"></i>Liên hệ ngay
+                </a>
+                <a href="tel:+84123456789" class="btn btn-outline-light btn-lg">
+                  <i class="bi bi-telephone me-2"></i>0123 456 789
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-logo me-2">
+                <i class="bi bi-briefcase"></i>
+              </div>
+              <span class="fw-bold">JobHub</span>
+            </div>
+            <p class="text-muted small mb-3">
+              Nền tảng kết nối sinh viên với cơ hội việc làm từ các doanh nghiệp uy tín.
+            </p>
+          </div>
+
+          <div class="col-md-3">
+            <h5 class="mb-3">Pháp lý</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="terms-of-service.html" class="text-muted text-decoration-none">Điều khoản dịch vụ</a>
+              </li>
+              <li>
+                <a href="privacy-policy.html" class="text-muted text-decoration-none">Chính sách bảo mật</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-3">
+            <h5 class="mb-3">Hỗ trợ</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="help.html" class="text-muted text-decoration-none">Trợ giúp</a>
+              </li>
+              <li>
+                <a href="help.html" class="text-muted text-decoration-none">FAQ</a>
+              </li>
+              <li>
+                <a href="contact.html" class="text-muted text-decoration-none">Liên hệ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-3">
+            <h5 class="mb-3">Liên hệ</h5>
+            <ul class="list-unstyled text-muted">
+              <li class="mb-2">
+                <i class="bi bi-geo-alt me-2"></i>123 Đường ABC, Quận 1, TP.HCM
+              </li>
+              <li class="mb-2">
+                <i class="bi bi-telephone me-2"></i>+84 123 456 789
+              </li>
+              <li><i class="bi bi-envelope me-2"></i>support@jobhub.vn</li>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="my-4 bg-secondary" />
+        <div class="text-center text-muted">
+          <p class="mb-0">&copy; 2025 JobHub. Tất cả quyền được bảo lưu.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Pricing Toggle Script -->
+    <script>
+      // Toggle between monthly and annual pricing
+      document.querySelectorAll('input[name="billingCycle"]').forEach((radio) => {
+        radio.addEventListener('change', function () {
+          const isAnnual = document.getElementById('annual').checked;
+          
+          document.querySelectorAll('.monthly-price').forEach((el) => {
+            el.style.display = isAnnual ? 'none' : 'inline';
+          });
+          
+          document.querySelectorAll('.annual-price').forEach((el) => {
+            el.style.display = isAnnual ? 'inline' : 'none';
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
