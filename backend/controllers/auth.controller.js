@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
                 .input('user_id', user.user_id)
                 .query('SELECT * FROM NhaTuyenDung WHERE user_id = @user_id');
             if (ntd.recordset.length) {
-                roleId = ntd.recordset[0].NhaTuyenDung_id;
+                roleId = ntd.recordset[0].NTD_id;
                 specificInfo = ntd.recordset[0];
             }
         }

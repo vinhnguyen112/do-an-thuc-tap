@@ -14,9 +14,9 @@ exports.getJobs = async (req, res) => {
                 bd.NgayDang, 
                 bd.YeuCau, -- Dùng làm kỹ năng (tạm thời)
                 ntd.TenCongTy,
-                ntd.NhaTuyenDung_id as NTD_id
+                ntd.NTD_id
             FROM BaiDang bd
-            JOIN NhaTuyenDung ntd ON bd.NTD_id = ntd.NhaTuyenDung_id
+            JOIN NhaTuyenDung ntd ON bd.NTD_id = ntd.NTD_id
             ORDER BY bd.NgayDang DESC
         `);
         
@@ -46,15 +46,15 @@ exports.getCompanies = async (req, res) => {
         // Lấy danh sách công ty
         const result = await pool.request().query(`
             SELECT TOP 6 
-                ntd.NhaTuyenDung_id, 
+                ntd.NTD_id, 
                 ntd.TenCongTy, 
                 ntd.DiaChi,
-                (SELECT COUNT(*) FROM BaiDang bd WHERE bd.NTD_id = ntd.NhaTuyenDung_id) as SoViTriTuyen
+                (SELECT COUNT(*) FROM BaiDang bd WHERE bd.NTD_id = ntd.NTD_id) as SoViTriTuyen
             FROM NhaTuyenDung ntd
         `);
         
         const companies = result.recordset.map(comp => ({
-            id: comp.NhaTuyenDung_id,
+            id: comp.NTD_id,
             ten: comp.TenCongTy || "Công ty chưa cập nhật tên",
             nganhNghe: "Đa ngành", // Tạm thời hardcode
             diaDiem: comp.DiaChi ? comp.DiaChi.split(',').pop().trim() : "Việt Nam", // Lấy thành phố từ địa chỉ
