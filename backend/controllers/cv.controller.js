@@ -4,6 +4,11 @@ const { getPool } = require('../db');
 exports.createCV = async (req, res) => {
     const { sinhVienId, tenCV, template, trangThai, duLieuCV } = req.body;
 
+    // Validate sinhVienId
+    if (!sinhVienId || sinhVienId === 'null' || sinhVienId === 'undefined') {
+        return res.status(400).json({ message: 'Lỗi xác thực: Vui lòng đăng xuất và đăng nhập lại.' });
+    }
+
     try {
         const pool = await getPool();
         

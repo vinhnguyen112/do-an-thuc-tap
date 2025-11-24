@@ -16,11 +16,14 @@ app.use(cors());
 // Cho phép đọc JSON từ request body
 app.use(express.json());
 
+const employerRoutes = require("./routes/employer.routes");
+
 // Sử dụng routes
 app.use("/api/cv", cvRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/public", publicRoutes);
 app.use("/api/student", studentRoutes);
+app.use("/api/employer", employerRoutes);
 
 // Hàm kiểm tra kết nối database
 async function kiemTraKetNoi() {

@@ -161,6 +161,7 @@
                   </div>
                   <div class="col-auto">
                     <button
+                      id="editButton"
                       class="btn btn-outline-primary"
                       onclick="toggleEditMode()"
                     >
@@ -199,7 +200,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      value="Tech Corp Vietnam"
+                      id="companyName"
                       readonly
                     />
                   </div>
@@ -208,7 +209,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      value="Tech Corp"
+                      id="shortName"
                       readonly
                     />
                   </div>
@@ -217,7 +218,7 @@
                     <input
                       type="email"
                       class="form-control"
-                      value="contact@techcorp.vn"
+                      id="email"
                       readonly
                     />
                   </div>
@@ -226,37 +227,42 @@
                     <input
                       type="tel"
                       class="form-control"
-                      value="+84 28 1234 5678"
+                      id="phone"
                       readonly
                     />
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Địa chỉ</label>
-                    <textarea class="form-control" rows="2" readonly>
-123 Nguyễn Huệ, Quận 1, TP.HCM, Việt Nam</textarea
-                    >
+                    <textarea class="form-control" rows="2" id="address" readonly></textarea>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label fw-semibold">Website</label>
                     <input
                       type="url"
                       class="form-control"
-                      value="https://techcorp.vn"
+                      id="website"
                       readonly
                     />
                   </div>
                   <div class="col-md-6">
                     <label class="form-label fw-semibold">Quy mô công ty</label>
-                    <select class="form-select" disabled>
+                    <select class="form-select" id="scale" disabled>
+                      <option value="1-10">1-10 nhân viên</option>
+                      <option value="10-50">10-50 nhân viên</option>
                       <option value="50-100">50-100 nhân viên</option>
+                      <option value="100-500">100-500 nhân viên</option>
+                      <option value="500+">Trên 500 nhân viên</option>
                     </select>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold"
                       >Lĩnh vực hoạt động</label
                     >
-                    <select class="form-select" disabled>
+                    <select class="form-select" id="industry" disabled>
                       <option value="it">Công nghệ thông tin</option>
+                      <option value="marketing">Marketing & Truyền thông</option>
+                      <option value="finance">Tài chính - Ngân hàng</option>
+                      <option value="education">Giáo dục - Đào tạo</option>
                     </select>
                   </div>
                 </div>
@@ -265,21 +271,7 @@
               <!-- Company Description -->
               <div class="mb-4">
                 <h5 class="section-title">Giới thiệu công ty</h5>
-                <textarea class="form-control" rows="6" readonly>
-Tech Corp Vietnam là công ty công nghệ hàng đầu chuyên cung cấp giải pháp phần mềm cho các doanh nghiệp trong và ngoài nước. Với hơn 5 năm kinh nghiệm, chúng tôi tự hào có đội ngũ kỹ sư tài năng và môi trường làm việc chuyên nghiệp.
-
-Chúng tôi chuyên phát triển các giải pháp:
-• Ứng dụng web và mobile
-• Hệ thống quản lý doanh nghiệp
-• Giải pháp đám mây và AI
-• Ứng dụng fintech và e-commerce
-
-Văn hóa công ty:
-• Môi trường làm việc trẻ trung, sáng tạo
-• Cơ hội phát triển nghề nghiệp không giới hạn
-• Chế độ đãi ngộ cạnh tranh
-• Đào tạo và nâng cao kỹ năng liên tục</textarea
-                >
+                <textarea class="form-control" rows="6" id="description" readonly></textarea>
               </div>
 
               <!-- Contact Person -->
@@ -291,7 +283,7 @@ Văn hóa công ty:
                     <input
                       type="text"
                       class="form-control"
-                      value="Nguyễn Văn A"
+                      id="contactName"
                       readonly
                     />
                   </div>
@@ -300,7 +292,7 @@ Văn hóa công ty:
                     <input
                       type="text"
                       class="form-control"
-                      value="HR Manager"
+                      id="contactPosition"
                       readonly
                     />
                   </div>
@@ -309,7 +301,7 @@ Văn hóa công ty:
                     <input
                       type="email"
                       class="form-control"
-                      value="hr@techcorp.vn"
+                      id="contactEmail"
                       readonly
                     />
                   </div>
@@ -318,7 +310,7 @@ Văn hóa công ty:
                     <input
                       type="tel"
                       class="form-control"
-                      value="+84 123 456 789"
+                      id="contactPhone"
                       readonly
                     />
                   </div>
@@ -334,7 +326,7 @@ Văn hóa công ty:
                     <input
                       type="url"
                       class="form-control"
-                      value="https://facebook.com/techcorpvn"
+                      id="facebook"
                       readonly
                     />
                   </div>
@@ -343,7 +335,7 @@ Văn hóa công ty:
                     <input
                       type="url"
                       class="form-control"
-                      value="https://linkedin.com/company/techcorp"
+                      id="linkedin"
                       readonly
                     />
                   </div>
@@ -355,9 +347,7 @@ Văn hóa công ty:
                 <button class="btn btn-secondary" onclick="cancelEdit()">
                   Hủy
                 </button>
-                <button class="btn btn-primary" onclick="saveProfile()">
-                  Lưu thay đổi
-                </button>
+                <!-- Nút Lưu đã được tích hợp vào nút Chỉnh sửa ở trên -->
               </div>
             </div>
           </div>
@@ -374,94 +364,6 @@ Văn hóa công ty:
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      let isEditMode = false;
-
-      function previewLogo(event) {
-        const reader = new FileReader();
-        reader.onload = function () {
-          const output = document.getElementById("logoPreview");
-          output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-
-      function toggleEditMode() {
-        isEditMode = !isEditMode;
-
-        const inputs = document.querySelectorAll(
-          ".profile-card input, .profile-card textarea, .profile-card select"
-        );
-        const button = event.target;
-
-        inputs.forEach((input) => {
-          input.readOnly = !isEditMode;
-          if (input.tagName === "SELECT") {
-            input.disabled = !isEditMode;
-          }
-        });
-
-        if (isEditMode) {
-          button.innerHTML = '<i class="bi bi-check me-1"></i>Lưu thay đổi';
-          button.classList.remove("btn-outline-primary");
-          button.classList.add("btn-primary");
-        } else {
-          button.innerHTML = '<i class="bi bi-pencil me-1"></i>Chỉnh sửa';
-          button.classList.remove("btn-primary");
-          button.classList.add("btn-outline-primary");
-        }
-      }
-
-      function cancelEdit() {
-        if (confirm("Hủy bỏ các thay đổi?")) {
-          location.reload();
-        }
-      }
-
-      function saveProfile() {
-        // Collect form data
-        const formData = {
-          companyName: document.querySelector(
-            'input[value="Tech Corp Vietnam"]'
-          ).value,
-          shortName: document.querySelector('input[value="Tech Corp"]').value,
-          email: document.querySelector('input[value="contact@techcorp.vn"]')
-            .value,
-          phone: document.querySelector('input[value="+84 28 1234 5678"]')
-            .value,
-          address: document.querySelector("textarea").value,
-          website: document.querySelector('input[value="https://techcorp.vn"]')
-            .value,
-          description: document.querySelector('textarea[rows="6"]').value,
-          contactName: document.querySelector('input[value="Nguyễn Văn A"]')
-            .value,
-          contactPosition: document.querySelector('input[value="HR Manager"]')
-            .value,
-          contactEmail: document.querySelector('input[value="hr@techcorp.vn"]')
-            .value,
-          contactPhone: document.querySelector('input[value="+84 123 456 789"]')
-            .value,
-          facebook: document.querySelector(
-            'input[value="https://facebook.com/techcorpvn"]'
-          ).value,
-          linkedin: document.querySelector(
-            'input[value="https://linkedin.com/company/techcorp"]'
-          ).value,
-        };
-
-        console.log("Saving profile:", formData);
-
-        // Simulate API call
-        setTimeout(() => {
-          alert("Thông tin công ty đã được cập nhật thành công!");
-          toggleEditMode();
-        }, 1000);
-      }
-
-      // Initialize
-      document.addEventListener("DOMContentLoaded", function () {
-        console.log("Employer profile page loaded");
-      });
-    </script>
+    <script src="employer-js/employer-profile.js"></script>
   </body>
 </html>
