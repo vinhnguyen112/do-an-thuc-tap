@@ -1,5 +1,5 @@
 // File: student-profile.js
-// Chức năng: Quản lý hồ sơ sinh viên
+// Chức năng: Quản lý hồ sơ sinh viên (Tích hợp API)
 // Tác giả: Sinh viên thực tập
 
 // Thông tin sinh viên
@@ -9,41 +9,44 @@ var thongTinSinhVien = {};
 window.onload = function() {
     console.log('Trang hồ sơ đã load!');
     
-    // Load thông tin sinh viên
-    taiThongTinSinhVien();
+    // Kiểm tra đăng nhập
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const roleId = localStorage.getItem('roleId');
+    
+    if (!isLoggedIn || !roleId) {
+        alert('Vui lòng đăng nhập để xem hồ sơ!');
+        window.location.href = '../page/dang-nhap.html';
+        return;
+    }
+
+    // Load thông tin sinh viên từ API
+    taiThongTinSinhVien(roleId);
     
     // Setup form
     setupForm();
 };
 
-// Tải thông tin sinh viên
-function taiThongTinSinhVien() {
-    console.log('Đang tải thông tin sinh viên...');
+// Tải thông tin sinh viên từ API
+async function taiThongTinSinhVien(id) {
+    console.log('Đang tải thông tin sinh viên từ server...');
     
-    // Thử lấy từ localStorage
-    var thongTin = localStorage.getItem('thongTinSinhVien');
-    
-    if (thongTin) {
-        thongTinSinhVien = JSON.parse(thongTin);
-        console.log('Đã tải thông tin từ localStorage');
-    } else {
-        // Tạo thông tin mẫu
-        thongTinSinhVien = {
-            hoTen: 'Nguyễn Văn A',
-            email: 'nguyenvana@example.com',
-            sdt: '0123456789',
-            diaChi: 'Hồ Chí Minh',
-            ngaySinh: '01/01/2000',
-            gioiTinh: 'Nam',
-            truong: 'Đại học Công nghệ TP.HCM',
-            nganh: 'Công nghệ Thông tin',
-            namTotNghiep: '2024'
-        };
-        console.log('Tạo thông tin mẫu');
+    try {
+        const response = await fetch(`http://localhost:5000/api/student/profile/${id}`);
+        
+        if (!response.ok) {
+            throw new Error('Không thể tải thông tin hồ sơ');
+        }
+
+        thongTinSinhVien = await response.json();
+        console.log('Đã tải thông tin:', thongTinSinhVien);
+        
+        // Điền vào form
+        dienThongTinVaoForm();
+        
+    } catch (error) {
+        console.error('Lỗi tải hồ sơ:', error);
+        alert('Có lỗi khi tải thông tin hồ sơ. Vui lòng thử lại sau.');
     }
-    
-    // Điền vào form
-    dienThongTinVaoForm();
 }
 
 // Điền thông tin vào form
@@ -77,23 +80,30 @@ function dienThongTinVaoForm() {
 
 // Setup form
 function setupForm() {
-    var form = document.getElementById('profileForm');
+    var form = document.getElementById('profileForm'); // Cần đảm bảo ID form đúng trong HTML
+    // Nếu HTML chưa có ID form, ta sẽ tìm nút lưu để gán sự kiện
     
-    if (form) {
-        form.onsubmit = function(e) {
-            e.preventDefault();
-            luuThongTin();
-        };
-    }
+    // Tìm nút lưu (dựa trên class hoặc vị trí nếu không có ID)
+    // Trong HTML hiện tại: <button class="btn btn-primary">Lưu thay đổi</button>
+    // Tốt nhất là thêm onclick vào nút đó hoặc tìm nó
+    
+    const buttons = document.querySelectorAll('button.btn-primary');
+    buttons.forEach(btn => {
+        if (btn.textContent.includes('Lưu thay đổi')) {
+            btn.onclick = luuThongTin;
+        }
+    });
 }
 
 // Lưu thông tin
-function luuThongTin() {
+async function luuThongTin() {
     console.log('Đang lưu thông tin...');
     
+    const roleId = localStorage.getItem('roleId');
+    if (!roleId) return;
+
     // Lấy dữ liệu từ form
     var hoTen = document.getElementById('hoTen').value;
-    var email = document.getElementById('email').value;
     var sdt = document.getElementById('sdt').value;
     var diaChi = document.getElementById('diaChi').value;
     var ngaySinh = document.getElementById('ngaySinh').value;
@@ -108,117 +118,69 @@ function luuThongTin() {
         return;
     }
     
-    if (!email || email.trim() == '') {
-        alert('Vui lòng nhập email!');
-        return;
-    }
-    
-    // Cập nhật object
-    thongTinSinhVien = {
-        hoTen: hoTen,
-        email: email,
-        sdt: sdt,
-        diaChi: diaChi,
-        ngaySinh: ngaySinh,
-        gioiTinh: gioiTinh,
-        truong: truong,
-        nganh: nganh,
-        namTotNghiep: namTotNghiep
+    // Tạo object dữ liệu
+    const dataToSave = {
+        hoTen,
+        sdt,
+        diaChi,
+        ngaySinh,
+        gioiTinh,
+        truong,
+        nganh,
+        namTotNghiep
     };
     
-    // Lưu vào localStorage
+    // Gọi API cập nhật
     try {
-        localStorage.setItem('thongTinSinhVien', JSON.stringify(thongTinSinhVien));
-        console.log('Đã lưu thông tin');
-        alert('Đã lưu thông tin thành công!');
-    } catch (loi) {
-        console.log('Lỗi khi lưu: ' + loi);
-        alert('Có lỗi khi lưu thông tin!');
+        const response = await fetch(`http://localhost:5000/api/student/profile/${roleId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSave)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Cập nhật hồ sơ thành công!');
+            // Cập nhật lại biến cục bộ
+            thongTinSinhVien = { ...thongTinSinhVien, ...dataToSave };
+        } else {
+            alert(result.message || 'Có lỗi khi lưu thông tin');
+        }
+    } catch (error) {
+        console.error('Lỗi lưu hồ sơ:', error);
+        alert('Không thể kết nối đến server');
     }
 }
 
-// Upload ảnh đại diện
+// Upload ảnh đại diện (Giữ nguyên logic cũ hoặc cập nhật sau)
 function uploadAnh() {
     console.log('Upload ảnh đại diện');
-    
-    var inputFile = document.getElementById('anhDaiDien');
-    
-    if (!inputFile) {
-        console.log('Không tìm thấy input file');
-        return;
-    }
-    
-    inputFile.click(); // Mở hộp thoại chọn file
+    var inputFile = document.getElementById('avatarInput'); // Sửa lại ID cho khớp HTML
+    if (inputFile) inputFile.click();
 }
 
-// Xử lý khi chọn ảnh
-function xuLyChonAnh(input) {
-    var file = input.files[0];
-    
-    if (!file) {
-        console.log('Chưa chọn file');
-        return;
-    }
-    
-    console.log('Đã chọn ảnh: ' + file.name);
-    
-    // Kiểm tra loại file
-    if (!file.type.startsWith('image/')) {
-        alert('Vui lòng chọn file ảnh!');
-        input.value = '';
-        return;
-    }
-    
-    // Đọc và hiển thị ảnh
-    var reader = new FileReader();
-    
-    reader.onload = function(e) {
-        var anhPreview = document.getElementById('anhPreview');
-        if (anhPreview) {
-            anhPreview.src = e.target.result;
-            console.log('Đã hiển thị ảnh preview');
+function previewAvatar(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('avatarPreview').src = e.target.result;
         }
-    };
-    
-    reader.readAsDataURL(file);
-}
-
-// Đổi mật khẩu
-function doiMatKhau() {
-    console.log('Đổi mật khẩu');
-    
-    var matKhauCu = prompt('Nhập mật khẩu cũ:');
-    
-    if (!matKhauCu) {
-        console.log('Đã hủy đổi mật khẩu');
-        return;
+        reader.readAsDataURL(file);
     }
-    
-    var matKhauMoi = prompt('Nhập mật khẩu mới:');
-    
-    if (!matKhauMoi) {
-        console.log('Đã hủy đổi mật khẩu');
-        return;
-    }
-    
-    var xacNhanMatKhau = prompt('Nhập lại mật khẩu mới:');
-    
-    if (matKhauMoi != xacNhanMatKhau) {
-        alert('Mật khẩu không khớp!');
-        return;
-    }
-    
-    // Giả lập đổi mật khẩu
-    console.log('Đang đổi mật khẩu...');
-    alert('Đổi mật khẩu thành công! (Demo)');
 }
 
 // Chuyển chế độ chỉnh sửa
 function chuyenCheDoChinhSua() {
-    console.log('Chuyển chế độ chỉnh sửa');
-    // Trong thực tế sẽ enable/disable các input
-    // Ở đây chỉ thông báo
-    alert('Bạn đang ở chế độ chỉnh sửa!');
+    // Logic enable input
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        if (input.id !== 'email') { // Email thường không cho sửa
+            input.readOnly = !input.readOnly;
+        }
+    });
+    alert('Đã bật/tắt chế độ chỉnh sửa');
 }
-
-console.log('File student-profile.js đã load!');

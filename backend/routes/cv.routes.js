@@ -1,26 +1,20 @@
-// Import Express
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+const cvController = require('../controllers/cv.controller');
 
-// Import controller CV
-const CVController = require("../controllers/cv.controller");
+// Tạo CV mới
+router.post('/', cvController.createCV);
 
-// ROUTES - Định nghĩa các đường dẫn API
+// Lấy danh sách CV của sinh viên
+router.get('/student/:id', cvController.getCVs);
 
-// Route để lưu CV mới
-router.post("/save", CVController.saveCV);
+// Lấy chi tiết CV
+router.get('/:id', cvController.getCV);
 
-// Route để lấy danh sách CV của user
-router.get("/list/:userId", CVController.getCVs);
+// Cập nhật CV
+router.put('/:id', cvController.updateCV);
 
-// Route để lấy 1 CV theo ID
-router.get("/:id", CVController.getCVById);
+// Xóa CV
+router.delete('/:id', cvController.deleteCV);
 
-// Route để cập nhật CV
-router.put("/:id", CVController.updateCV);
-
-// Route để xóa CV
-router.delete("/:id", CVController.deleteCV);
-
-// Export router để dùng ở file khác
 module.exports = router;

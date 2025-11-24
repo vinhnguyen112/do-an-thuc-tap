@@ -1,5 +1,5 @@
 // File: application-form.js  
-// Mục đích: Xử lý form ứng tuyển
+// Mục đích: Xử lý form ứng tuyển (Tích hợp API)
 // Người viết: Sinh viên thực tập
 
 // Biến lưu ID công việc
@@ -9,11 +9,25 @@ var idCongViecUngTuyen = null;
 window.onload = function() {
     console.log('Form ứng tuyển đã sẵn sàng!');
     
+    // Kiểm tra đăng nhập
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const roleId = localStorage.getItem('roleId');
+    
+    if (!isLoggedIn || !roleId) {
+        alert('Vui lòng đăng nhập để ứng tuyển!');
+        window.location.href = '../page/dang-nhap.html';
+        return;
+    }
+
     // Lấy ID công việc từ URL
     idCongViecUngTuyen = layIDCongViec();
     
     if (idCongViecUngTuyen) {
         console.log('Ứng tuyển vào công việc ID: ' + idCongViecUngTuyen);
+    } else {
+        alert('Không tìm thấy công việc để ứng tuyển!');
+        window.history.back();
+        return;
     }
     
     // Setup form
@@ -69,10 +83,6 @@ function xuLyChonFile(input) {
         return;
     }
     
-    console.log('Đã chọn file: ' + file.name);
-    console.log('Kích thước: ' + file.size + ' bytes');
-    console.log('Loại file: ' + file.type);
-    
     // Kiểm tra loại file
     var loaiFileHopLe = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     var hopLe = false;
@@ -103,9 +113,12 @@ function xuLyChonFile(input) {
 }
 
 // Xử lý gửi đơn ứng tuyển
-function xuLyGuiDon() {
+async function xuLyGuiDon() {
     console.log('Đang xử lý gửi đơn...');
     
+    const roleId = localStorage.getItem('roleId');
+    if (!roleId) return;
+
     // Lấy dữ liệu từ form
     var hoTen = document.getElementById('fullName').value;
     var email = document.getElementById('email').value;
@@ -114,52 +127,10 @@ function xuLyGuiDon() {
     var fileCV = document.getElementById('cvFile').files[0];
     
     // Kiểm tra dữ liệu
-    if (!hoTen || hoTen.trim() == '') {
-        alert('Vui lòng nhập họ tên!');
-        return;
-    }
-    
-    if (!email || email.trim() == '') {
-        alert('Vui lòng nhập email!');
-        return;
-    }
-    
-    // Kiểm tra email hợp lệ (đơn giản)
-    if (email.indexOf('@') < 0) {
-        alert('Email không hợp lệ!');
-        return;
-    }
-    
-    if (!sdt || sdt.trim() == '') {
-        alert('Vui lòng nhập số điện thoại!');
-        return;
-    }
-    
-    if (!fileCV) {
-        alert('Vui lòng chọn file CV!');
-        return;
-    }
-    
-    console.log('Dữ liệu hợp lệ, đang gửi...');
-    console.log('Họ tên: ' + hoTen);
-    console.log('Email: ' + email);
-    console.log('SĐT: ' + sdt);
-    console.log('File CV: ' + fileCV.name);
-    
-    // Tạo object đơn ứng tuyển
-    var donUngTuyen = {
-        idCongViec: idCongViecUngTuyen,
-        hoTen: hoTen,
-        email: email,
-        sdt: sdt,
-        thuGioiThieu: thuGioiThieu,
-        tenFileCV: fileCV.name,
-        ngayGui: layNgayGio(),
-        trangThai: 'Đang chờ duyệt'
-    };
-    
-    // Lưu vào localStorage (giả lập)
-    luuDonUngTuyen(donUngTuyen);
+    if (!hoTen || hoTen.trim() == '') { alert('Vui lòng nhập họ tên!'); return; }
+    if (!email || email.trim() == '') { alert('Vui lòng nhập email!'); return; }
+    if (!sdt || sdt.trim() == '') { alert('Vui lòng nhập số điện thoại!'); return; }
+    if (!fileCV) { alert('Vui lòng chọn file CV!'); return; }
     
     // Hiển thị loading
     var nutGui = document.querySelector('button[type="submit"]');
@@ -167,73 +138,37 @@ function xuLyGuiDon() {
     nutGui.disabled = true;
     nutGui.innerHTML = 'Đang gửi...';
     
-    // Giả lập gửi đơn (sau 2 giây)
-    setTimeout(function() {
+    try {
+        // Gọi API ứng tuyển
+        const response = await fetch(`http://localhost:5000/api/student/apply/${roleId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                jobId: idCongViecUngTuyen,
+                thuGioiThieu: thuGioiThieu,
+                tenFileCV: fileCV.name // Tạm thời chỉ gửi tên file, chưa upload file thật
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Đã gửi đơn ứng tuyển thành công!');
+            // Chuyển về trang danh sách ứng tuyển (nếu có) hoặc trang chủ
+            // window.location.href = 'my-applications.html'; // Tạm thời chưa có trang này
+            window.location.href = 'job-search.html';
+        } else {
+            alert(result.message || 'Có lỗi khi gửi đơn ứng tuyển');
+        }
+    } catch (error) {
+        console.error('Lỗi gửi đơn:', error);
+        alert('Không thể kết nối đến server');
+    } finally {
         nutGui.disabled = false;
         nutGui.innerHTML = noiDungGoc;
-        
-        alert('Đã gửi đơn ứng tuyển thành công!');
-        console.log('Gửi đơn thành công!');
-        
-        // Chuyển về trang danh sách ứng tuyển
-        window.location.href = 'my-applications.html';
-    }, 2000);
-}
-
-// Lưu đơn ứng tuyển
-function luuDonUngTuyen(don) {
-    console.log('Lưu đơn ứng tuyển...');
-    
-    // Lấy danh sách đơn đã gửi
-    var danhSachDon = localStorage.getItem('donUngTuyen');
-    
-    if (danhSachDon) {
-        danhSachDon = JSON.parse(danhSachDon);
-    } else {
-        danhSachDon = [];
     }
-    
-    // Thêm đơn mới
-    danhSachDon.push(don);
-    
-    // Lưu lại
-    localStorage.setItem('donUngTuyen', JSON.stringify(danhSachDon));
-    
-    console.log('Đã lưu đơn ứng tuyển');
-}
-
-// Lấy ngày giờ hiện tại
-function layNgayGio() {
-    var ngay = new Date();
-    return ngay.toLocaleString('vi-VN');
-}
-
-// Chọn CV từ danh sách
-function chonCV(id) {
-    console.log('Đã chọn CV ID: ' + id);
-    
-    // Bỏ chọn tất cả
-    var tatCaOption = document.querySelectorAll('.cv-option');
-    for (var i = 0; i < tatCaOption.length; i++) {
-        tatCaOption[i].classList.remove('selected');
-        var radio = tatCaOption[i].querySelector('input[type="radio"]');
-        if (radio) radio.checked = false;
-    }
-    
-    // Chọn CV hiện tại
-    // Lưu ý: Trong thực tế cần tìm element chính xác hơn
-    // Ở đây giả lập bằng cách tìm theo thứ tự
-    if (tatCaOption[id-1]) {
-        tatCaOption[id-1].classList.add('selected');
-        var radio = tatCaOption[id-1].querySelector('input[type="radio"]');
-        if (radio) radio.checked = true;
-    }
-}
-
-// Xem trước đơn ứng tuyển
-function xemTruocDon() {
-    console.log('Xem trước đơn ứng tuyển...');
-    alert('Tính năng xem trước đang phát triển!');
 }
 
 console.log('File application-form.js đã load!');

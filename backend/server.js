@@ -4,6 +4,7 @@ const cors = require("cors");
 const cvRoutes = require("./routes/cv.routes");
 const authRoutes = require("./routes/auth.routes");
 const publicRoutes = require("./routes/public.routes");
+const studentRoutes = require("./routes/student.routes");
 const { getPool } = require("./db");
 
 // Tạo ứng dụng Express
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use("/api/cv", cvRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/public", publicRoutes);
+app.use("/api/student", studentRoutes);
 
 // Hàm kiểm tra kết nối database
 async function kiemTraKetNoi() {

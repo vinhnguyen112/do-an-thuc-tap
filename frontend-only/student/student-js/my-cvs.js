@@ -1,62 +1,60 @@
 // File: my-cvs.js
-// Mục đích: Quản lý danh sách CV của sinh viên
-// Người viết: Sinh viên thực tập
+// Mục đích: Quản lý danh sách CV của sinh viên (Tích hợp API)
 
-// Danh sách CV (giả lập)
+// Danh sách CV
 var danhSachCV = [];
 
 // Khi trang load xong
 window.onload = function() {
     console.log('Trang quản lý CV đã load!');
     
+    // Kiểm tra đăng nhập
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+        window.location.href = '../page/dang-nhap.html';
+        return;
+    }
+
     // Load danh sách CV
     taiDanhSachCV();
-    
-    // Hiển thị CV
-    hienThiDanhSachCV();
 };
 
-// Hàm tải danh sách CV
-function taiDanhSachCV() {
+// Hàm tải danh sách CV từ API
+async function taiDanhSachCV() {
     console.log('Đang tải danh sách CV...');
     
-    // Thử lấy từ localStorage
-    var cvTrongLocalStorage = localStorage.getItem('danhSachCV');
-    
-    if (cvTrongLocalStorage) {
-        try {
-            danhSachCV = JSON.parse(cvTrongLocalStorage);
-            console.log('Đã tải ' + danhSachCV.length + ' CV từ localStorage');
-        } catch (loi) {
-            console.log('Lỗi khi parse CV: ' + loi);
-            danhSachCV = taoDataMau();
-        }
-    } else {
-        // Nếu chưa có thì tạo data mẫu
-        danhSachCV = taoDataMau();
-    }
-}
+    const roleId = localStorage.getItem('roleId');
+    if (!roleId) return;
 
-// Tạo dữ liệu mẫu
-function taoDataMau() {
-    console.log('Tạo dữ liệu CV mẫu...');
-    
-    return [
-        {
-            id: 1,
-            tieuDe: 'CV Frontend Developer',
-            ngayTao: '15/12/2024',
-            lanCapNhatCuoi: '18/12/2024',
-            template: 'Modern'
-        },
-        {
-            id: 2,
-            tieuDe: 'CV ReactJS Developer',
-            ngayTao: '10/12/2024',
-            lanCapNhatCuoi: '10/12/2024',
-            template: 'Professional'
+    try {
+        const response = await fetch(`http://localhost:5000/api/cv/student/${roleId}`);
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Map dữ liệu từ DB sang format hiển thị
+            danhSachCV = data.map(cv => ({
+                id: cv.CV_id,
+                tieuDe: cv.TenCV,
+                ngayTao: new Date(cv.NgayTaiLen).toLocaleDateString('vi-VN'),
+                lanCapNhatCuoi: new Date(cv.NgayTaiLen).toLocaleDateString('vi-VN'),
+                template: cv.Template || 'Modern',
+                trangThai: cv.TrangThai || 'completed',
+                duLieu: cv.DuLieuCV
+            }));
+            
+            console.log('Đã tải ' + danhSachCV.length + ' CV từ server');
+            hienThiDanhSachCV();
+        } else {
+            console.error('Lỗi tải CV:', data.message);
+            // Nếu lỗi, hiển thị danh sách rỗng
+            danhSachCV = [];
+            hienThiDanhSachCV();
         }
-    ];
+    } catch (error) {
+        console.error('Lỗi kết nối:', error);
+        danhSachCV = [];
+        hienThiDanhSachCV();
+    }
 }
 
 // Hiển thị danh sách CV
@@ -105,7 +103,7 @@ function hienThiDanhSachCV() {
             '<div class="card h-100 shadow-sm hover-shadow">' +
             '<div class="card-body">' +
             '<div class="d-flex justify-content-between align-items-start mb-3">' +
-            '<h5 class="card-title mb-0">' + cv.tieuDe + '</h5>';
+            '<h5 class="card-title mb-0 text-truncate" title="' + cv.tieuDe + '">' + cv.tieuDe + '</h5>';
         
         // Badge trạng thái
         if (cv.trangThai === 'completed') {
@@ -195,132 +193,78 @@ function capNhatThongKe() {
 
 // Xem chi tiết CV
 function xemCV(idCV) {
-    console.log('Xem CV ID: ' + idCV);
-    
-    // Tìm CV trong danh sách
-    var cvCanXem = null;
-    
-    for (var i = 0; i < danhSachCV.length; i++) {
-        if (danhSachCV[i].id == idCV) {
-            cvCanXem = danhSachCV[i];
-            break;
-        }
-    }
-    
-    if (cvCanXem) {
-        console.log('Tìm thấy CV: ' + cvCanXem.tieuDe);
-        // Chuyển sang trang xem CV
-        window.location.href = 'cv-builder.html?id=' + idCV;
-    } else {
-        console.log('Không tìm thấy CV');
-        alert('Không tìm thấy CV!');
-    }
+    window.location.href = 'cv-builder.html?id=' + idCV;
 }
 
 // Xóa CV
-function xoaCV(idCV) {
-    console.log('Xóa CV ID: ' + idCV);
+async function xoaCV(idCV) {
+    if (!confirm('Bạn có chắc muốn xóa CV này không?')) return;
     
-    // Hỏi xác nhận
-    var xacNhan = confirm('Bạn có chắc muốn xóa CV này không?');
-    
-    if (!xacNhan) {
-        console.log('Đã hủy xóa');
-        return;
-    }
-    
-    // Tìm và xóa CV
-    var viTriCV = -1;
-    
-    for (var i = 0; i < danhSachCV.length; i++) {
-        if (danhSachCV[i].id == idCV) {
-            viTriCV = i;
-            break;
+    try {
+        const response = await fetch(`http://localhost:5000/api/cv/${idCV}`, {
+            method: 'DELETE'
+        });
+        
+        if (response.ok) {
+            alert('Đã xóa CV thành công!');
+            taiDanhSachCV(); // Tải lại danh sách
+        } else {
+            alert('Lỗi khi xóa CV');
         }
-    }
-    
-    if (viTriCV >= 0) {
-        // Xóa khỏi mảng
-        danhSachCV.splice(viTriCV, 1);
-        
-        // Lưu lại vào localStorage
-        localStorage.setItem('danhSachCV', JSON.stringify(danhSachCV));
-        
-        console.log('Đã xóa CV');
-        alert('Đã xóa CV thành công!');
-        
-        // Hiển thị lại danh sách
-        hienThiDanhSachCV();
-    } else {
-        console.log('Không tìm thấy CV để xóa');
-        alert('Không tìm thấy CV!');
+    } catch (error) {
+        console.error('Lỗi xóa CV:', error);
+        alert('Không thể kết nối đến server');
     }
 }
 
 // Tải xuống CV
 function taiXuongCV(idCV) {
-    console.log('Tải xuống CV ID: ' + idCV);
     alert('Tính năng tải xuống đang được phát triển!');
 }
 
 // Sao chép CV
-function saoChepCV(idCV) {
-    console.log('Sao chép CV ID: ' + idCV);
-    
+async function saoChepCV(idCV) {
     // Tìm CV gốc
-    var cvGoc = null;
+    const cvGoc = danhSachCV.find(cv => cv.id === idCV);
+    if (!cvGoc) return;
     
-    for (var i = 0; i < danhSachCV.length; i++) {
-        if (danhSachCV[i].id == idCV) {
-            cvGoc = danhSachCV[i];
-            break;
+    const roleId = localStorage.getItem('roleId');
+    
+    // Parse dữ liệu JSON nếu cần
+    let duLieu = cvGoc.duLieu;
+    if (typeof duLieu === 'string') {
+        try {
+            duLieu = JSON.parse(duLieu);
+        } catch (e) {
+            duLieu = {};
         }
     }
-    
-    if (cvGoc) {
-        // Tạo CV mới (sao chép)
-        var cvMoi = {
-            id: Date.now(), // Dùng timestamp làm ID mới
-            tieuDe: cvGoc.tieuDe + ' (Bản sao)',
-            ngayTao: layNgayHienTai(),
-            lanCapNhatCuoi: layNgayHienTai(),
-            template: cvGoc.template,
-            trangThai: cvGoc.trangThai,
-            duLieu: cvGoc.duLieu ? JSON.parse(JSON.stringify(cvGoc.duLieu)) : {} // Deep copy
-        };
-        
-        // Thêm vào danh sách
-        danhSachCV.unshift(cvMoi); // Thêm vào đầu danh sách
-        
-        // Lưu lại
-        localStorage.setItem('danhSachCV', JSON.stringify(danhSachCV));
-        
-        console.log('Đã sao chép CV');
-        alert('Đã sao chép CV thành công!');
-        
-        // Hiển thị lại
-        hienThiDanhSachCV();
-    } else {
-        alert('Không tìm thấy CV để sao chép!');
-    }
-}
 
-// Lấy ngày hiện tại (định dạng dd/mm/yyyy)
-function layNgayHienTai() {
-    var ngay = new Date();
-    var ngayTrongThang = ngay.getDate();
-    var thang = ngay.getMonth() + 1; // Tháng bắt đầu từ 0
-    var nam = ngay.getFullYear();
-    
-    // Thêm số 0 phía trước nếu < 10
-    if (ngayTrongThang < 10) {
-        ngayTrongThang = '0' + ngayTrongThang;
+    const payload = {
+        sinhVienId: roleId,
+        tenCV: cvGoc.tieuDe + ' (Bản sao)',
+        template: cvGoc.template,
+        trangThai: cvGoc.trangThai,
+        duLieuCV: duLieu
+    };
+
+    try {
+        const response = await fetch('http://localhost:5000/api/cv', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            alert('Đã sao chép CV thành công!');
+            taiDanhSachCV();
+        } else {
+            alert('Lỗi khi sao chép CV');
+        }
+    } catch (error) {
+        console.error('Lỗi sao chép CV:', error);
+        alert('Không thể kết nối đến server');
     }
-    if (thang < 10) {
-        thang = '0' + thang;
-    }
-    
-    return ngayTrongThang + '/' + thang + '/' + nam;
 }
 
 console.log('File my-cvs.js đã sẵn sàng!');
