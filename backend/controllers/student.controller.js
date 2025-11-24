@@ -1,15 +1,11 @@
 const { getPool } = require('../db');
 
 exports.getProfile = async (req, res) => {
-    const { id } = req.params; // id này là user_id hoặc SinhVien_id, tùy frontend gửi
-    // Ở auth.controller.js trả về roleId (SinhVien_id) và id (user_id). 
-    // Frontend nên gửi SinhVien_id để tiện query bảng SinhVien.
+    const { id } = req.params;
 
     try {
         const pool = await getPool();
         
-        // Query bảng SinhVien
-        // Giả sử id gửi lên là SinhVien_id
         const result = await pool.request()
             .input('id', id)
             .query(`
@@ -25,7 +21,6 @@ exports.getProfile = async (req, res) => {
 
         const sv = result.recordset[0];
         
-        // Map dữ liệu DB sang format frontend mong đợi (camelCase)
         const profile = {
             hoTen: sv.HoTen,
             email: sv.Email,
@@ -47,14 +42,12 @@ exports.getProfile = async (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-    const { id } = req.params; // SinhVien_id
+    const { id } = req.params;
     const { hoTen, sdt, diaChi, ngaySinh, gioiTinh, truong, nganh, namTotNghiep } = req.body;
 
     try {
         const pool = await getPool();
 
-        // 1. Cập nhật bảng Users (HoTen, SDT)
-        // Cần lấy user_id từ bảng SinhVien trước
         const svCheck = await pool.request()
             .input('id', id)
             .query('SELECT user_id FROM SinhVien WHERE SinhVien_id = @id');
@@ -71,9 +64,6 @@ exports.updateProfile = async (req, res) => {
             .input('SDT', sdt)
             .query('UPDATE Users SET HoTen = @HoTen, SDT = @SDT WHERE user_id = @user_id');
 
-        // 2. Cập nhật bảng SinhVien (Các thông tin còn lại)
-        // Lưu ý: Cần đảm bảo các cột này tồn tại trong DB. Nếu chưa có, lệnh này sẽ lỗi.
-        // Tôi giả định các cột này đã được tạo theo logic thông thường.
         await pool.request()
             .input('id', id)
             .input('HoTen', hoTen)
@@ -104,13 +94,11 @@ exports.updateProfile = async (req, res) => {
 };
 
 exports.getSavedJobs = async (req, res) => {
-    const { id } = req.params; // SinhVien_id
+    const { id } = req.params;
 
     try {
         const pool = await getPool();
         
-        // Lấy danh sách việc làm đã lưu
-        // Giả sử bảng ViecLamDaLuu(SinhVien_id, BaiDang_id, NgayLuu)
         const result = await pool.request()
             .input('id', id)
             .query(`
@@ -137,7 +125,6 @@ exports.getSavedJobs = async (req, res) => {
 
     } catch (err) {
         console.error('Get Saved Jobs Error:', err);
-        // Nếu lỗi do bảng không tồn tại, trả về mảng rỗng để frontend không crash
         if (err.message.includes('Invalid object name')) {
             return res.json([]);
         }
@@ -146,13 +133,12 @@ exports.getSavedJobs = async (req, res) => {
 };
 
 exports.saveJob = async (req, res) => {
-    const { id } = req.params; // SinhVien_id
-    const { jobId } = req.body; // BaiDang_id
+    const { id } = req.params;
+    const { jobId } = req.body;
 
     try {
         const pool = await getPool();
 
-        // Kiểm tra xem đã lưu chưa
         const check = await pool.request()
             .input('sv_id', id)
             .input('job_id', jobId)
@@ -162,7 +148,6 @@ exports.saveJob = async (req, res) => {
             return res.status(400).json({ message: 'Công việc này đã được lưu rồi' });
         }
 
-        // Lưu vào DB
         await pool.request()
             .input('sv_id', id)
             .input('job_id', jobId)
@@ -177,7 +162,7 @@ exports.saveJob = async (req, res) => {
 };
 
 exports.unsaveJob = async (req, res) => {
-    const { id, jobId } = req.params; // id: SinhVien_id, jobId: BaiDang_id
+    const { id, jobId } = req.params;
 
     try {
         const pool = await getPool();
@@ -196,13 +181,12 @@ exports.unsaveJob = async (req, res) => {
 };
 
 exports.applyJob = async (req, res) => {
-    const { id } = req.params; // SinhVien_id
+    const { id } = req.params;
     const { jobId, thuGioiThieu, tenFileCV } = req.body;
 
     try {
         const pool = await getPool();
 
-        // Kiểm tra xem đã ứng tuyển chưa
         const check = await pool.request()
             .input('sv_id', id)
             .input('job_id', jobId)
@@ -212,7 +196,6 @@ exports.applyJob = async (req, res) => {
             return res.status(400).json({ message: 'Bạn đã ứng tuyển công việc này rồi' });
         }
 
-        // Lưu vào DB
         await pool.request()
             .input('sv_id', id)
             .input('job_id', jobId)
@@ -232,7 +215,7 @@ exports.applyJob = async (req, res) => {
 };
 
 exports.getApplications = async (req, res) => {
-    const { id } = req.params; // SinhVien_id
+    const { id } = req.params;
 
     try {
         const pool = await getPool();

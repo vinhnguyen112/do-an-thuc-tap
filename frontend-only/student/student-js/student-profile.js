@@ -1,15 +1,8 @@
-// File: student-profile.js
-// Chức năng: Quản lý hồ sơ sinh viên (Tích hợp API)
-// Tác giả: Sinh viên thực tập
-
-// Thông tin sinh viên
 var thongTinSinhVien = {};
 
-// Khi trang load
 window.onload = function() {
     console.log('Trang hồ sơ đã load!');
     
-    // Kiểm tra đăng nhập
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const roleId = localStorage.getItem('roleId');
     
@@ -19,14 +12,10 @@ window.onload = function() {
         return;
     }
 
-    // Load thông tin sinh viên từ API
     taiThongTinSinhVien(roleId);
-    
-    // Setup form
     setupForm();
 };
 
-// Tải thông tin sinh viên từ API
 async function taiThongTinSinhVien(id) {
     console.log('Đang tải thông tin sinh viên từ server...');
     
@@ -40,7 +29,6 @@ async function taiThongTinSinhVien(id) {
         thongTinSinhVien = await response.json();
         console.log('Đã tải thông tin:', thongTinSinhVien);
         
-        // Điền vào form
         dienThongTinVaoForm();
         
     } catch (error) {
@@ -49,11 +37,9 @@ async function taiThongTinSinhVien(id) {
     }
 }
 
-// Điền thông tin vào form
 function dienThongTinVaoForm() {
     console.log('Điền thông tin vào form...');
     
-    // Lấy các ô input
     var oHoTen = document.getElementById('hoTen');
     var oEmail = document.getElementById('email');
     var oSdt = document.getElementById('sdt');
@@ -64,7 +50,6 @@ function dienThongTinVaoForm() {
     var oNganh = document.getElementById('nganh');
     var oNamTotNghiep = document.getElementById('namTotNghiep');
     
-    // Điền giá trị
     if (oHoTen) oHoTen.value = thongTinSinhVien.hoTen || '';
     if (oEmail) oEmail.value = thongTinSinhVien.email || '';
     if (oSdt) oSdt.value = thongTinSinhVien.sdt || '';
@@ -78,15 +63,7 @@ function dienThongTinVaoForm() {
     console.log('Đã điền thông tin');
 }
 
-// Setup form
 function setupForm() {
-    var form = document.getElementById('profileForm'); // Cần đảm bảo ID form đúng trong HTML
-    // Nếu HTML chưa có ID form, ta sẽ tìm nút lưu để gán sự kiện
-    
-    // Tìm nút lưu (dựa trên class hoặc vị trí nếu không có ID)
-    // Trong HTML hiện tại: <button class="btn btn-primary">Lưu thay đổi</button>
-    // Tốt nhất là thêm onclick vào nút đó hoặc tìm nó
-    
     const buttons = document.querySelectorAll('button.btn-primary');
     buttons.forEach(btn => {
         if (btn.textContent.includes('Lưu thay đổi')) {
@@ -95,14 +72,12 @@ function setupForm() {
     });
 }
 
-// Lưu thông tin
 async function luuThongTin() {
     console.log('Đang lưu thông tin...');
     
     const roleId = localStorage.getItem('roleId');
     if (!roleId) return;
 
-    // Lấy dữ liệu từ form
     var hoTen = document.getElementById('hoTen').value;
     var sdt = document.getElementById('sdt').value;
     var diaChi = document.getElementById('diaChi').value;
@@ -112,13 +87,11 @@ async function luuThongTin() {
     var nganh = document.getElementById('nganh').value;
     var namTotNghiep = document.getElementById('namTotNghiep').value;
     
-    // Kiểm tra dữ liệu
     if (!hoTen || hoTen.trim() == '') {
         alert('Vui lòng nhập họ tên!');
         return;
     }
     
-    // Tạo object dữ liệu
     const dataToSave = {
         hoTen,
         sdt,
@@ -130,7 +103,6 @@ async function luuThongTin() {
         namTotNghiep
     };
     
-    // Gọi API cập nhật
     try {
         const response = await fetch(`http://localhost:5000/api/student/profile/${roleId}`, {
             method: 'PUT',
@@ -144,7 +116,6 @@ async function luuThongTin() {
 
         if (response.ok) {
             alert('Cập nhật hồ sơ thành công!');
-            // Cập nhật lại biến cục bộ
             thongTinSinhVien = { ...thongTinSinhVien, ...dataToSave };
         } else {
             alert(result.message || 'Có lỗi khi lưu thông tin');
@@ -155,10 +126,9 @@ async function luuThongTin() {
     }
 }
 
-// Upload ảnh đại diện (Giữ nguyên logic cũ hoặc cập nhật sau)
 function uploadAnh() {
     console.log('Upload ảnh đại diện');
-    var inputFile = document.getElementById('avatarInput'); // Sửa lại ID cho khớp HTML
+    var inputFile = document.getElementById('avatarInput'); 
     if (inputFile) inputFile.click();
 }
 
@@ -173,12 +143,10 @@ function previewAvatar(event) {
     }
 }
 
-// Chuyển chế độ chỉnh sửa
 function chuyenCheDoChinhSua() {
-    // Logic enable input
     const inputs = document.querySelectorAll('.form-control');
     inputs.forEach(input => {
-        if (input.id !== 'email') { // Email thường không cho sửa
+        if (input.id !== 'email') { 
             input.readOnly = !input.readOnly;
         }
     });

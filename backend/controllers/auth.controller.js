@@ -10,7 +10,6 @@ exports.login = async (req, res) => {
     try {
         const pool = await getPool();
         
-        // Tìm user theo email
         const result = await pool.request()
             .input('email', email)
             .query('SELECT * FROM Users WHERE Email = @email');
@@ -21,12 +20,10 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: 'Email không tồn tại' });
         }
         
-        // Kiểm tra mật khẩu
         if (user.Password_hash !== password) {
             return res.status(401).json({ message: 'Mật khẩu không đúng' });
         }
         
-        // Lấy thông tin chi tiết theo role
         let roleId = null;
         let specificInfo = {};
         let frontendRole = '';
@@ -58,7 +55,7 @@ exports.login = async (req, res) => {
                 id: user.user_id,
                 email: user.Email,
                 name: user.HoTen,
-                role: frontendRole, // Trả về 'student' hoặc 'employer' cho frontend
+                role: frontendRole,
                 roleId: roleId,
                 ...specificInfo
             }
@@ -80,7 +77,6 @@ exports.register = async (req, res) => {
     try {
         const pool = await getPool();
         
-        // Kiểm tra email đã tồn tại chưa
         const check = await pool.request()
             .input('email', email)
             .query('SELECT * FROM Users WHERE Email = @email');
@@ -89,13 +85,11 @@ exports.register = async (req, res) => {
             return res.status(400).json({ message: 'Email đã được sử dụng' });
         }
         
-        // Map frontend role to database role
         let dbRole = '';
         if (role === 'student') dbRole = 'SinhVien';
         else if (role === 'employer') dbRole = 'NhaTuyenDung';
-        else dbRole = role; // Fallback
+        else dbRole = role;
 
-        // Insert vào bảng Users
         const result = await pool.request()
             .input('email', email)
             .input('password', password)
@@ -110,7 +104,6 @@ exports.register = async (req, res) => {
             
         const userId = result.recordset[0].user_id;
         
-        // Insert vào bảng chi tiết (SinhVien hoặc NhaTuyenDung)
         if (role === 'student') {
             await pool.request()
                 .input('user_id', userId)

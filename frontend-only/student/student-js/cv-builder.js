@@ -1,16 +1,6 @@
-// File: cv-builder.js
-// Tác giả: Sinh viên thực tập
-// Mô tả: Code để tạo CV với preview trực tiếp (Tích hợp API)
-
-// Biến lưu template hiện tại
 var templateHienTai = 'modern';
-var cvIdHienTai = null; // ID của CV đang sửa (nếu có)
+var cvIdHienTai = null;
 
-// ========================================
-// CÁC HÀM TẠO TEMPLATE CV
-// ========================================
-
-// Hàm tạo template Modern - 1 cột đơn giản
 function taoTemplateModern(duLieu) {
     return `
         <div class="text-center mb-4">
@@ -73,11 +63,9 @@ function taoTemplateModern(duLieu) {
     `;
 }
 
-// Hàm tạo template Professional - 2 cột với sidebar
 function taoTemplateProfessional(duLieu) {
     return `
         <div class="row">
-            <!-- Sidebar trái -->
             <div class="col-md-4 cv-sidebar">
                 <div class="text-center mb-4">
                     <div class="avatar-circle mx-auto mb-3">
@@ -109,7 +97,6 @@ function taoTemplateProfessional(duLieu) {
                 </div>
             </div>
 
-            <!-- Nội dung chính bên phải -->
             <div class="col-md-8 cv-main-content">
                 <div class="mb-4">
                     <h5 class="fw-bold section-title">MỤC TIÊU NGHỀ NGHIỆP</h5>
@@ -149,10 +136,8 @@ function taoTemplateProfessional(duLieu) {
     `;
 }
 
-// Hàm tạo template Creative - Header lớn + 2 cột
 function taoTemplateCreative(duLieu) {
     return `
-        <!-- Header lớn với background -->
         <div class="creative-header text-center mb-4 p-4">
             <h1 class="display-4 fw-bold mb-2" id="previewName">${duLieu.hoTen || 'NGUYỄN VĂN A'}</h1>
             <h4 class="mb-3" id="previewJobTitle">${duLieu.viTri || 'Frontend Developer'}</h4>
@@ -164,7 +149,6 @@ function taoTemplateCreative(duLieu) {
         </div>
 
         <div class="row">
-            <!-- Cột trái 40% -->
             <div class="col-md-5">
                 <div class="mb-4">
                     <h5 class="fw-bold creative-section-title">KỸ NĂNG</h5>
@@ -193,7 +177,6 @@ function taoTemplateCreative(duLieu) {
                 </div>
             </div>
 
-            <!-- Cột phải 60% -->
             <div class="col-md-7">
                 <div class="mb-4">
                     <h5 class="fw-bold creative-section-title">MỤC TIÊU</h5>
@@ -231,10 +214,8 @@ function taoTemplateCreative(duLieu) {
     `;
 }
 
-// Hàm tạo template Minimal - Siêu đơn giản
 function taoTemplateMinimal(duLieu) {
     return `
-        <!-- Header đơn giản trên 1 dòng -->
         <div class="minimal-header mb-4 pb-3 border-bottom">
             <h2 class="mb-1" id="previewName">${duLieu.hoTen || 'NGUYỄN VĂN A'}</h2>
             <div class="d-flex gap-3 flex-wrap">
@@ -244,13 +225,11 @@ function taoTemplateMinimal(duLieu) {
             </div>
         </div>
 
-        <!-- Mục tiêu -->
         <div class="mb-3">
             <h5 class="mb-2">MỤC TIÊU NGHỀ NGHIỆP</h5>
             <p id="previewObjective">${duLieu.mucTieu || 'Sinh viên năm cuối ngành Công nghệ Thông tin...'}</p>
         </div>
 
-        <!-- Kinh nghiệm -->
         <div class="mb-3">
             <h5 class="mb-2">KINH NGHIỆM</h5>
             <div class="mb-2">
@@ -263,14 +242,12 @@ function taoTemplateMinimal(duLieu) {
             </div>
         </div>
 
-        <!-- Học vấn -->
         <div class="mb-3">
             <h5 class="mb-2">HỌC VẤN</h5>
             <strong>Đại học Công nghệ TP.HCM</strong><br>
             Cử nhân Công nghệ Thông tin | 2020 - 2024 | GPA: 3.5/4.0
         </div>
 
-        <!-- Kỹ năng -->
         <div class="mb-3">
             <h5 class="mb-2">KỸ NĂNG</h5>
             <div id="previewSkills">
@@ -278,7 +255,6 @@ function taoTemplateMinimal(duLieu) {
             </div>
         </div>
 
-        <!-- Dự án -->
         <div>
             <h5 class="mb-2">DỰ ÁN</h5>
             <strong>Website E-commerce</strong><br>
@@ -288,9 +264,7 @@ function taoTemplateMinimal(duLieu) {
     `;
 }
 
-// Hàm cập nhật preview theo template
 function capNhatPreview() {
-    // Lấy dữ liệu từ form
     var duLieu = {
         hoTen: document.getElementById('fullName') ? document.getElementById('fullName').value : '',
         viTri: document.getElementById('jobTitle') ? document.getElementById('jobTitle').value : '',
@@ -301,11 +275,9 @@ function capNhatPreview() {
         kyNang: layDanhSachKyNang()
     };
 
-    // Lấy container preview
     var cvPreview = document.getElementById('cvPreview');
     if (!cvPreview) return;
 
-    // Tạo HTML theo template
     var htmlMoi = '';
     if (templateHienTai === 'modern') {
         htmlMoi = taoTemplateModern(duLieu);
@@ -317,19 +289,12 @@ function capNhatPreview() {
         htmlMoi = taoTemplateMinimal(duLieu);
     }
 
-    // Cập nhật HTML
     cvPreview.innerHTML = htmlMoi;
 }
 
-// ========================================
-// KHỞI TẠO TRANG
-// ========================================
-
-// Chờ trang web load xong rồi mới chạy
 window.onload = function() {
     console.log("Trang đã load xong!");
     
-    // Kiểm tra đăng nhập
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     if (!isLoggedIn) {
         alert('Vui lòng đăng nhập để tạo CV!');
@@ -337,10 +302,8 @@ window.onload = function() {
         return;
     }
 
-    // Gọi hàm setup các sự kiện
     khoiTaoSuKien();
     
-    // Kiểm tra xem có đang sửa CV không (qua URL param id)
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     
@@ -348,16 +311,13 @@ window.onload = function() {
         cvIdHienTai = id;
         taiDuLieuCV(id);
     } else {
-        // Render preview mặc định
         capNhatPreview();
     }
 };
 
-// Hàm để setup các sự kiện khi người dùng nhập liệu
 function khoiTaoSuKien() {
     console.log("Đang setup các sự kiện...");
     
-    // Lấy các ô input
     var hoTen = document.getElementById('fullName');
     var viTri = document.getElementById('jobTitle');
     var soDienThoai = document.getElementById('phone');
@@ -365,18 +325,16 @@ function khoiTaoSuKien() {
     var diaChi = document.getElementById('address');
     var mucTieu = document.getElementById('cvObjective');
     
-    // Khi người dùng gõ họ tên
     if (hoTen) {
         hoTen.oninput = function() {
             var ten = this.value;
             if (ten == '') {
-                ten = 'NGUYỄN VĂN A'; // Nếu để trống thì hiện tên mặc định
+                ten = 'NGUYỄN VĂN A'; 
             }
             document.getElementById('previewName').innerText = ten.toUpperCase();
         };
     }
     
-    // Khi người dùng gõ vị trí ứng tuyển
     if (viTri) {
         viTri.oninput = function() {
             var vitri = this.value;
@@ -387,7 +345,6 @@ function khoiTaoSuKien() {
         };
     }
     
-    // Khi người dùng gõ số điện thoại
     if (soDienThoai) {
         soDienThoai.oninput = function() {
             var sdt = this.value;
@@ -398,7 +355,6 @@ function khoiTaoSuKien() {
         };
     }
     
-    // Khi người dùng gõ email
     if (email) {
         email.oninput = function() {
             var mail = this.value;
@@ -409,7 +365,6 @@ function khoiTaoSuKien() {
         };
     }
     
-    // Khi người dùng gõ địa chỉ
     if (diaChi) {
         diaChi.oninput = function() {
             var dc = this.value;
@@ -420,7 +375,6 @@ function khoiTaoSuKien() {
         };
     }
     
-    // Khi người dùng gõ mục tiêu nghề nghiệp
     if (mucTieu) {
         mucTieu.oninput = function() {
             var mt = this.value;
@@ -431,14 +385,12 @@ function khoiTaoSuKien() {
         };
     }
     
-    // Setup sự kiện cho ô nhập kỹ năng - nhấn Enter để thêm
     var oNhapKyNang = document.getElementById('skillInput');
     if (oNhapKyNang) {
         oNhapKyNang.onkeypress = function(e) {
-            // Kiểm tra xem có phải phím Enter không
             if (e.keyCode == 13 || e.which == 13) {
-                e.preventDefault(); // Ngăn form submit
-                themKyNang(); // Gọi hàm thêm kỹ năng
+                e.preventDefault(); 
+                themKyNang(); 
             }
         };
     }
@@ -446,67 +398,48 @@ function khoiTaoSuKien() {
     console.log("Setup xong!");
 }
 
-// Hàm chọn template CV
 function selectTemplate(element, loaiTemplate) {
     console.log("Đang chọn template: " + loaiTemplate);
     
-    // Bỏ class 'selected' ở tất cả các template
     var tatCaTemplate = document.querySelectorAll('.template-card');
     for (var i = 0; i < tatCaTemplate.length; i++) {
         tatCaTemplate[i].classList.remove('selected');
     }
     
-    // Thêm class 'selected' vào template được chọn
     element.classList.add('selected');
     
-    // Check radio button
     var radioButton = element.querySelector('input[type="radio"]');
     if (radioButton) {
         radioButton.checked = true;
     }
     
-    // Lưu template hiện tại
     templateHienTai = loaiTemplate;
     
-    // Đổi style của preview theo template được chọn
     var cvPreview = document.querySelector('.cv-template-preview');
     if (cvPreview) {
-        // Xóa tất cả các class template cũ
         cvPreview.classList.remove('template-modern', 'template-professional', 'template-creative', 'template-minimal');
-        
-        // Thêm class template mới
         cvPreview.classList.add('template-' + loaiTemplate);
-        
         console.log("Đã đổi style preview sang: template-" + loaiTemplate);
     }
     
-    // Cập nhật lại HTML của preview theo template mới
     capNhatPreview();
-    
     console.log("Đã chọn template: " + loaiTemplate);
 }
 
-// Hàm thêm kỹ năng mới
 function themKyNang() {
     console.log("Đang thêm kỹ năng...");
     
     var oNhapKyNang = document.getElementById('skillInput');
-    var kyNang = oNhapKyNang.value.trim(); // Lấy giá trị và bỏ khoảng trắng 2 đầu
+    var kyNang = oNhapKyNang.value.trim(); 
     
-    // Kiểm tra xem có nhập gì không
     if (kyNang != '') {
-        // Tìm chỗ để thêm badge kỹ năng
         var noiChuaBadge = document.querySelector('.d-flex.flex-wrap.gap-2.mb-2');
         
-        // Tạo badge mới
         var badge = document.createElement('span');
         badge.className = 'badge bg-primary';
         badge.innerHTML = kyNang + ' <i class="bi bi-x ms-1" onclick="xoaKyNang(this)"></i>';
         
-        // Thêm vào danh sách
         noiChuaBadge.appendChild(badge);
-        
-        // Xóa ô input
         oNhapKyNang.value = '';
         
         console.log("Đã thêm kỹ năng: " + kyNang);
@@ -515,21 +448,17 @@ function themKyNang() {
     }
 }
 
-// Hàm xóa kỹ năng (tên cũ: removeSkill)
 function xoaKyNang(element) {
     console.log("Đang xóa kỹ năng...");
-    // Xóa cả cái badge (parentElement của icon X)
     element.parentElement.remove();
 }
 
-// Hàm lưu CV (Gọi API)
 async function saveCV() {
     console.log("Đang lưu CV...");
     
     const roleId = localStorage.getItem('roleId');
     if (!roleId) return;
 
-    // Kiểm tra xem đã nhập họ tên chưa
     var hoTen = document.getElementById('fullName') ? document.getElementById('fullName').value : '';
     var viTri = document.getElementById('jobTitle') ? document.getElementById('jobTitle').value : '';
     
@@ -538,7 +467,6 @@ async function saveCV() {
         return;
     }
     
-    // Thu thập dữ liệu từ form
     var duLieuCV = {
         hoTen: hoTen,
         viTri: viTri,
@@ -561,7 +489,6 @@ async function saveCV() {
         let url = 'http://localhost:5000/api/cv';
         let method = 'POST';
 
-        // Nếu đang sửa CV cũ thì dùng PUT
         if (cvIdHienTai) {
             url = `http://localhost:5000/api/cv/${cvIdHienTai}`;
             method = 'PUT';
@@ -587,7 +514,6 @@ async function saveCV() {
     }
 }
 
-// Hàm lưu bản nháp (Gọi API)
 async function saveDraft() {
     console.log("Đang lưu bản nháp...");
     
@@ -642,7 +568,6 @@ async function saveDraft() {
     }
 }
 
-// Hàm tải dữ liệu CV từ API
 async function taiDuLieuCV(id) {
     console.log("Đang tải dữ liệu CV...");
     
@@ -653,19 +578,15 @@ async function taiDuLieuCV(id) {
         if (response.ok && cv) {
             console.log("Đã tải xong CV!");
             
-            // Parse dữ liệu JSON
             let duLieu = cv.DuLieuCV;
             if (typeof duLieu === 'string') {
                 duLieu = JSON.parse(duLieu);
             }
             
-            // Cập nhật template
             if (cv.Template) {
                 templateHienTai = cv.Template;
-                // Update UI selection (cần logic phức tạp hơn để highlight đúng card)
             }
 
-            // Điền dữ liệu vào form
             if (document.getElementById('fullName')) document.getElementById('fullName').value = duLieu.hoTen || '';
             if (document.getElementById('jobTitle')) document.getElementById('jobTitle').value = duLieu.viTri || '';
             if (document.getElementById('phone')) document.getElementById('phone').value = duLieu.sdt || '';
@@ -673,10 +594,9 @@ async function taiDuLieuCV(id) {
             if (document.getElementById('address')) document.getElementById('address').value = duLieu.diaChi || '';
             if (document.getElementById('cvObjective')) document.getElementById('cvObjective').value = duLieu.mucTieu || '';
             
-            // Load kỹ năng
             const skillsContainer = document.querySelector('.d-flex.flex-wrap.gap-2.mb-2');
             if (skillsContainer && duLieu.kyNang) {
-                skillsContainer.innerHTML = ''; // Clear cũ
+                skillsContainer.innerHTML = ''; 
                 duLieu.kyNang.forEach(kn => {
                     var badge = document.createElement('span');
                     badge.className = 'badge bg-primary';
@@ -685,7 +605,6 @@ async function taiDuLieuCV(id) {
                 });
             }
 
-            // Kích hoạt sự kiện input để cập nhật preview
             var tatCaInput = document.querySelectorAll('input, textarea');
             for (var i = 0; i < tatCaInput.length; i++) {
                 var event = new Event('input');
@@ -702,14 +621,12 @@ async function taiDuLieuCV(id) {
     }
 }
 
-// Hàm lấy danh sách kỹ năng
 function layDanhSachKyNang() {
     var danhSachKyNang = [];
     var tatCaBadge = document.querySelectorAll('.badge.bg-primary');
     
     for (var i = 0; i < tatCaBadge.length; i++) {
         var noiDung = tatCaBadge[i].innerText;
-        // Bỏ ký tự × (icon X)
         noiDung = noiDung.replace('×', '').trim();
         if (noiDung != '') {
             danhSachKyNang.push(noiDung);
@@ -719,14 +636,12 @@ function layDanhSachKyNang() {
     return danhSachKyNang;
 }
 
-// Hàm tải xuống PDF
 function downloadPDF() {
     console.log("Đang tải PDF...");
     alert('Tính năng tải xuống PDF đang được phát triển.\nHiện tại bạn có thể dùng Print to PDF của trình duyệt (Ctrl+P).');
     window.print();
 }
 
-// Thêm alias cho các hàm cũ (để tương thích)
 var addSkill = themKyNang;
 var removeSkill = xoaKyNang;
 

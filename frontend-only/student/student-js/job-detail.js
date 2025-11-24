@@ -1,15 +1,8 @@
-// File: job-detail.js
-// Chức năng: Hiển thị chi tiết công việc
-// Tác giả: Sinh viên thực tập
-
-// Biến lưu thông tin công việc hiện tại
 var congViecHienTai = null;
 
-// Khi trang load
 window.addEventListener('load', function() {
     console.log('Trang chi tiết công việc đã load!');
     
-    // Lấy ID công việc từ URL
     var idCongViec = layIDTuURL();
     
     if (idCongViec) {
@@ -21,19 +14,15 @@ window.addEventListener('load', function() {
     }
 });
 
-// Lấy ID từ URL (ví dụ: job-detail.html?id=123)
 function layIDTuURL() {
-    // Lấy phần query string
     var url = window.location.href;
     var viTriDauHoi = url.indexOf('?');
     
     if (viTriDauHoi < 0) {
-        return null; // Không có query string
+        return null; 
     }
     
     var queryString = url.substring(viTriDauHoi + 1);
-    
-    // Tách các tham số
     var cacThamSo = queryString.split('&');
     
     for (var i = 0; i < cacThamSo.length; i++) {
@@ -49,11 +38,9 @@ function layIDTuURL() {
     return null;
 }
 
-// Tải thông tin công việc
 function taiThongTinCongViec(id) {
     console.log('Đang tải thông tin công việc ID: ' + id);
     
-    // Giả lập dữ liệu - sau này sẽ gọi API
     congViecHienTai = {
         id: id,
         tieuDe: 'Frontend Developer Intern',
@@ -65,11 +52,9 @@ function taiThongTinCongViec(id) {
         quyenLoi: ['Lương cạnh tranh', 'Môi trường trẻ trung', 'Cơ hội thăng tiến']
     };
     
-    // Hiển thị thông tin
     hienThiThongTin();
 }
 
-// Hiển thị thông tin công việc
 function hienThiThongTin() {
     if (!congViecHienTai) {
         console.log('Chưa có thông tin công việc');
@@ -77,14 +62,9 @@ function hienThiThongTin() {
     }
     
     console.log('Hiển thị thông tin: ' + congViecHienTai.tieuDe);
-    
-    // Cập nhật tiêu đề trang
     document.title = congViecHienTai.tieuDe + ' - JobHub';
-    
-    // Sau này sẽ cập nhật các phần tử HTML khác
 }
 
-// Ứng tuyển vào công việc
 function ungTuyen() {
     console.log('Ứng tuyển vào công việc');
     
@@ -97,15 +77,12 @@ function ungTuyen() {
     
     if (xacNhan) {
         console.log('Đã xác nhận ứng tuyển');
-        
-        // Chuyển sang trang form ứng tuyển
         window.location.href = 'application-form.html?jobId=' + congViecHienTai.id;
     } else {
         console.log('Đã hủy ứng tuyển');
     }
 }
 
-// Lưu công việc
 function luuCongViec() {
     console.log('Lưu công việc');
     
@@ -114,7 +91,6 @@ function luuCongViec() {
         return;
     }
     
-    // Lấy danh sách đã lưu
     var danhSachDaLuu = localStorage.getItem('congViecDaLuu');
     
     if (danhSachDaLuu) {
@@ -123,7 +99,6 @@ function luuCongViec() {
         danhSachDaLuu = [];
     }
     
-    // Kiểm tra đã lưu chưa
     var daLuu = false;
     for (var i = 0; i < danhSachDaLuu.length; i++) {
         if (danhSachDaLuu[i] == congViecHienTai.id) {
@@ -135,7 +110,6 @@ function luuCongViec() {
     if (daLuu) {
         alert('Bạn đã lưu công việc này rồi!');
     } else {
-        // Thêm vào danh sách
         danhSachDaLuu.push(congViecHienTai.id);
         localStorage.setItem('congViecDaLuu', JSON.stringify(danhSachDaLuu));
         
@@ -144,14 +118,10 @@ function luuCongViec() {
     }
 }
 
-// Chia sẻ công việc
 function chiaSeCongViec() {
     console.log('Chia sẻ công việc');
-    
-    // Lấy URL hiện tại
     var url = window.location.href;
     
-    // Copy vào clipboard
     if (navigator.clipboard) {
         navigator.clipboard.writeText(url).then(function() {
             alert('Đã copy link công việc!');
@@ -160,7 +130,6 @@ function chiaSeCongViec() {
             alert('Không thể copy link. Vui lòng copy thủ công: ' + url);
         });
     } else {
-        // Trình duyệt cũ không hỗ trợ clipboard API
         alert('Link công việc: ' + url);
     }
 }

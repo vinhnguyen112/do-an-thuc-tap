@@ -1,23 +1,12 @@
-// File: job-search.js
-// Chức năng: Tìm kiếm và lọc công việc (Tích hợp API)
-// Tác giả: Sinh viên thực tập
-
-// Biến toàn cục để lưu danh sách công việc
 var danhSachCongViec = [];
 var danhSachDaLoc = [];
 
-// Khi trang load xong
 window.onload = function() {
     console.log('Trang tìm kiếm đã sẵn sàng!');
-    
-    // Load dữ liệu công việc từ API
     taiDanhSachCongViec();
-    
-    // Setup sự kiện tìm kiếm
     setupTimKiem();
 };
 
-// Hàm tải danh sách công việc từ API
 async function taiDanhSachCongViec() {
     console.log('Đang tải danh sách công việc từ server...');
     
@@ -29,15 +18,13 @@ async function taiDanhSachCongViec() {
         }
 
         danhSachCongViec = await response.json();
-        danhSachDaLoc = danhSachCongViec; // Ban đầu hiển thị tất cả
+        danhSachDaLoc = danhSachCongViec; 
         console.log('Đã tải ' + danhSachCongViec.length + ' công việc');
         
-        // Hiển thị ra giao diện (nếu có hàm hiển thị)
         hienThiKetQua();
         
     } catch (error) {
         console.error('Lỗi tải việc làm:', error);
-        // Hiển thị thông báo lỗi
         const container = document.getElementById('jobsContainer');
         if (container) {
             container.innerHTML = '<div class="col-12 text-center text-danger"><p>Không thể tải danh sách việc làm. Vui lòng thử lại sau.</p></div>';
@@ -45,31 +32,24 @@ async function taiDanhSachCongViec() {
     }
 }
 
-// Setup sự kiện tìm kiếm
 function setupTimKiem() {
     var oTimKiem = document.getElementById('searchInput');
     
     if (oTimKiem) {
-        // Khi người dùng gõ vào ô tìm kiếm
         oTimKiem.oninput = function() {
             var tuKhoa = this.value.toLowerCase();
             console.log('Đang tìm kiếm: ' + tuKhoa);
-            
-            // Lọc danh sách
             timKiemCongViec(tuKhoa);
         };
     }
 }
 
-// Hàm tìm kiếm công việc
 function timKiemCongViec(tuKhoa) {
     console.log('Tìm kiếm với từ khóa: ' + tuKhoa);
     
     if (tuKhoa == '') {
-        // Nếu không có từ khóa thì hiển thị tất cả
         danhSachDaLoc = danhSachCongViec;
     } else {
-        // Lọc theo từ khóa
         danhSachDaLoc = danhSachCongViec.filter(congViec => {
             const tieuDe = congViec.tieuDe.toLowerCase();
             const congTy = congViec.tenCongTy.toLowerCase();
@@ -78,12 +58,9 @@ function timKiemCongViec(tuKhoa) {
     }
     
     console.log('Tìm thấy ' + danhSachDaLoc.length + ' kết quả');
-    
-    // Cập nhật giao diện
     hienThiKetQua();
 }
 
-// Hàm hiển thị kết quả
 function hienThiKetQua() {
     console.log('Đang hiển thị ' + danhSachDaLoc.length + ' công việc');
     
@@ -138,7 +115,6 @@ function hienThiKetQua() {
     container.innerHTML = html;
 }
 
-// Hàm lọc theo địa điểm
 function locTheoDiaDiem(diaDiem) {
     console.log('Lọc theo địa điểm: ' + diaDiem);
     
@@ -151,7 +127,6 @@ function locTheoDiaDiem(diaDiem) {
     hienThiKetQua();
 }
 
-// Hàm lưu công việc (Gọi API)
 async function luuCongViec(idCongViec) {
     console.log('Lưu công việc ID: ' + idCongViec);
     

@@ -1,7 +1,3 @@
-/* JavaScript cho trang chủ - Hiển thị việc làm, công ty, tìm kiếm */
-
-// Dữ liệu mẫu việc làm
-// Hiển thị danh sách việc làm từ API
 async function hienThiViecLam() {
   const khungChua = document.getElementById("jobsContainer");
   if (!khungChua) return;
@@ -57,7 +53,6 @@ async function hienThiViecLam() {
   }
 }
 
-// Hiển thị danh sách công ty từ API
 async function hienThiCongTy() {
   const khungChua = document.getElementById("companiesContainer");
   if (!khungChua) return;
@@ -104,7 +99,6 @@ async function hienThiCongTy() {
   }
 }
 
-// Xử lý tìm kiếm
 function xuLyTimKiem() {
   const oTimKiem = document.getElementById("searchInput");
   const oDiaDiem = document.getElementById("locationSelect");
@@ -118,7 +112,6 @@ function xuLyTimKiem() {
   }
 }
 
-// Khởi động khi trang đã tải xong
 document.addEventListener("DOMContentLoaded", function () {
   const oTimKiem = document.getElementById("searchInput");
   if (oTimKiem) {
@@ -132,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
   hienThiViecLam();
   hienThiCongTy();
 
-  // Cuộn mượt cho các link có dấu #
   const tatCaLink = document.querySelectorAll('a[href^="#"]');
   for (let i = 0; i < tatCaLink.length; i++) {
     tatCaLink[i].addEventListener("click", function (e) {
@@ -151,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Hiệu ứng menu khi cuộn
 window.addEventListener("scroll", function () {
   const menu = document.querySelector(".navbar");
   if (window.scrollY > 50) {
