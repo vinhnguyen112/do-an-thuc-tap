@@ -33,7 +33,7 @@
         <div class="container">
           <a
             class="navbar-brand d-flex align-items-center"
-            href="employer-home.html"
+            href="/employer/employer-home.html"
           >
             <div class="logo-icon me-2">
               <i class="bi bi-briefcase"></i>
@@ -51,29 +51,29 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto me-auto">
               <li class="nav-item">
-                <a class="nav-link" href="employer-home.html">Trang chủ</a>
+                <a class="nav-link" href="/employer/employer-home.html">Trang chủ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="employer-dashboard.html">Dashboard</a>
+                <a class="nav-link" href="/employer/employer-dashboard.html">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="post-job.html">Đăng tin</a>
+                <a class="nav-link" href="/employer/post-job.html">Đăng tin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="manage-jobs.html"
+                <a class="nav-link active" href="/employer/manage-jobs.html"
                   >Quản lý tin</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="job-candidates.html">Ứng viên</a>
+                <a class="nav-link" href="/employer/job-candidates.html">Ứng viên</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="employer-profile.html">Hồ sơ</a>
+                <a class="nav-link" href="/employer/employer-profile.html">Hồ sơ</a>
               </li>
             </ul>
             <div class="d-flex gap-2 align-items-center">
               <a
-                href="../shared/notifications.html"
+                href="/shared/notifications.html"
                 class="btn btn-outline-secondary btn-sm position-relative"
               >
                 <i class="bi bi-bell"></i>
@@ -92,18 +92,18 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="employer-profile.html"
+                    <a class="dropdown-item" href="/employer/employer-profile.html"
                       >Hồ sơ công ty</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../shared/settings.html"
+                    <a class="dropdown-item" href="/shared/settings.html"
                       >Cài đặt</a
                     >
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <a class="dropdown-item text-danger" href="employer-home.html"
+                    <a class="dropdown-item text-danger" href="/page/index.html"
                       >Đăng xuất</a
                     >
                   </li>
@@ -116,57 +116,60 @@
     </header>
 
     <!-- Main Content -->
-    <div class="manage-jobs-container">
+    <div class="page-container">
       <div class="container">
+        <!-- Page Header -->
         <div class="row mb-4">
           <div class="col-12">
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <h1 class="fw-bold mb-1">Quản lý tin tuyển dụng</h1>
+                <h1 class="fw-bold mb-1">
+                  <i class="bi bi-folder2-open me-2"></i>Quản lý tin tuyển dụng
+                </h1>
                 <p class="text-muted mb-0">
                   Theo dõi và quản lý tất cả tin đăng của bạn
                 </p>
               </div>
-              <a href="post-job.html" class="btn btn-primary">
+              <a href="/employer/post-job.html" class="btn btn-primary btn-lg">
                 <i class="bi bi-plus-circle me-2"></i>Đăng tin mới
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Stats -->
-        <div class="row g-4 mb-4">
-          <div class="col-md-3">
-            <div class="stats-card">
-              <h3 class="fw-bold text-primary">8</h3>
-              <p class="text-muted mb-0">Tin đang hoạt động</p>
+        <!-- Stats Cards -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-number text-primary">8</div>
+              <div class="stat-label">Đang hoạt động</div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="stats-card">
-              <h3 class="fw-bold text-warning">3</h3>
-              <p class="text-muted mb-0">Tin chờ duyệt</p>
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-number text-warning">3</div>
+              <div class="stat-label">Chờ duyệt</div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="stats-card">
-              <h3 class="fw-bold text-success">156</h3>
-              <p class="text-muted mb-0">Tổng ứng viên</p>
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-number text-success">156</div>
+              <div class="stat-label">Tổng ứng viên</div>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="stats-card">
-              <h3 class="fw-bold text-info">23</h3>
-              <p class="text-muted mb-0">Đang phỏng vấn</p>
+          <div class="col-6 col-md-3">
+            <div class="stat-card">
+              <div class="stat-number text-info">23</div>
+              <div class="stat-label">Đang phỏng vấn</div>
             </div>
           </div>
         </div>
 
-        <div class="row g-4">
-          <!-- Jobs List -->
+        <div class="row">
+          <!-- Main Content -->
           <div class="col-lg-8">
-            <!-- Filter Tabs -->
-            <ul class="nav nav-pills mb-4" id="jobTabs" role="tablist">
+            <!-- Filter Pills -->
+            <ul class="nav nav-pills mb-3" id="jobTabs" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
                   class="nav-link active"
@@ -175,7 +178,7 @@
                   data-bs-target="#all"
                   type="button"
                 >
-                  Tất cả tin
+                  <i class="bi bi-list-ul me-1"></i>Tất cả (11)
                 </button>
               </li>
               <li class="nav-item" role="presentation">
@@ -186,7 +189,7 @@
                   data-bs-target="#active"
                   type="button"
                 >
-                  Đang tuyển
+                  <i class="bi bi-check-circle me-1"></i>Đang tuyển (8)
                 </button>
               </li>
               <li class="nav-item" role="presentation">
@@ -197,7 +200,7 @@
                   data-bs-target="#pending"
                   type="button"
                 >
-                  Chờ duyệt
+                  <i class="bi bi-clock me-1"></i>Chờ duyệt (3)
                 </button>
               </li>
               <li class="nav-item" role="presentation">
@@ -208,34 +211,23 @@
                   data-bs-target="#draft"
                   type="button"
                 >
-                  Bản nháp
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link"
-                  id="closed-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#closed"
-                  type="button"
-                >
-                  Đã đóng
+                  <i class="bi bi-file-earmark me-1"></i>Nháp (0)
                 </button>
               </li>
             </ul>
 
-            <!-- Search and Filter -->
-            <div class="quick-action-card">
-              <div class="row g-3 align-items-center">
-                <div class="col-md-6">
+            <!-- Search & Filter -->
+            <div class="filter-section mb-3">
+              <div class="row g-2">
+                <div class="col-md-7">
                   <div class="input-group">
-                    <span class="input-group-text"
-                      ><i class="bi bi-search"></i
-                    ></span>
+                    <span class="input-group-text bg-white">
+                      <i class="bi bi-search"></i>
+                    </span>
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Tìm kiếm tin tuyển dụng..."
+                      placeholder="Tìm kiếm theo tiêu đề, địa điểm..."
                     />
                   </div>
                 </div>
@@ -244,12 +236,12 @@
                     <option value="">Sắp xếp theo</option>
                     <option value="newest">Mới nhất</option>
                     <option value="candidates">Số ứng viên</option>
-                    <option value="deadline">Hạn nộp</option>
+                    <option value="views">Lượt xem</option>
                   </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <button class="btn btn-outline-primary w-100">
-                    <i class="bi bi-funnel me-1"></i>Lọc
+                    <i class="bi bi-funnel"></i>
                   </button>
                 </div>
               </div>
@@ -257,344 +249,285 @@
 
             <!-- Tab Content -->
             <div class="tab-content" id="jobTabsContent">
-              <!-- All Jobs -->
+              <!-- All Jobs Tab -->
               <div class="tab-pane fade show active" id="all" role="tabpanel">
-                <!-- Job 1 - Active -->
-                <div class="job-card">
-                  <div class="row align-items-center">
-                    <div class="col">
-                      <div
-                        class="d-flex justify-content-between align-items-start"
-                      >
-                        <div>
-                          <h5 class="fw-bold mb-1">
-                            Frontend Developer Intern
-                          </h5>
-                          <p class="text-muted mb-2">
-                            Hồ Chí Minh • Toàn thời gian • 8-12 triệu
-                          </p>
-                          <div class="d-flex gap-4 text-muted small">
-                            <span
-                              ><i class="bi bi-calendar me-1"></i>Đăng:
-                              15/12/2024</span
-                            >
-                            <span
-                              ><i class="bi bi-clock me-1"></i>Hạn nộp:
-                              25/12/2024</span
-                            >
-                            <span
-                              ><i class="bi bi-eye me-1"></i>245 lượt xem</span
-                            >
-                          </div>
-                        </div>
-                        <div class="text-end">
-                          <span class="status-badge bg-success text-white"
-                            >Đang tuyển</span
-                          >
-                          <div class="candidate-count mt-2">45 ứng viên</div>
-                        </div>
+                <!-- Job Card 1 - Active -->
+                <div class="job-card-new status-active">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="flex-grow-1">
+                      <h3 class="job-title">Frontend Developer Intern</h3>
+                      <div class="job-meta">
+                        <span class="job-meta-item">
+                          <i class="bi bi-geo-alt-fill"></i>
+                          <span>Hồ Chí Minh</span>
+                        </span>
+                        <span class="job-meta-item">
+                          <i class="bi bi-briefcase-fill"></i>
+                          <span>Toàn thời gian</span>
+                        </span>
+                        <span class="job-meta-item">
+                          <i class="bi bi-cash"></i>
+                          <span>8-12 triệu</span>
+                        </span>
                       </div>
                     </div>
+                    <span class="status-badge-new bg-success text-white">
+                      <i class="bi bi-check-circle me-1"></i>Đang tuyển
+                    </span>
                   </div>
-                  <div class="mt-3">
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="d-flex gap-2">
-                          <span class="badge bg-light text-dark"
-                            >12 ứng viên mới</span
-                          >
-                          <span class="badge bg-warning">3 chờ phỏng vấn</span>
-                          <span class="badge bg-success">2 đã tuyển</span>
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <div class="btn-group">
-                          <a
-                            href="job-candidates.html?job=1"
-                            class="btn btn-outline-primary btn-sm"
-                          >
-                            <i class="bi bi-people me-1"></i>Xem ứng viên
-                          </a>
-                          <button
-                            class="btn btn-outline-secondary btn-sm"
-                            onclick="editJob(1)"
-                          >
-                            <i class="bi bi-pencil me-1"></i>Sửa
-                          </button>
-                          <button
-                            class="btn btn-outline-danger btn-sm"
-                            onclick="closeJob(1)"
-                          >
-                            <i class="bi bi-x-circle me-1"></i>Đóng tin
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+
+                  <div class="job-meta mb-2">
+                    <span class="job-meta-item">
+                      <i class="bi bi-calendar3"></i>
+                      <span>Đăng: 15/12/2024</span>
+                    </span>
+                    <span class="job-meta-item">
+                      <i class="bi bi-clock"></i>
+                      <span>Hạn: 25/12/2024</span>
+                    </span>
+                    <span class="job-meta-item">
+                      <i class="bi bi-eye"></i>
+                      <span>245 lượt xem</span>
+                    </span>
+                  </div>
+
+                  <div class="job-stats">
+                    <span class="job-stat-badge bg-primary bg-opacity-10 text-primary">
+                      <i class="bi bi-person-fill-check"></i>
+                      45 ứng viên
+                    </span>
+                    <span class="job-stat-badge bg-info bg-opacity-10 text-info">
+                      <i class="bi bi-envelope-plus"></i>
+                      12 mới
+                    </span>
+                    <span class="job-stat-badge bg-warning bg-opacity-10 text-warning">
+                      <i class="bi bi-calendar-event"></i>
+                      3 chờ PV
+                    </span>
+                    <span class="job-stat-badge bg-success bg-opacity-10 text-success">
+                      <i class="bi bi-check2-circle"></i>
+                      2 đã tuyển
+                    </span>
+                  </div>
+
+                  <div class="job-actions mt-3">
+                    <a href="job-candidates.html?job=1" class="btn btn-primary btn-sm">
+                      <i class="bi bi-people me-1"></i>Xem ứng viên
+                    </a>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="editJob(1)">
+                      <i class="bi bi-pencil me-1"></i>Sửa
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="closeJob(1)">
+                      <i class="bi bi-x-circle me-1"></i>Đóng tin
+                    </button>
                   </div>
                 </div>
 
-                <!-- Job 2 - Pending -->
-                <div class="job-card">
-                  <div class="row align-items-center">
-                    <div class="col">
-                      <div
-                        class="d-flex justify-content-between align-items-start"
-                      >
-                        <div>
-                          <h5 class="fw-bold mb-1">Senior React Developer</h5>
-                          <p class="text-muted mb-2">
-                            Hà Nội • Toàn thời gian • 25-40 triệu
-                          </p>
-                          <div class="d-flex gap-4 text-muted small">
-                            <span
-                              ><i class="bi bi-calendar me-1"></i>Đăng:
-                              16/12/2024</span
-                            >
-                            <span
-                              ><i class="bi bi-clock me-1"></i>Hạn nộp:
-                              31/12/2024</span
-                            >
-                            <span
-                              ><i class="bi bi-eye me-1"></i>89 lượt xem</span
-                            >
-                          </div>
-                        </div>
-                        <div class="text-end">
-                          <span class="status-badge bg-warning text-dark"
-                            >Chờ duyệt</span
-                          >
-                          <div class="candidate-count mt-2">0 ứng viên</div>
-                        </div>
+                <!-- Job Card 2 - Pending -->
+                <div class="job-card-new status-pending">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="flex-grow-1">
+                      <h3 class="job-title">Senior React Developer</h3>
+                      <div class="job-meta">
+                        <span class="job-meta-item">
+                          <i class="bi bi-geo-alt-fill"></i>
+                          <span>Hà Nội</span>
+                        </span>
+                        <span class="job-meta-item">
+                          <i class="bi bi-briefcase-fill"></i>
+                          <span>Toàn thời gian</span>
+                        </span>
+                        <span class="job-meta-item">
+                          <i class="bi bi-cash"></i>
+                          <span>25-40 triệu</span>
+                        </span>
                       </div>
                     </div>
+                    <span class="status-badge-new bg-warning text-dark">
+                      <i class="bi bi-clock me-1"></i>Chờ duyệt
+                    </span>
                   </div>
-                  <div class="mt-3">
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="alert alert-warning small mb-0">
-                          <i class="bi bi-info-circle me-1"></i>
-                          Tin đang chờ phê duyệt từ quản trị viên
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <div class="btn-group">
-                          <button
-                            class="btn btn-outline-secondary btn-sm"
-                            onclick="editJob(2)"
-                          >
-                            <i class="bi bi-pencil me-1"></i>Sửa
-                          </button>
-                          <button
-                            class="btn btn-outline-danger btn-sm"
-                            onclick="deleteJob(2)"
-                          >
-                            <i class="bi bi-trash me-1"></i>Xóa
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+
+                  <div class="alert alert-warning mb-2" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Tin đang chờ phê duyệt từ quản trị viên
+                  </div>
+
+                  <div class="job-meta">
+                    <span class="job-meta-item">
+                      <i class="bi bi-calendar3"></i>
+                      <span>Gửi duyệt: 16/12/2024</span>
+                    </span>
+                  </div>
+
+                  <div class="job-actions">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="editJob(2)">
+                      <i class="bi bi-pencil me-1"></i>Chỉnh sửa
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="deleteJob(2)">
+                      <i class="bi bi-trash me-1"></i>Xóa
+                    </button>
                   </div>
                 </div>
 
-                <!-- Job 3 - Draft -->
-                <div class="job-card">
-                  <div class="row align-items-center">
-                    <div class="col">
-                      <div
-                        class="d-flex justify-content-between align-items-start"
-                      >
-                        <div>
-                          <h5 class="fw-bold mb-1">UI/UX Designer (Remote)</h5>
-                          <p class="text-muted mb-2">
-                            Remote • Part-time • 15-25 triệu
-                          </p>
-                          <div class="d-flex gap-4 text-muted small">
-                            <span
-                              ><i class="bi bi-calendar me-1"></i>Tạo:
-                              17/12/2024</span
-                            >
-                            <span
-                              ><i class="bi bi-pencil me-1"></i>Sửa lần cuối:
-                              Hôm nay</span
-                            >
-                          </div>
-                        </div>
-                        <div class="text-end">
-                          <span class="status-badge bg-secondary text-white"
-                            >Bản nháp</span
-                          >
-                          <div class="candidate-count mt-2">0 ứng viên</div>
-                        </div>
+                <!-- Job Card 3 - Draft -->
+                <div class="job-card-new status-draft">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="flex-grow-1">
+                      <h3 class="job-title">UI/UX Designer (Remote)</h3>
+                      <div class="job-meta">
+                        <span class="job-meta-item">
+                          <i class="bi bi-geo-alt-fill"></i>
+                          <span>Remote</span>
+                        </span>
+                        <span class="job-meta-item">
+                          <i class="bi bi-briefcase-fill"></i>
+                          <span>Part-time</span>
+                        </span>
+                        <span class="job-meta-item">
+                          <i class="bi bi-cash"></i>
+                          <span>15-25 triệu</span>
+                        </span>
                       </div>
                     </div>
+                    <span class="status-badge-new bg-secondary text-white">
+                      <i class="bi bi-file-earmark me-1"></i>Bản nháp
+                    </span>
                   </div>
-                  <div class="mt-3">
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <span class="text-muted small"
-                          >Chưa được gửi duyệt</span
-                        >
-                      </div>
-                      <div class="col-auto">
-                        <div class="btn-group">
-                          <button
-                            class="btn btn-outline-primary btn-sm"
-                            onclick="continueEditing(3)"
-                          >
-                            <i class="bi bi-pencil me-1"></i>Tiếp tục chỉnh sửa
-                          </button>
-                          <button
-                            class="btn btn-outline-success btn-sm"
-                            onclick="submitForApproval(3)"
-                          >
-                            <i class="bi bi-send me-1"></i>Gửi duyệt
-                          </button>
-                          <button
-                            class="btn btn-outline-danger btn-sm"
-                            onclick="deleteJob(3)"
-                          >
-                            <i class="bi bi-trash me-1"></i>Xóa
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+
+                  <div class="job-meta">
+                    <span class="job-meta-item">
+                      <i class="bi bi-calendar3"></i>
+                      <span>Tạo: 17/12/2024</span>
+                    </span>
+                    <span class="job-meta-item">
+                      <i class="bi bi-pencil"></i>
+                      <span>Sửa: Hôm nay</span>
+                    </span>
+                  </div>
+
+                  <div class="job-actions mt-3">
+                    <button class="btn btn-primary btn-sm" onclick="continueEditing(3)">
+                      <i class="bi bi-pencil me-1"></i>Tiếp tục chỉnh sửa
+                    </button>
+                    <button class="btn btn-outline-success btn-sm" onclick="submitForApproval(3)">
+                      <i class="bi bi-send me-1"></i>Gửi duyệt
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="deleteJob(3)">
+                      <i class="bi bi-trash me-1"></i>Xóa
+                    </button>
                   </div>
                 </div>
               </div>
 
-              <!-- Other tabs would show filtered jobs -->
+              <!-- Other Tabs -->
               <div class="tab-pane fade" id="active" role="tabpanel">
-                <p class="text-muted text-center py-4">
-                  Hiển thị tin đang tuyển dụng
-                </p>
+                <div class="empty-state">
+                  <i class="bi bi-check-circle"></i>
+                  <h5>Tin đang tuyển</h5>
+                  <p>Hiển thị các tin tuyển dụng đang hoạt động</p>
+                </div>
               </div>
               <div class="tab-pane fade" id="pending" role="tabpanel">
-                <p class="text-muted text-center py-4">
-                  Hiển thị tin chờ duyệt
-                </p>
+                <div class="empty-state">
+                  <i class="bi bi-clock"></i>
+                  <h5>Tin chờ duyệt</h5>
+                  <p>Hiển thị các tin đang chờ phê duyệt</p>
+                </div>
               </div>
               <div class="tab-pane fade" id="draft" role="tabpanel">
-                <p class="text-muted text-center py-4">Hiển thị tin bản nháp</p>
-              </div>
-              <div class="tab-pane fade" id="closed" role="tabpanel">
-                <p class="text-muted text-center py-4">Hiển thị tin đã đóng</p>
+                <div class="empty-state">
+                  <i class="bi bi-file-earmark"></i>
+                  <h5>Bản nháp</h5>
+                  <p>Chưa có bản nháp nào</p>
+                </div>
               </div>
             </div>
-
-            <!-- Pagination -->
-            <nav aria-label="Page navigation" class="mt-4">
-              <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#">Trước</a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Tiếp</a>
-                </li>
-              </ul>
-            </nav>
           </div>
 
           <!-- Sidebar -->
           <div class="col-lg-4">
             <!-- Quick Actions -->
-            <div class="quick-action-card">
-              <h5 class="fw-bold mb-3">Hành động nhanh</h5>
+            <div class="sidebar-card">
+              <h5 class="sidebar-title">
+                <i class="bi bi-lightning me-2"></i>Hành động nhanh
+              </h5>
               <div class="d-grid gap-2">
-                <a href="post-job.html" class="btn btn-primary">
+                <a href="/employer/post-job.html" class="btn btn-primary">
                   <i class="bi bi-plus-circle me-2"></i>Đăng tin mới
                 </a>
-                <button class="btn btn-outline-primary" onclick="exportJobs()">
+                <button class="btn btn-outline-primary">
                   <i class="bi bi-download me-2"></i>Xuất danh sách
                 </button>
-                <button class="btn btn-outline-success" onclick="bulkAction()">
+                <button class="btn btn-outline-success">
                   <i class="bi bi-send me-2"></i>Gửi duyệt hàng loạt
                 </button>
               </div>
             </div>
 
-            <!-- Performance Stats -->
-            <div class="quick-action-card">
-              <h5 class="fw-bold mb-3">Hiệu suất tin đăng</h5>
+            <!-- Performance -->
+            <div class="sidebar-card">
+              <h5 class="sidebar-title">
+                <i class="bi bi-graph-up me-2"></i>Hiệu suất
+              </h5>
               <div class="mb-3">
-                <h6 class="fw-semibold mb-2">Tỷ lệ chuyển đổi:</h6>
-                <div class="progress mb-2">
-                  <div class="progress-bar bg-success" style="width: 65%">
-                    65%
-                  </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="small">Tỷ lệ chuyển đổi</span>
+                  <strong class="text-success">65%</strong>
                 </div>
-                <small class="text-muted">Lượt xem → Ứng tuyển</small>
+                <div class="progress" style="height: 8px;">
+                  <div class="progress-bar bg-success" style="width: 65%"></div>
+                </div>
               </div>
-              <div class="mb-3">
-                <h6 class="fw-semibold mb-2">Thời gian trung bình:</h6>
+              <div class="mb-3 pb-3 border-bottom">
                 <div class="d-flex justify-content-between">
-                  <small class="text-muted">Tuyển dụng</small>
-                  <small class="fw-semibold">12 ngày</small>
+                  <span class="small text-muted">Thời gian TB tuyển</span>
+                  <strong>12 ngày</strong>
                 </div>
               </div>
               <div>
-                <h6 class="fw-semibold mb-2">Tin hiệu quả nhất:</h6>
-                <p class="small mb-1">Frontend Developer Intern</p>
+                <p class="small fw-semibold mb-1">Tin hiệu quả nhất:</p>
+                <p class="mb-0">Frontend Developer Intern</p>
                 <small class="text-muted">45 ứng viên • 85% phù hợp</small>
               </div>
             </div>
 
             <!-- Recent Candidates -->
-            <div class="quick-action-card">
-              <div
-                class="d-flex justify-content-between align-items-center mb-3"
-              >
-                <h5 class="fw-bold mb-0">Ứng viên mới</h5>
-                <a
-                  href="job-candidates.html"
-                  class="btn btn-sm btn-outline-primary"
-                  >Xem tất cả</a
-                >
+            <div class="sidebar-card">
+              <h5 class="sidebar-title">
+                <i class="bi bi-people me-2"></i>Ứng viên mới
+              </h5>
+              <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                <img
+                  src="../page/assets/avata.jpg"
+                  alt="Avatar"
+                  width="45"
+                  height="45"
+                  class="rounded-circle me-3"
+                />
+                <div class="flex-grow-1">
+                  <h6 class="mb-0 fw-semibold">Nguyễn Văn A</h6>
+                  <small class="text-muted">Frontend Developer</small>
+                </div>
+                <span class="badge bg-warning">Mới</span>
               </div>
-
-              <div class="candidate-item d-flex align-items-center mb-3">
-                <div class="flex-shrink-0">
-                  <img
-                    src="../page/assets/avata.jpg"
-                    alt="Candidate"
-                    width="40"
-                    height="40"
-                    class="rounded-circle"
-                  />
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <h6 class="fw-semibold mb-0">Nguyễn Văn A</h6>
-                  <small class="text-muted">Frontend Developer Intern</small>
-                </div>
-                <div class="text-end">
-                  <small class="text-muted d-block">2 giờ trước</small>
-                  <span class="badge bg-warning">Mới</span>
-                </div>
-              </div>
-
-              <div class="candidate-item d-flex align-items-center">
-                <div class="flex-shrink-0">
-                  <img
-                    src="../page/assets/avata.jpg"
-                    alt="Candidate"
-                    width="40"
-                    height="40"
-                    class="rounded-circle"
-                  />
-                </div>
-                <div class="flex-grow-1 ms-3">
-                  <h6 class="fw-semibold mb-0">Trần Thị B</h6>
+              <div class="d-flex align-items-center">
+                <img
+                  src="../page/assets/avata.jpg"
+                  alt="Avatar"
+                  width="45"
+                  height="45"
+                  class="rounded-circle me-3"
+                />
+                <div class="flex-grow-1">
+                  <h6 class="mb-0 fw-semibold">Trần Thị B</h6>
                   <small class="text-muted">React Developer</small>
                 </div>
-                <div class="text-end">
-                  <small class="text-muted d-block">5 giờ trước</small>
-                  <span class="badge bg-info">Đã xem</span>
-                </div>
+                <span class="badge bg-info">Đã xem</span>
               </div>
+              <a href="/employer/job-candidates.html" class="btn btn-outline-primary w-100 mt-3">
+                Xem tất cả
+              </a>
             </div>
           </div>
         </div>
@@ -604,15 +537,51 @@
     <!-- Footer -->
     <footer class="bg-dark text-white py-5 mt-5">
       <div class="container">
-        <!-- Footer content same as previous pages -->
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold mb-3">JobHub cho Nhà Tuyển Dụng</h5>
+            <p class="text-white-50">
+              Nền tảng tuyển dụng hàng đầu, kết nối doanh nghiệp với ứng viên
+              tiềm năng.
+            </p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h6 class="fw-bold mb-3">Liên Kết Nhanh</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="/employer/employer-home.html" class="text-white-50">Trang chủ</a>
+              </li>
+              <li class="mb-2">
+                <a href="/employer/post-job.html" class="text-white-50">Đăng tin</a>
+              </li>
+              <li class="mb-2">
+                <a href="/page/bang-gia.html" class="text-white-50"
+                  >Bảng giá</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h6 class="fw-bold mb-3">Liên Hệ</h6>
+            <p class="text-white-50">
+              <i class="bi bi-envelope me-2"></i>employer@jobhub.vn
+            </p>
+            <p class="text-white-50">
+              <i class="bi bi-telephone me-2"></i>1900 xxxx
+            </p>
+          </div>
+        </div>
+        <hr class="border-secondary" />
+        <div class="text-center text-white-50">
+          <p class="mb-0">&copy; 2024 JobHub. All rights reserved.</p>
+        </div>
       </div>
     </footer>
 
-    <!-- Bootstrap 5 JS Bundle -->
+    <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       function editJob(jobId) {
-        console.log("Editing job:", jobId);
         window.location.href = `post-job.html?edit=${jobId}`;
       }
 
@@ -623,12 +592,6 @@
           )
         ) {
           alert("Đã đóng tin tuyển dụng!");
-          console.log("Closed job:", jobId);
-          // Update UI to show closed status
-          const jobCard = event.target.closest(".job-card");
-          const statusBadge = jobCard.querySelector(".status-badge");
-          statusBadge.className = "status-badge bg-secondary text-white";
-          statusBadge.textContent = "Đã đóng";
         }
       }
 
@@ -639,43 +602,19 @@
           )
         ) {
           alert("Đã xóa tin tuyển dụng!");
-          console.log("Deleted job:", jobId);
-          // Remove job card from UI
-          event.target.closest(".job-card").remove();
+          event.target.closest(".job-card-new").remove();
         }
       }
 
       function continueEditing(jobId) {
-        console.log("Continuing editing draft job:", jobId);
         window.location.href = `post-job.html?draft=${jobId}`;
       }
 
       function submitForApproval(jobId) {
         if (confirm("Gửi tin tuyển dụng này để phê duyệt?")) {
           alert("Đã gửi duyệt! Tin sẽ được kiểm tra trong vòng 24h.");
-          console.log("Submitted for approval:", jobId);
-          // Update UI to show pending status
-          const jobCard = event.target.closest(".job-card");
-          const statusBadge = jobCard.querySelector(".status-badge");
-          statusBadge.className = "status-badge bg-warning text-dark";
-          statusBadge.textContent = "Chờ duyệt";
         }
       }
-
-      function exportJobs() {
-        alert("Đang tải về danh sách tin tuyển dụng...");
-        // Implement export logic
-      }
-
-      function bulkAction() {
-        alert("Mở modal chọn tin để gửi duyệt hàng loạt...");
-        // Implement bulk action logic
-      }
-
-      // Initialize
-      document.addEventListener("DOMContentLoaded", function () {
-        console.log("Manage jobs page loaded");
-      });
     </script>
   </body>
 </html>

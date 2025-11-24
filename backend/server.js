@@ -1,6 +1,7 @@
 // Import các thư viện cần thiết
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const cvRoutes = require("./routes/cv.routes");
 const authRoutes = require("./routes/auth.routes");
 const publicRoutes = require("./routes/public.routes");
@@ -18,12 +19,20 @@ app.use(express.json());
 
 const employerRoutes = require("./routes/employer.routes");
 
-// Sử dụng routes
+// Sử dụng routes API (đặt trước static files để ưu tiên API)
 app.use("/api/cv", cvRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/public", publicRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/employer", employerRoutes);
+
+// Serve static files từ thư mục frontend-only
+app.use(express.static(path.join(__dirname, "../frontend-only")));
+
+// Route cho trang chủ - trỏ đến page/index.html
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend-only/page/index.html"));
+});
 
 // Hàm kiểm tra kết nối database
 async function kiemTraKetNoi() {

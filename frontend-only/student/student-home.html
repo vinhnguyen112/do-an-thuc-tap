@@ -23,7 +23,7 @@
       rel="stylesheet"
     />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../page/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="student-style.css" />
   </head>
   <body>
@@ -33,7 +33,7 @@
         <div class="container">
           <a
             class="navbar-brand d-flex align-items-center"
-            href="student-home.html"
+            href="/student/student-home.html"
           >
             <div class="logo-icon me-2">
               <i class="bi bi-briefcase"></i>
@@ -51,24 +51,27 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto me-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="student-home.html">Trang chủ</a>
+                <a class="nav-link active" href="/student/student-home.html">Trang chủ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="job-search.html">Tìm việc</a>
+                <a class="nav-link" href="/student/student-dashboard.html">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="my-cvs.html">CV của tôi</a>
+                <a class="nav-link" href="/student/job-search.html">Tìm việc</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="my-applications.html">Ứng tuyển</a>
+                <a class="nav-link" href="/student/my-cvs.html">CV của tôi</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="saved-jobs.html">Đã lưu</a>
+                <a class="nav-link" href="/student/my-applications.html">Ứng tuyển</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/student/saved-jobs.html">Đã lưu</a>
               </li>
             </ul>
             <div class="d-flex gap-2 align-items-center">
               <a
-                href="../shared/notifications.html"
+                href="/shared/notifications.html"
                 class="btn btn-outline-secondary btn-sm position-relative"
               >
                 <i class="bi bi-bell"></i>
@@ -87,17 +90,17 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="student-profile.html"
+                    <a class="dropdown-item" href="/student/student-profile.html"
                       >Hồ sơ</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="student-dashboard.html"
+                    <a class="dropdown-item" href="/student/student-dashboard.html"
                       >Dashboard</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../shared/settings.html"
+                    <a class="dropdown-item" href="/shared/settings.html"
                       >Cài đặt</a
                     >
                   </li>
@@ -105,7 +108,7 @@
                   <li>
                     <a
                       class="dropdown-item text-danger"
-                      href="../page/index.html"
+                      href="/page/index.html"
                       onclick="localStorage.clear()"
                       >Đăng xuất</a
                     >
@@ -132,10 +135,10 @@
                     Chào mừng bạn trở lại với JobHub. Hãy khám phá các cơ hội việc làm mới nhất dành cho bạn!
                   </p>
                   <div class="d-flex gap-3">
-                    <a href="job-search.html" class="btn btn-light btn-lg">
+                    <a href="/student/job-search.html" class="btn btn-light btn-lg">
                       <i class="bi bi-search me-2"></i>Tìm việc ngay
                     </a>
-                    <a href="cv-builder.html" class="btn btn-outline-light btn-lg">
+                    <a href="/student/cv-builder.html" class="btn btn-outline-light btn-lg">
                       <i class="bi bi-file-earmark-plus me-2"></i>Tạo CV mới
                     </a>
                   </div>
@@ -208,7 +211,7 @@
                 <h5 class="fw-bold mb-0">
                   <i class="bi bi-star text-warning me-2"></i>Việc làm phù hợp với bạn
                 </h5>
-                <a href="job-search.html" class="btn btn-sm btn-outline-primary">Xem tất cả</a>
+                <a href="/student/job-search.html" class="btn btn-sm btn-outline-primary">Xem tất cả</a>
               </div>
 
               <!-- Job Card 1 -->
@@ -389,7 +392,7 @@
                 ></div>
               </div>
               <p class="text-muted small mb-3">Hồ sơ của bạn đã hoàn thành 75%</p>
-              <a href="student-profile.html" class="btn btn-sm btn-outline-primary w-100">
+              <a href="/student/student-profile.html" class="btn btn-sm btn-outline-primary w-100">
                 Cập nhật hồ sơ
               </a>
             </div>
@@ -400,13 +403,13 @@
             <div class="card-body">
               <h6 class="fw-bold mb-3">Hành động nhanh</h6>
               <div class="d-grid gap-2">
-                <a href="cv-builder.html" class="btn btn-primary">
+                <a href="/student/cv-builder.html" class="btn btn-primary">
                   <i class="bi bi-file-earmark-plus me-2"></i>Tạo CV mới
                 </a>
-                <a href="job-search.html" class="btn btn-outline-primary">
+                <a href="/student/job-search.html" class="btn btn-outline-primary">
                   <i class="bi bi-search me-2"></i>Tìm việc làm
                 </a>
-                <a href="my-applications.html" class="btn btn-outline-secondary">
+                <a href="/student/my-applications.html" class="btn btn-outline-secondary">
                   <i class="bi bi-list-check me-2"></i>Xem đơn ứng tuyển
                 </a>
               </div>
